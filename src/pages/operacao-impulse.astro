@@ -1,0 +1,245 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroOverlay from '../components/HeroOverlay.astro';
+import LinhaSeparadora from '../components/LinhaSeparadora.astro';
+import SobreThais from '../components/SobreThais.astro';
+import { sobreThaisDados } from '../dados/sobreThais.js';
+import CtaFinal from '../components/CtaFinal.astro';
+---
+
+<Layout temaHeader="escuro" temaFooter="escuro">
+
+  <HeroOverlay
+    tema="escuro"
+    badge="Operação Impulse"
+    logo="/imagens-padrao/logoperfectlahesmarrom-aberto.png"
+    titulo="Operação Impulse"
+    texto="Transforme seu negócio da beleza em uma operação lucrativa de verdade. Chega de se esforçar demais e não ser valorizada. É hora de trabalhar menos, ganhar mais e viver do que você ama sem exaustão."
+    textoBotaoPrimario="Quero começar agora"
+    textoBotaoSecundario=""
+    imagemFundo="/imagens-operacaoimpulse/hero-operacao-impulse.png"
+  />
+
+  <LinhaSeparadora />
+
+<section class="bg-black px-6 py-16 md:py-[70px]">
+  <div class="max-w-[1400px] mx-auto">
+    <h2 class="titulo-livre-lovelace text-[22px] md:text-[26px] text-(--rose-gold) mb-8 md:mb-10">
+      O que você vai conquistar com a Operação Impulse:
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="impulse-goal-card p-5">
+        <h3 class="texto-livre font-bold text-white text-[16px] md:text-[17px] mb-1">Clientes ideais</h3>
+        <p class="texto-livre text-[#F2E4D8] text-[13px]">Atraia quem valoriza seu trabalho</p>
+      </div>
+      <div class="impulse-goal-card p-5">
+        <h3 class="texto-livre font-bold text-white text-[16px] md:text-[17px] mb-1">Agenda estável com qualidade</h3>
+        <p class="texto-livre text-[#F2E4D8] text-[13px]">Previsibilidade e segurança financeira</p>
+      </div>
+      <div class="impulse-goal-card p-5">
+        <h3 class="texto-livre font-bold text-white text-[16px] md:text-[17px] mb-1">Valorização dos serviços</h3>
+        <p class="texto-livre text-[#F2E4D8] text-[13px]">Confiança para cobrar o que você vale</p>
+      </div>
+      <div class="impulse-goal-card p-5">
+        <h3 class="texto-livre font-bold text-white text-[16px] md:text-[17px] mb-1">Lucratividade real</h3>
+        <p class="texto-livre text-[#F2E4D8] text-[13px]">Veja o dinheiro sobrar no final do mês</p>
+      </div>
+      <div class="impulse-goal-card p-5">
+        <h3 class="texto-livre font-bold text-white text-[16px] md:text-[17px] mb-1">Recuperação de clientes</h3>
+        <p class="texto-livre text-[#F2E4D8] text-[13px]">Estratégias que reativam quem já te conhece</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="relative overflow-hidden">
+  <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden px-6 py-16 md:py-[70px]">
+    <img src="/imagens-operacaoimpulse/opimpulse-secao3-praqueme.png" alt="" class="absolute inset-0 w-full h-full object-cover object-[50%_50%]" />
+
+    <div class="relative z-10">
+      <h2 class="titulo-livre-lovelace text-[22px] md:text-[26px] text-(--rose-gold) mb-4">
+        Para quem é o Operação Impulse?
+      </h2>
+      <p class="texto-livre text-[#F2E4D8] text-[13px] md:text-[14px] max-w-[720px] mb-10">
+        Este programa foi criado especialmente para você, profissional da beleza (lash, designer de sobrancelhas, nail, esteticista...) que:
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="paraquem-card p-5">
+          <h3 class="texto-livre font-bold text-white text-[15px] mb-1">Trabalha demais, lucra de menos</h3>
+          <p class="texto-livre text-(--rose-gold) text-[12px]">Sua agenda está cheia mas o dinheiro não aparece</p>
+        </div>
+        <div class="paraquem-card p-5">
+          <h3 class="texto-livre font-bold text-white text-[15px] mb-1">Só atrai clientes por preço</h3>
+          <p class="texto-livre text-(--rose-gold) text-[12px]">Compete com quem cobra barato e não entrega qualidade</p>
+        </div>
+        <div class="paraquem-card p-5">
+          <h3 class="texto-livre font-bold text-white text-[15px] mb-1">Agenda instável ou vazia</h3>
+          <p class="texto-livre text-(--rose-gold) text-[12px]">Um mês cheio, outro vazio, sem previsibilidade</p>
+        </div>
+        <div class="paraquem-card p-5">
+          <h3 class="texto-livre font-bold text-white text-[15px] mb-1">Precisa melhorar a precificação</h3>
+          <p class="texto-livre text-(--rose-gold) text-[12px]">Tem medo de cobrar mais e perder clientes</p>
+        </div>
+        <div class="paraquem-card p-5">
+          <h3 class="texto-livre font-bold text-white text-[15px] mb-1">Cansada de não ser valorizada</h3>
+          <p class="texto-livre text-(--rose-gold) text-[12px]">Se esforça mas sente que ninguém te reconhece</p>
+        </div>
+        <div class="paraquem-card p-5">
+          <h3 class="texto-livre font-bold text-white text-[15px] mb-1">Quer viver do que ama</h3>
+          <p class="texto-livre text-(--rose-gold) text-[12px]">Sonha com um negócio próspero, sem se matar de trabalhar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="bg-black px-6 py-16 md:py-[70px] text-center">
+  <div class="max-w-[1400px] mx-auto">
+    <h2 class="titulo-livre-lovelace text-[22px] md:text-[26px] text-white max-w-[640px] mx-auto mb-6">
+      Você vai trabalhar menos, ganhar mais e voltar a amar o que faz!
+    </h2>
+    <p class="texto-livre text-(--rose-gold) text-[13px] md:text-[14px] max-w-[640px] mx-auto mb-5 text-left">
+      Imagine acordar sabendo que sua agenda está organizada, com clientes que te valorizam e o dinheiro finalmente entrando, ter tempo para você, para sua família... viver sem culpa e sem correria.
+    </p>
+    <p class="titulo-livre-lovelace italic text-[#F2E4D8] text-[15px] max-w-[640px] mx-auto mb-12">
+      Esse é o resultado real da Operação Impulse.
+    </p>
+
+    <div class="flex flex-col md:flex-row justify-center gap-8 md:gap-6 max-w-[960px] mx-auto mb-12">
+      <div class="flex flex-col items-center flex-1">
+        <div class="impulse-icon-circulo mb-3">
+          <img src="/imagens-operacaoimpulse/icone-circular-opimpulse01.png" alt="Menos tempo trabalhando" class="w-full h-full object-cover rounded-full" />
+        </div>
+        <h3 class="texto-livre font-medium text-white text-[13px] mb-1">Menos tempo trabalhando</h3>
+        <p class="texto-livre text-(--rose-gold) text-[11px]">Trabalhe com inteligência, não com exaustão</p>
+      </div>
+      <div class="flex flex-col items-center flex-1">
+        <div class="impulse-icon-circulo mb-3">
+          <img src="/imagens-operacaoimpulse/icone-circular-opimpulse02.png" alt="Mais lucratividade" class="w-full h-full object-cover rounded-full" />
+        </div>
+        <h3 class="texto-livre font-medium text-white text-[13px] mb-1">Mais lucratividade</h3>
+        <p class="texto-livre text-(--rose-gold) text-[11px]">Veja seu faturamento crescer de verdade</p>
+      </div>
+      <div class="flex flex-col items-center flex-1">
+        <div class="impulse-icon-circulo mb-3">
+          <img src="/imagens-operacaoimpulse/icone-ecircular-opimpulse03.png" alt="Clientes que valorizam" class="w-full h-full object-cover rounded-full" />
+        </div>
+        <h3 class="texto-livre font-medium text-white text-[13px] mb-1">Clientes que valorizam</h3>
+        <p class="texto-livre text-(--rose-gold) text-[11px]">Atraia quem paga pelo seu talento</p>
+      </div>
+    </div>
+
+    <a href="#" class="botao-base botao-pri-padrao-rose">Clique para começar agora</a>
+  </div>
+</section>
+
+<section class="bg-white px-6 py-16 md:py-[70px]">
+  <div class="max-w-[1400px] mx-auto">
+    <h2 class="titulo-livre-lovelace text-[20px] md:text-[24px] text-(--charcoal) text-center max-w-[720px] mx-auto mb-4">
+      O que tem por dentro da Operação:
+    </h2>
+    <p class="texto-livre text-[#444444] text-[13px] max-w-[720px] mx-auto text-center mb-12">
+      Não é mais um curso de teoria bonita que você assiste e não aplica. É um sistema completo e prático para transformar seu negócio em uma operação lucrativa de verdade. Cada aula te leva direto para a ação.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8 max-w-[800px] mx-auto">
+      <div class="por-dentro-card relative pt-6 pb-5 px-5 text-center">
+        <div class="por-dentro-badge">1</div>
+        <h3 class="titulo-livre-lovelace text-white text-[15px] mb-1.5">18 Aulas Práticas</h3>
+        <p class="texto-livre text-[#F2E4D8] text-[12px]">Conteúdo direto, sem enrolação. Cada aula resolve um problema real do seu negócio.</p>
+      </div>
+      <div class="por-dentro-card relative pt-6 pb-5 px-5 text-center">
+        <div class="por-dentro-badge">2</div>
+        <h3 class="titulo-livre-lovelace text-white text-[15px] mb-1.5">Diagnóstico Personalizado</h3>
+        <p class="texto-livre text-[#F2E4D8] text-[12px]">Identifique onde seu negócio está travado e o que precisa mudar.</p>
+      </div>
+      <div class="por-dentro-card relative pt-6 pb-5 px-5 text-center">
+        <div class="por-dentro-badge">3</div>
+        <h3 class="titulo-livre-lovelace text-white text-[15px] mb-1.5">Plano de Ação Pronto</h3>
+        <p class="texto-livre text-[#F2E4D8] text-[12px]">Saia sabendo exatamente o que fazer, passo a passo, sem dúvidas.</p>
+      </div>
+      <div class="por-dentro-card relative pt-6 pb-5 px-5 text-center">
+        <div class="por-dentro-badge">4</div>
+        <h3 class="titulo-livre-lovelace text-white text-[15px] mb-1.5">Workbook Completo</h3>
+        <p class="texto-livre text-[#F2E4D8] text-[12px]">Tarefas práticas e execução guiada para você aplicar imediatamente.</p>
+      </div>
+    </div>
+
+    <div class="border-l-[3px] border-(--deep-brown) pl-5 py-6 mt-10 max-w-[500px] mx-auto md:mx-0 md:ml-[32%]">
+      <p class="titulo-livre-lovelace text-(--charcoal) text-[14px]">Sem enrolação. Sem teoria que não serve pra nada.</p>
+      <p class="texto-livre text-[#444444] text-[13px] mt-1.5">É aprender, aplicar e ver o resultado acontecer.</p>
+    </div>
+  </div>
+</section>
+
+<section class="relative overflow-hidden">
+  <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden px-6 py-16 md:py-[70px] min-h-[300px] md:min-h-[400px]">
+    <img src="/imagens-operacaoimpulse/resultadosreais-operacaoimpulse.png" alt="" class="absolute inset-0 w-full h-full object-cover object-[50%_50%]" />
+
+    <div class="relative z-10 text-center">
+      <h2 class="titulo-livre-lovelace text-[22px] md:text-[26px] text-white">
+        Resultados REAIS que já aconteceram
+      </h2>
+      <p class="titulo-livre-lovelace italic text-(--rose-gold) text-[14px] mt-2">
+        *EM MENOS DE 1 DIA!
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<SobreThais {...sobreThaisDados} />
+
+
+<CtaFinal
+  imagemFundo="/imagens-operacaoimpulse/cta-final-operacaoimpulse.png"
+  textoBotaoPrimario="Comprar agora"
+  fundo="branco"
+/>
+
+<section class="relative overflow-hidden">
+  <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden px-6 py-16 md:py-[70px] text-center">
+    <img src="/imagens-operacaoimpulse/paginafinal-operacaoimpulse.png" alt="" class="absolute inset-0 w-full h-full object-cover object-[50%_50%]" />
+
+    <div class="relative z-10">
+      <h2 class="titulo-livre-lovelace text-[24px] md:text-[30px] text-white mb-8">
+        O Momento de virar o jogo é agora
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-[900px] mx-auto">
+        <div class="impulse-balao p-4">
+          <p class="texto-livre italic text-white text-[13px]">Estou cansada de trabalhar tanto e não ver resultado. Quero ter um negócio que me dê liberdade!</p>
+        </div>
+        <div class="impulse-balao p-4">
+          <p class="texto-livre italic text-white text-[13px]">Sei que mereço ganhar mais, mas não sei como cobrar sem perder clientes.</p>
+        </div>
+        <div class="impulse-balao p-4">
+          <p class="texto-livre italic text-white text-[13px]">Quero voltar a amar o que faço. Acordar animada, não exausta. Quero prosperidade de verdade.</p>
+        </div>
+      </div>
+
+      <p class="texto-livre text-(--rose-gold) text-[16px] md:text-[18px] mb-16">
+        Se você se identificou com essas falas, <strong class="text-white font-bold">você precisa dar o próximo passo!</strong>
+      </p>
+
+      <div class="impulse-destaque max-w-[560px] mx-auto p-6 mb-5">
+        <p class="titulo-livre-lovelace italic text-(--charcoal) text-[17px]">
+          O seu futuro próspero está a um clique de distância!
+        </p>
+      </div>
+
+      <p class="texto-livre italic text-[#999999] text-[13px] mb-6">
+        Ainda com dúvidas? Entre em contato com nosso suporte!
+      </p>
+
+      <a href="#" class="botao-base botao-pri-padrao-rose">Ainda tenho dúvidas</a>
+    </div>
+  </div>
+</section>
+
+
+</Layout>

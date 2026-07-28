@@ -1,0 +1,203 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSplit from '../components/HeroSplit.astro';
+import SobreThais from '../components/SobreThais.astro';
+import Depoimentos from '../components/Depoimentos.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import { sobreThaisDados } from '../dados/sobreThais.js';
+
+const pilares = [
+  { numero: "01", titulo: "Posicionamento", texto: "Ocupar o lugar certo no mercado, definir com clareza quem é como profissional, quem deseja atender e por que o seu serviço deve ser escolhido. Sem mais disputar por preço, ser reconhecida por valor, autoridade e confiança." },
+  { numero: "02", titulo: "Finanças", texto: "Aprender como organizar os números, assumindo o controle financeiro do seu negócio. Como precificar com segurança, organizar custos, definir margens e tomar decisões conscientes." },
+  { numero: "03", titulo: "Atração e Vendas", texto: "Encontre as clientes que deseja, alinhadas, que valorizam sua qualidade. Com uma comunicação estratégica, que gera interesse, desejo e conversão." },
+  { numero: "04", titulo: "Atendimento Encantador", texto: "Estruturar e construir um atendimento profissional, firme e elegante. Conduzindo suas clientes com segurança, criando uma experiência positiva." },
+  { numero: "05", titulo: "Fidelização de Clientes", texto: "Aprenda como criar vínculos, confiança e recorrência, transformando clientes satisfeitas em fiéis e indicadoras do seu trabalho." },
+  { numero: "06", titulo: "Aceleração de Lucros", texto: "Como continuar crescendo com estratégias pensadas para o seu negócio. Trabalhar melhor, não apenas mais, construindo um negócio sustentável e PREVISÍVEL." },
+];
+---
+
+<Layout temaHeader="escuro" temaFooter="escuro">
+
+  <HeroSplit
+  tema="escuro"
+  badge="Para profissionais da beleza"
+  titulo="A missão que vai "
+  tituloDestaque="alavancar "
+  tituloFinal="o seu negócio!"
+  texto="DIREÇÃO · ESTRUTURA · ACOMPANHAMENTO"
+  textoBotaoPrimario="Quero meu diagnóstico"
+  textoBotaoSecundario="Agendar reunião estratégica"
+  microtexto="Vagas limitadas mediante aprovação"
+  imagem="/imagens-mentoria/hero-thais-mentoria.png"
+/>
+
+
+
+  <section class="mentoria-statement">
+  <hr class="mentoria-statement-line" />
+  <p class="mentoria-statement-text titulo-livre-lovelace italic text-[24px] md:text-[32px] text-(--charcoal)">
+    Ganho real se constrói com estratégia e clientes que te valorizam
+  </p>
+  <hr class="mentoria-statement-line" />
+  <p class="mentoria-statement-support texto-livre text-[14px] text-(--charcoal) max-w-[600px] mx-auto">
+    Para você, profissional da beleza que domina a técnica, mas quer aprender de vez como estruturar e ver resultados reais na sua empresa
+  </p>
+</section>
+
+
+
+
+  <section class="mentoria-audience px-6 py-16 md:py-[70px]">
+  <h2 class="texto-livre font-bold text-center text-[24px] md:text-[32px] tracking-widest text-(--rose-gold) mb-12">
+    PARA QUEM É A M.I.B.
+  </h2>
+
+  <div class="grid md:grid-cols-2 gap-10 md:gap-[60px] max-w-[1100px] mx-auto">
+    <div>
+      <h3 class="texto-livre text-[13px] tracking-widest text-(--rose-gold) mb-4">É PRA VOCÊ SE</h3>
+      <hr class="mentoria-audience-col-line border-(--rose-gold) mb-6" />
+      <ul class="space-y-4">
+        <li class="flex items-start gap-3">
+          <span class="text-(--rose-gold) flex-shrink-0">✓</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Você já domina a técnica, mas sente que falta estrutura pra crescer</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-(--rose-gold) flex-shrink-0">✓</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Quer atrair clientes que valorizam e pagam pelo seu trabalho</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-(--rose-gold) flex-shrink-0">✓</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Está pronta pra sair da correria e ter previsibilidade no negócio</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-(--rose-gold) flex-shrink-0">✓</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Busca posicionamento e autoridade no mercado de beleza</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-(--rose-gold) flex-shrink-0">✓</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Quer aprender gestão, precificação e processos de verdade</span>
+        </li>
+        <li class="flex items-start gap-3">
+          <span class="text-(--rose-gold) flex-shrink-0">✓</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Está disposta a se comprometer com um plano de ação</span>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="texto-livre text-[13px] tracking-widest text-(--blood-red) mb-4">NÃO É PRA VOCÊ SE</h3>
+      <hr class="mentoria-audience-col-line border-(--blood-red) mb-6" />
+      <ul class="space-y-4">
+        <li class="flex items-start gap-3 opacity-70">
+          <span class="text-(--blood-red) flex-shrink-0">×</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Você busca fórmula mágica sem colocar a mão na massa</span>
+        </li>
+        <li class="flex items-start gap-3 opacity-70">
+          <span class="text-(--blood-red) flex-shrink-0">×</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Não está disposta a rever processos e sair da zona de conforto</span>
+        </li>
+        <li class="flex items-start gap-3 opacity-70">
+          <span class="text-(--blood-red) flex-shrink-0">×</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Ainda não sabe executar a técnica com qualidade</span>
+        </li>
+        <li class="flex items-start gap-3 opacity-70">
+          <span class="text-(--blood-red) flex-shrink-0">×</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Espera resultado sem se comprometer com o acompanhamento</span>
+        </li>
+        <li class="flex items-start gap-3 opacity-70">
+          <span class="text-(--blood-red) flex-shrink-0">×</span>
+          <span class="texto-livre text-[13px] text-white leading-relaxed">Não tem interesse em tratar o seu trabalho como negócio</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mentoria-audience-cta max-w-[640px] mx-auto mt-12 p-6 text-center">
+    <p class="titulo-livre-lovelace italic text-[18px] md:text-[21px] text-(--rose-gold) mb-5">
+      Se você se reconheceu, é hora de se tornar a próxima Agente MIB.
+    </p>
+    <div class="flex justify-center">
+      <a href="#" class="botao-base botao-pri-padrao-rose">Quero meu diagnóstico</a>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="mentoria-pillars-grid-section px-6 pb-16 md:pb-[70px]">
+  <hr class="mentoria-pillars-divider max-w-[760px] mx-auto mb-12" />
+  <div class="mentoria-pillars-grid grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[900px] mx-auto">
+    {pilares.map((pilar) => (
+      <div class="mentoria-pillar-card px-5 py-3">
+        <div class="flex items-baseline gap-2 mb-2.5">
+          <span class="texto-livre text-[10px] text-(--rose-gold)">{pilar.numero}</span>
+          <h3 class="texto-livre font-bold text-[13px] text-(--rose-gold)">{pilar.titulo}</h3>
+        </div>
+        <p class="texto-livre text-[12px] text-white opacity-70 leading-relaxed">{pilar.texto}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+
+
+
+  <<SobreThais {...sobreThaisDados} />
+
+  <Depoimentos
+    titulo="Depoimentos"
+    depoimentos={[]}
+  />
+
+
+  
+<section class="mentoria-final px-6 pt-16 pb-6 md:pt-[90px] md:pb-8 text-center">
+  <p class="texto-livre text-[16px] md:text-[24px] tracking-widest text-(--rose-gold) mb-10">
+    <span class="hidden md:inline">M.I.B. — </span>MENTORIA IMPULSE BEAUTY
+  </p>
+
+  <div class="mentoria-final-frame max-w-[680px] mx-auto p-8 mb-12">
+    <p class="titulo-livre-lovelace italic text-[18px] md:text-[21px] text-white leading-relaxed mb-3 relative z-10">
+      A mentoria é personalizada, entre em contato para agendar uma reunião estratégica e se tornar a próxima
+    </p>
+    <p class="titulo-livre-lovelace font-bold text-[24px] md:text-[29px] tracking-wide text-(--rose-gold) relative z-10">
+      Agente M.I.B.
+    </p>
+  </div>
+
+ <div class="flex flex-col md:flex-row flex-wrap items-center md:items-end justify-center gap-3 md:gap-5">
+    <div class="mentoria-final-agent texto-livre text-[12px] font-semibold tracking-wide text-white px-7 py-3.5">Agente em Expansão</div>
+    <div class="mentoria-final-agent texto-livre text-[12px] font-semibold tracking-wide text-white px-7 py-3.5">Agente Estratégica</div>
+    <div class="mentoria-final-agent mentoria-final-agent--elite texto-livre text-[12px] font-bold tracking-wide text-(--rose-gold) px-7 py-3.5">Agente de Elite</div>
+  </div>
+</section>
+
+
+<CtaFinal
+  imagemFundo="/imagens-mentoria/oculos-cta-mentoria.png"
+  textoBotaoPrimario="Quero meu diagnóstico"
+  textoBotaoSecundario="Agendar reunião estratégica"
+/>
+
+</Layout>
+
+
+
+
+<script>
+  (function () {
+    var target = document.querySelector('.mentoria-statement');
+    if (!target) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(target);
+  })();
+</script>

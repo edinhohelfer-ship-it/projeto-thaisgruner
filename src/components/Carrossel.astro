@@ -1,0 +1,250 @@
+---
+const { itens, corDestaque = 'var(--rose-gold)' } = Astro.props;
+---
+
+<section class="coverflow-section" aria-label="Carrossel de Cursos" style={`--cf-cor-destaque: ${corDestaque};`}>
+  <div class="coverflow-viewport" id="cf-viewport">
+    <button type="button" class="cf-arrow cf-arrow-prev" aria-label="Item anterior" id="cf-prev">&#8249;</button>
+    <ul class="coverflow-track" id="cf-track">
+      {itens.map((item, index) => (
+        <li class="cf-card" data-index={index}>
+          <a href={item.link || '#'}>
+            <img src={item.imagem} alt={item.titulo}>
+            <span class="cf-card-title">{item.titulo}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <button type="button" class="cf-arrow cf-arrow-next" aria-label="Próximo item" id="cf-next">&#8250;</button>
+  </div>
+
+  <ul class="cf-quick-links" id="cf-quick-links">
+    {itens.map((item, index) => (
+      <li><a href="#" data-index={index}>{item.titulo}</a></li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .coverflow-section {
+    position: relative;
+    background-color: #000000;
+    padding: 4rem 1.5rem;
+    overflow: hidden;
+  }
+  .coverflow-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 45%, rgba(176, 108, 74, 0.28), rgba(0, 0, 0, 0) 60%);
+    pointer-events: none;
+  }
+  .coverflow-viewport {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 470px;
+    perspective: 1200px;
+  }
+  .coverflow-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transform-style: preserve-3d;
+  }
+  .cf-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 270px;
+    height: 360px;
+    margin-left: -135px;
+    margin-top: -180px;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  .cf-card a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+  .cf-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .cf-card-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+    color: #FFFFFF;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    text-align: center;
+  }
+  .cf-card.is-active a {
+    box-shadow: 0 25px 45px rgba(176, 108, 74, 0.45), 0 10px 25px rgba(0, 0, 0, 0.55);
+  }
+  .cf-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .cf-arrow:hover {
+    border-color: var(--cf-cor-destaque);
+    background-color: rgba(204, 177, 158, 0.2);
+  }
+  .cf-arrow-prev {
+    left: 0;
+  }
+  .cf-arrow-next {
+    right: 0;
+  }
+  .cf-quick-links {
+    display: none;
+  }
+  @media (max-width: 767px) {
+    .cf-arrow {
+      display: none;
+    }
+    .coverflow-viewport {
+      height: 335px;
+    }
+    .cf-card {
+      width: 190px;
+      height: 258px;
+      margin-left: -95px;
+      margin-top: -129px;
+    }
+    .cf-quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 1.25rem;
+      max-width: 1100px;
+      margin: 2rem auto 0;
+      padding: 0 1rem;
+    }
+    .cf-quick-links a {
+      color: var(--cf-cor-destaque);
+      font-size: 12px;
+      text-decoration: none;
+    }
+    .cf-quick-links a:hover {
+      text-decoration: underline;
+    }
+  }
+</style>
+
+<script>
+  function initCarrossel(section) {
+    var cards = Array.prototype.slice.call(section.querySelectorAll('.cf-card'));
+    var total = cards.length;
+    var activeIndex = 0;
+    var viewport = section.querySelector('.coverflow-viewport');
+    var prevBtn = section.querySelector('.cf-arrow-prev');
+    var nextBtn = section.querySelector('.cf-arrow-next');
+    var quickLinks = section.querySelectorAll('.cf-quick-links a');
+
+    function render() {
+      cards.forEach(function (card, i) {
+        var offset = i - activeIndex;
+        if (offset > total / 2) {
+          offset -= total;
+        }
+        if (offset < -total / 2) {
+          offset += total;
+        }
+
+        var absOffset = Math.abs(offset);
+        var translateX = offset * 130;
+        var translateZ = -absOffset * 120;
+        var rotateY = offset * -35;
+        var scale = absOffset === 0 ? 1 : 0.75;
+        var opacity = absOffset > 2 ? 0 : 1 - absOffset * 0.3;
+        var zIndex = total - absOffset;
+
+        card.style.transform = 'translateX(' + translateX + 'px) translateZ(' + translateZ + 'px) rotateY(' + rotateY + 'deg) scale(' + scale + ')';
+        card.style.opacity = opacity;
+        card.style.zIndex = zIndex;
+        card.style.pointerEvents = absOffset > 2 ? 'none' : 'auto';
+        card.classList.toggle('is-active', offset === 0);
+      });
+    }
+
+    function goTo(index) {
+      activeIndex = (index + total) % total;
+      render();
+    }
+
+    prevBtn.addEventListener('click', function () {
+      goTo(activeIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', function () {
+      goTo(activeIndex + 1);
+    });
+
+    cards.forEach(function (card, i) {
+      card.querySelector('a').addEventListener('click', function (e) {
+        if (i !== activeIndex) {
+          e.preventDefault();
+          goTo(i);
+        }
+      });
+    });
+
+    quickLinks.forEach(function (link, i) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        goTo(i);
+        viewport.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+
+    var touchStartX = 0;
+
+    viewport.addEventListener('touchstart', function (e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', function (e) {
+      var touchEndX = e.changedTouches[0].clientX;
+      var diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 40) {
+        if (diff < 0) {
+          goTo(activeIndex + 1);
+        } else {
+          goTo(activeIndex - 1);
+        }
+      }
+    }, { passive: true });
+
+    render();
+  }
+
+  document.querySelectorAll('.coverflow-section').forEach(initCarrossel);
+</script>

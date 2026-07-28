@@ -1,0 +1,64 @@
+---
+const {
+  imagemFundo,
+  cards, // array de { titulo, topicos, imagem, textoBotao, link }
+} = Astro.props;
+
+const cardsComPosicao = cards.map((card, index) => ({
+  ...card,
+  inicioTexto: 35 + index * 20,
+  inicioCard: 35 + index * 20 + 5,
+}));
+---
+
+<section class="hero-home relative">
+  <div class="relative min-h-[90svh] md:min-h-[80svh] w-[min(90%,1200px)] mx-auto overflow-hidden">
+    <img src={imagemFundo} alt="" class="hero-home__fundo object-[50%_50%]" />
+
+    <!-- Versão mobile: empilhado, por faixas percentuais -->
+    <div class="md:hidden absolute inset-0">
+      {cardsComPosicao.map((card) => (
+        <div>
+          <div
+            class="absolute left-0 right-0 flex flex-col justify-center items-center px-3"
+            style={`top: ${card.inicioTexto}%; height: 5%;`}
+          >
+            <p class="titulo-livre-lovelace text-[11px] text-(--rose-gold) whitespace-nowrap overflow-hidden text-ellipsis">
+              {card.titulo}
+            </p>
+          </div>
+
+          <a
+            href={card.link}
+            class="hero-home__card absolute left-4 right-4"
+            style={`top: ${card.inicioCard}%; height: 15%; position: absolute;`}
+          >
+            <img src={card.imagem} alt={card.titulo} class="hero-home__card-imagem" />
+            <span class="hero-home__card-texto text-[9px]">{card.textoBotao}</span>
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <!-- Versão desktop: lado a lado, faixa 55%-95% -->
+    <div class="hidden md:flex absolute left-0 right-0 top-[55%] bottom-[5%] flex-row items-stretch justify-center gap-5 px-8">
+      {cards.map((card) => (
+        <div class="flex-1 max-w-[280px] flex flex-col">
+          <div class="hero-home__legenda text-center mb-2">
+            <p class="titulo-livre-lovelace text-[14px] text-(--rose-gold) whitespace-nowrap overflow-hidden text-ellipsis">
+              {card.titulo}
+            </p>
+            <hr class="hero-home__linha mx-auto" />
+            <p class="texto-livre text-[8px] tracking-wide text-(--rose-gold) opacity-75 whitespace-nowrap overflow-hidden text-ellipsis">
+              {card.topicos}
+            </p>
+          </div>
+          <a href={card.link} class="hero-home__card flex-1">
+            <img src={card.imagem} alt={card.titulo} class="hero-home__card-imagem" />
+            <span class="hero-home__card-texto text-[12px]">{card.textoBotao}</span>
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

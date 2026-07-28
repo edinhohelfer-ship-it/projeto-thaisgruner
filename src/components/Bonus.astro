@@ -1,0 +1,48 @@
+---
+const {
+  titulo,
+  imagemFundo,
+  cards, // array de { imagem, tituloCard, texto }
+  textoBotaoPrimario,
+  textoBotaoSecundario,
+} = Astro.props;
+---
+
+<section class="bonus relative">
+  <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden px-6 py-16 md:py-24">
+    <img
+      src={imagemFundo}
+      alt=""
+      class="bonus__fundo object-[50%_50%] md:object-[50%_50%]"
+    />
+
+    <div class="bonus__conteudo max-w-[900px] mx-auto">
+      <h2 class="texto-livre font-bold text-white text-[28px] md:text-[40px] text-center mb-10 md:mb-14">
+        {titulo}
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-8 md:gap-10">
+        {cards.map((card) => (
+          <div>
+            <img
+              src={card.imagem}
+              alt={card.tituloCard}
+              class="bonus__card-imagem w-full h-[160px] md:h-[200px] object-[50%_50%] mb-5"
+            />
+            <h3 class="texto-livre font-bold text-(--rose-gold) uppercase text-[13px] md:text-[14px] tracking-wide mb-2">
+              {card.tituloCard}
+            </h3>
+            <p class="texto-livre text-white opacity-80 text-[12px] md:text-[13px] leading-relaxed">
+              {card.texto}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div class="flex flex-col md:flex-row justify-center gap-3 mt-10 md:mt-14">
+        <a href="#" class="botao-base botao-pri-padrao-rose">{textoBotaoPrimario}</a>
+        <a href="#" class="botao-base botao-sec-padrao-branco">{textoBotaoSecundario}</a>
+      </div>
+    </div>
+  </div>
+</section>

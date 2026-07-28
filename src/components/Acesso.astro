@@ -1,0 +1,40 @@
+---
+const {
+  destaque,
+  titulo,
+  itens,
+  videoUrl,
+  fundo = 'charcoal',
+} = Astro.props;
+---
+
+<section class={`acesso ${fundo === 'preto' ? 'acesso--preto' : ''} px-6 py-16 md:py-24`}>
+  <div class="grid md:grid-cols-2 gap-10 md:gap-14 max-w-[1200px] mx-auto items-center">
+    <div>
+      <p class="titulo-livre-lovelace text-[18px] md:text-[26px] text-(--rose-gold) italic max-w-[500px]">
+        {destaque}
+      </p>
+      <h3 class="texto-livre font-bold text-[16px] md:text-[19px] text-white mt-6">
+        {titulo}
+      </h3>
+      <ul class="mt-5 space-y-3">
+        {itens.map((item) => (
+          <li class="flex items-start gap-3">
+            <span class="acesso__icone">✓</span>
+            <span class="texto-livre text-[13px] text-white opacity-80">{item}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <iframe
+        src={videoUrl}
+        title="Vídeo"
+        class="acesso__video w-full"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</section>

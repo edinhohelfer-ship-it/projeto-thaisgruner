@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroImersoes from '../components/HeroImersoes.astro';
+import Divisor from '../components/Divisor.astro';
+import Acesso from '../components/Acesso.astro';
+import SobreThais from '../components/SobreThais.astro';
+import Garantia from '../components/Garantia.astro';
+import AvisoOferta from '../components/AvisoOferta.astro';
+import Depoimentos from '../components/Depoimentos.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import { sobreThaisDados } from '../dados/sobreThais.js';
+import Faq from '../components/Faq.astro';
+---
+
+<Layout temaHeader="escuro" temaFooter="escuro">
+
+<HeroImersoes
+  tema="escuro"
+  badge="Tricologia Avançada"
+  logo="/imagens-padrao/logoperfectlahesmarrom-aberto.png"
+  titulo="Tricologia Avançada para lashes"
+  texto="Conteúdo técnico aprofundado, com ênfase em tricologia dos cílios para entender como preservar a saúde dos fios naturais durante o uso da extensão de cílios."
+  textoBotaoPrimario="Eu quero"
+  textoBotaoSecundario="Ver aula gratuita"
+  imagemFundo="/imagens-tricologia/hero-tricologia.png"
+/>
+
+
+ <Divisor
+  logo="/imagens-padrao/logoperfectlashesmarrom-fechado.png"
+  texto="Muito mais que uma lash. Uma Perfect Lashes!"
+/>
+
+
+ <Acesso
+  destaque="Sobre o"
+  titulo="CONTEÚDO"
+  itens={[
+    "Conteúdo técnico aprofundado, com ênfase em tricologia dos cílios para entender como preservar a saúde dos fios naturais durante o uso da extensão de cílios.",
+    "Cuidados e protocolos associados para manter a longevidade e a qualidade das extensões sem danos aos fios naturais.",
+    "Como identificar possíveis causas relacionadas à alterações da estrutura dos cílios, proporcionando um procedimento diferenciado, com foco em durabilidade e preservação dos fios.",
+  ]}
+  videoUrl="https://www.youtube.com/embed/fZY9Hs2ecbQ"
+  fundo="preto"
+/>
+
+
+
+ <AvisoOferta
+  texto="ESTA OFERTA TERMINARÁ EM BREVE."
+  textoBotao="Comprar agora"
+/>
+
+
+
+  <SobreThais {...sobreThaisDados} />
+
+ <Garantia
+  dias="7"
+  subtitulo="Seu dinheiro de volta, sem questionamentos, até 7 dias depois da compra."
+/>
+
+
+ <CtaFinal
+  imagemFundo="/imagens-tricologia/cta-final-tricologia.png"
+  textoBotaoPrimario="Comprar agora"
+  fundo="branco"
+/>
+
+  <Faq
+  titulo="PERGUNTAS FREQUENTES"
+  perguntas={[
+    { pergunta: "Para quem é esse produto?", resposta: "Profissionais da área de beleza em geral, tanto experientes como iniciantes que buscam entregar aos seus clientes um atendimento personalizado." },
+    { pergunta: "Como funciona o Prazo de Garantia?", resposta: "O Prazo de Garantia é o período que você tem para pedir o reembolso integral do valor pago pela sua compra, caso o produto não seja satisfatório." },
+    { pergunta: "O que é e como funciona o Certificado de Conclusão digital?", resposta: "Alguns cursos online oferecem um certificado digital de conclusão. Alunos podem emitir esse certificado ao final do curso ou entrando em contato com o Autor ou Autora. Esses certificados podem ser compartilhados em redes sociais como o LinkedIn e inseridos em informações curriculares." },
+  ]}
+/>
+
+</Layout>

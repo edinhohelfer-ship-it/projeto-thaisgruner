@@ -1,0 +1,39 @@
+---
+const {
+  titulo,
+  subtitulo,
+  imagemFundo,
+  textoBotaoPrimario,
+  textoBotaoSecundario,
+  fundo = 'preto',
+} = Astro.props;
+---
+
+<section class={`cta-final ${fundo === 'branco' ? 'cta-final--branco' : ''} relative`}>
+  <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden">
+    <img
+      src={imagemFundo}
+      alt=""
+      class="cta-final__fundo object-[50%_50%]"
+    />
+
+<div class="relative px-6 pt-6 pb-2 md:pb-6 flex flex-col items-center justify-end text-center min-h-[30svh] md:min-h-[35svh]">
+      {titulo && (
+        <h2 class="titulo-livre-lovelace text-[24px] md:text-[32px] text-(--rose-gold) mb-5 relative z-10">
+          {titulo}
+        </h2>
+      )}
+      {subtitulo && (
+        <p class="titulo-livre-lovelace italic text-[14px] md:text-[16px] text-white opacity-80 mb-10 relative z-10">
+          {subtitulo}
+        </p>
+      )}
+      {(textoBotaoPrimario || textoBotaoSecundario) && (
+        <div class="flex flex-col md:flex-row justify-center gap-3 relative z-10">
+          {textoBotaoPrimario && <a href="#" class="botao-base botao-pri-padrao-rose">{textoBotaoPrimario}</a>}
+          {textoBotaoSecundario && <a href="#" class="botao-base botao-sec-padrao-branco">{textoBotaoSecundario}</a>}
+        </div>
+      )}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+---
+const {
+  titulo,
+  perguntas, // array de { pergunta, resposta }
+} = Astro.props;
+---
+
+<section class="faq px-6 py-16 md:py-20">
+  <h2 class="texto-livre font-bold text-(--rose-gold) text-[28px] md:text-[32px] text-center mb-10">
+    {titulo}
+  </h2>
+
+  <div class="faq__lista max-w-[800px] mx-auto">
+    {perguntas.map((item) => (
+      <div class="faq__item">
+        <button type="button" class="faq__pergunta texto-livre font-bold text-(--rose-gold) text-[14px]">
+          {item.pergunta}
+        </button>
+        <div class="faq__resposta">
+          <p class="texto-livre text-white opacity-80 text-[13px] leading-relaxed">
+            {item.resposta}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script>
+  function initFaq(section) {
+    var items = section.querySelectorAll('.faq__item');
+    items.forEach(function (item) {
+      var question = item.querySelector('.faq__pergunta');
+      question.addEventListener('click', function () {
+        var isOpen = item.classList.contains('active');
+        items.forEach(function (other) {
+          other.classList.remove('active');
+        });
+        if (!isOpen) {
+          item.classList.add('active');
+        }
+      });
+    });
+  }
+
+  document.querySelectorAll('.faq').forEach(initFaq);
+</script>

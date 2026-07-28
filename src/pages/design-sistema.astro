@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroOverlay from '../components/HeroOverlay.astro';
+import HeroSplit from '../components/HeroSplit.astro';
+import TecnicaMetodo from '../components/TecnicaMetodo.astro';
+import Depoimentos from '../components/Depoimentos.astro';
+import Acesso from '../components/Acesso.astro';
+import Bonus from '../components/Bonus.astro';
+import Divisor from '../components/Divisor.astro';
+import SobreThais from '../components/SobreThais.astro';
+import LinhaSeparadora from '../components/LinhaSeparadora.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+
+
+---
+
+<Layout>
+	<HeroOverlay
+		badge="CONSULTORIA TÉCNICA"
+		logo="/imagens-padrao/logoperfectlahesmarrom-aberto.png"
+		titulo="A técnica certa. O resultado que você merece."
+		texto="Você, lash que já atua na área, ATENÇÃO! Pare de comprar cursos que não entregam o que você precisa. Monte sua consultoria PERSONALIZADA e destrave de vez o que realmente precisa aprender!"
+		textoBotaoPrimario="Quero minha consultoria"
+		textoBotaoSecundario="Agendar reunião"
+		imagemFundo="/imagens-consultoria/hero-consultoria.png"
+	/>
+
+
+	<HeroSplit
+		badge="Para profissionais da beleza"
+		titulo="O método "
+		tituloDestaque="que fatura "
+		tituloFinal="mesmo quando você não está"
+		texto="Parágrafo de apoio explicando o benefício principal do método apresentado."
+		textoBotaoPrimario="Quero começar"
+		textoBotaoSecundario="Saiba mais"
+		microtexto="Vagas limitadas mediante aprovação"
+		imagem="https://placehold.co/540x720"
+	/>
+
+
+	<TecnicaMetodo
+  frase="Correção, evolução e segurança técnica."
+  texto="Uma consultoria online, individual e personalizada, focada exclusivamente nas suas dificuldades técnicas reais. Nada genérico. Nada padrão. Tudo adaptado ao seu nível e à sua rotina."
+  beneficios={[
+    { imagem: "/imagens-consultoria/icone-circular-01.png", texto: "Tenha mais segurança, autoridade e confiança nos atendimentos dominando o lash design." },
+    { imagem: "/imagens-consultoria/icone-circular-02.png", texto: "Ganhe seu tempo e agilidade, agregue valor e lucre mais nos seus atendimentos." },
+    { imagem: "/imagens-consultoria/icone-circular-03.png", texto: "Aumente a durabilidade e retenção das extensões com refinamento técnico." },
+    { imagem: "/imagens-consultoria/icone-circular-04.png", texto: "Melhore e refine a entrega visual das suas extensões, conquistando clientes que pagam o que você vale." },
+  ]}
+	/>
+
+	<Acesso
+  destaque="O problema não é a falta de cursos... É a falta de acompanhamento personalizado à sua necessidade e realidade!"
+  titulo="Você terá acesso à:"
+  itens={[
+    "Curso Iniciante ao Avançado Perfect Lashes",
+    "Imersão em Saúde Ocular",
+    "Imersão em Tricologia",
+    "E-book de Ficha Procedimental (anamnese)",
+    "3 encontros individuais com Thaís Grüner",
+  ]}
+  videoUrl="https://www.youtube.com/embed/SEU_VIDEO_AQUI"
+	/>
+
+
+<Depoimentos
+  titulo="Depoimentos"
+  depoimentos={[
+    { foto: "https://placehold.co/80x80", nome: "Ana Paula", texto: "Um atendimento excepcional, superou todas as minhas expectativas do início ao fim." },
+    { foto: "https://placehold.co/80x80", nome: "Carla Souza", texto: "Profissionalismo e cuidado em cada detalhe. Recomendo de olhos fechados." },
+    { foto: "https://placehold.co/80x80", nome: "Mariana Lima", texto: "Resultado incrível e uma experiência muito acolhedora durante todo o processo." },
+  ]}
+/>
+
+
+	<Bonus
+  titulo="Bônus Exclusivos"
+  imagemFundo="/imagens-consultoria/bonus-exclusivo-fundo.png"
+  cards={[
+    {
+      imagem: "/imagens-consultoria/bonus-consultoria-card-esquerda.png",
+      tituloCard: "Operação Impulse",
+      texto: "Um sistema completo e prático para transformar seu negócio em uma operação lucrativa de verdade, com aplicação direta em cada aula.",
+    },
+    {
+      imagem: "/imagens-consultoria/bonus-consultoria-card-direita.png",
+      tituloCard: "Photo Lash",
+      texto: "Captura e edição para lashes. Faça registros incríveis dos seus trabalhos independente do tipo de câmera que você possui.",
+    },
+  ]}
+  textoBotaoPrimario="Quero minha consultoria"
+  textoBotaoSecundario="Agendar reunião"
+	/>
+
+<Divisor
+  logo="/imagens-padrao/logoperfectlashesmarrom-fechado.png"
+  texto="Muito mais que uma lash. Uma Perfect Lashes!"
+/>
+
+<SobreThais
+  kicker="Quem é"
+  nome="Thaís Grüner"
+  foto="/imagens-padrao/thais-gruner.png"
+  paragrafos={[
+    "Engenheira Civil por formação, empresária há 8 anos no ramo da beleza, com mais de 7500 atendimentos, 5 anos com equipe de excelência e mais de 30K em faturamento mensal somente com procedimentos de beleza.",
+    "Expert em fidelização, atendimento encantador e atração de clientes high ticket.",
+    "Fundadora do Studio Thaís Grüner (2018), criadora do maior Workshop Técnico Lash (VRPT/RS), palestrante e mentora de empreendedoras do ramo beauty.",
+  ]}
+  stats={[
+    { destaque: "10 ANOS", linha1: "expertise no", linha2: "mercado beauty" },
+    { destaque: "+7500", linha1: "atendimentos", linha2: "realizados" },
+    { destaque: "+30K", linha1: "faturamento", linha2: "mensal" },
+    { destaque: "CRIADORA", linha1: "workshop", linha2: "perfect lashes" },
+  ]}
+/>
+
+
+<LinhaSeparadora />
+
+<CtaFinal
+  titulo="Uma consultoria única está esperando por você!"
+  subtitulo="Entre em contato, monte sua consultoria personalizada e dê o próximo passo rumo à sua evolução."
+  imagemFundo="/imagens-consultoria/cta-final-consultoria.png"
+  textoBotaoPrimario="Quero minha consultoria"
+  textoBotaoSecundario="Agendar reunião"
+/>
+
+
+
+
+
+</Layout>

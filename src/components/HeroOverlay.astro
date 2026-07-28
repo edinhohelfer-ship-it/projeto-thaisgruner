@@ -1,0 +1,38 @@
+---
+const {
+  badge,
+  logo,
+  titulo,
+  texto,
+  textoBotaoPrimario,
+  textoBotaoSecundario,
+  imagemFundo,
+} = Astro.props;
+---
+
+<section class="hero-overlay relative">
+  <div class="relative min-h-[50svh] md:min-h-[80svh] w-[min(90%,1200px)] mx-auto flex flex-col items-start overflow-hidden">
+    <img src={imagemFundo} alt="" class="absolute inset-0 w-full h-full object-cover object-[52%_30%] md:object-[40%_50%]" />
+
+    <div class="relative w-full min-w-0 grid md:grid-cols-2 pt-16 md:pt-30">
+      <div class="w-4/5 md:w-full min-w-0 flex flex-col items-start px-4 md:px-0">
+        <span class="texto-livre text-[12px] md:text-[16px] text-(--rose-gold)">{badge}</span>
+        <img src={logo} alt="Perfect Lashes" class="w-[140px] md:w-[180px] h-auto mt-2" />
+        <h1 class="titulo-livre-lovelace text-[24px] md:text-[40px] text-white mt-4">{titulo}</h1>
+        <p class="texto-livre text-[14px] md:text-[16px] text-white opacity-60 mt-8">{texto}</p>
+      </div>
+    </div>
+
+    <!-- Botões sobrepostos: só no desktop -->
+    <div class="hidden md:flex absolute bottom-40 left-0 w-1/2 flex-row justify-center gap-3">
+      <a href="#" class="botao-base botao-pri-padrao-rose">{textoBotaoPrimario}</a>
+      <a href="#" class="botao-base botao-sec-padrao-branco">{textoBotaoSecundario}</a>
+    </div>
+
+    <!-- Botões abaixo da imagem: só no mobile -->
+    <div class="hero-overlay__botoes-mobile flex md:hidden flex-col items-center gap-3 px-6 py-20">
+      <a href="#" class="botao-base botao-pri-padrao-rose w-full">{textoBotaoPrimario}</a>
+      <a href="#" class="botao-base botao-sec-padrao-branco w-full">{textoBotaoSecundario}</a>
+    </div>
+  </div>
+</section>

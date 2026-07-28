@@ -1,0 +1,26 @@
+---
+import '../styles/global.css';
+import '../styles/estilos-compartilhados.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const { temaHeader = 'escuro', temaFooter = 'escuro' } = Astro.props;
+---
+
+<html lang="pt-BR">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Thaís Grüner</title>
+	</head>
+	<body class="bg-black">
+    <Header tema={temaHeader} />
+    <main style="padding-top: var(--altura-header);">
+        <slot />
+    </main>
+    <Footer tema={temaFooter} />
+	</body>
+	
+</html>

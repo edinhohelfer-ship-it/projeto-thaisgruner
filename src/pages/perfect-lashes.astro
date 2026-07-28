@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Container from '../components/Container.astro';
+import Carrossel from '../components/Carrossel.astro';
+
+const cursos = [
+  { titulo: "Curso Iniciante", imagem: "/imagens-perfectlashes/card01-cursos.png" },
+  { titulo: "Iniciante e Avançado", imagem: "/imagens-perfectlashes/card02-cursos.png" },
+  { titulo: "Tricologia", imagem: "/imagens-perfectlashes/card03-cursos.png", link: "/imersao-tricologia" },
+  { titulo: "Saúde Ocular", imagem: "/imagens-perfectlashes/card04-cursos.png", link: "/imersao-saude-ocular" },
+  { titulo: "Finanças", imagem: "/imagens-perfectlashes/card05-cursos.png" },
+  { titulo: "Operação Impulse", imagem: "/imagens-perfectlashes/card06-cursos.png" },
+];
+---
+
+<Layout temaHeader="escuro" temaFooter="escuro">
+  <section class="py-[24.2px] px-6 bg-black">
+    <Container>
+      <div class="grid grid-cols-[30%_70%] md:grid-cols-[20%_60%_20%] items-center">
+        <img src="/imagens-padrao/logoperfectlashesmarrom-fechado.png" alt="Logo Perfect Lashes" class="h-[48px] md:h-[64px] w-auto justify-self-center">
+        <h2 class="titulo-livre-lovelace text-[18px] md:text-[32px] text-(--rose-gold) text-center">CONHEÇA OS CURSOS PERFECT LASHES</h2>
+      </div>
+    </Container>
+  </section>
+
+  <Carrossel itens={cursos} corDestaque="var(--rose-gold)" />
+</Layout>

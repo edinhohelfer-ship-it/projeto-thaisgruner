@@ -1,0 +1,13 @@
+---
+const {
+  texto,
+  textoBotao,
+} = Astro.props;
+---
+
+<section class="bg-white px-6 py-10 md:py-14 text-center">
+  <p class="texto-livre text-[16px] md:text-[20px] text-black mb-5">
+    {texto}
+  </p>
+  <a href="#" class="botao-base botao-pri-padrao-rose">{textoBotao}</a>
+</section>

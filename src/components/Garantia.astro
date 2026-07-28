@@ -1,0 +1,21 @@
+---
+const {
+  dias,
+  subtitulo,
+} = Astro.props;
+---
+
+<section class="garantia px-6 py-14 md:py-16 text-center">
+  <div class="flex items-center justify-center gap-3 mb-6">
+    <span class="garantia__selo texto-livre text-[8px] text-(--charcoal)">SELO</span>
+    <h2 class="texto-livre font-bold text-[24px] text-(--charcoal) tracking-widest">GARANTIA</h2>
+  </div>
+  <hr class="garantia__linha my-6" />
+  <p class="texto-livre font-bold text-[21px] text-(--charcoal) mb-0">
+    Garantia total de {dias} dias.
+  </p>
+  <hr class="garantia__linha my-6" />
+  <p class="texto-livre text-[13px] text-(--charcoal) opacity-80 max-w-[500px] mx-auto">
+    {subtitulo}
+  </p>
+</section>

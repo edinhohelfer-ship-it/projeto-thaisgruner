@@ -1,0 +1,92 @@
+---
+const {
+  titulo,
+  depoimentos, // array de { foto, nome, texto }
+} = Astro.props;
+---
+
+<section class="depoimentos" aria-label="Depoimentos">
+  <h2 class="titulo-livre-lovelace text-[28px] md:text-[32px] text-(--charcoal) mb-10">{titulo}</h2>
+
+  <div class="depoimentos__carousel">
+    <button type="button" class="depoimentos__seta depoimentos__seta-prev" aria-label="Depoimento anterior">&#8249;</button>
+    <div class="depoimentos__slide">
+      <img class="depoimentos__foto" alt="" />
+      <p class="depoimentos__nome"></p>
+      <p class="depoimentos__texto"></p>
+    </div>
+    <button type="button" class="depoimentos__seta depoimentos__seta-next" aria-label="Próximo depoimento">&#8250;</button>
+  </div>
+
+  <div class="depoimentos__dots"></div>
+
+  <script type="application/json" class="depoimentos__dados" set:html={JSON.stringify(depoimentos)} />
+</section>
+
+<script>
+  function initDepoimentos(section) {
+    var dadosEl = section.querySelector('.depoimentos__dados');
+    var itens = JSON.parse(dadosEl.textContent);
+    var currentIndex = 0;
+    var intervalId = null;
+
+    var fotoEl = section.querySelector('.depoimentos__foto');
+    var nomeEl = section.querySelector('.depoimentos__nome');
+    var textoEl = section.querySelector('.depoimentos__texto');
+    var dotsEl = section.querySelector('.depoimentos__dots');
+    var prevBtn = section.querySelector('.depoimentos__seta-prev');
+    var nextBtn = section.querySelector('.depoimentos__seta-next');
+
+    itens.forEach(function (_, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'depoimentos__dot';
+      dot.setAttribute('aria-label', 'Ir para depoimento ' + (i + 1));
+      dot.addEventListener('click', function () {
+        goToSlide(i);
+        resetInterval();
+      });
+      dotsEl.appendChild(dot);
+    });
+
+    function render() {
+      var item = itens[currentIndex];
+      fotoEl.src = item.foto;
+      fotoEl.alt = item.nome;
+      nomeEl.textContent = item.nome;
+      textoEl.textContent = item.texto;
+
+      var dots = dotsEl.querySelectorAll('.depoimentos__dot');
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    function goToSlide(index) {
+      currentIndex = (index + itens.length) % itens.length;
+      render();
+    }
+
+    function resetInterval() {
+      clearInterval(intervalId);
+      intervalId = setInterval(function () {
+        goToSlide(currentIndex + 1);
+      }, 5000);
+    }
+
+    nextBtn.addEventListener('click', function () {
+      goToSlide(currentIndex + 1);
+      resetInterval();
+    });
+
+    prevBtn.addEventListener('click', function () {
+      goToSlide(currentIndex - 1);
+      resetInterval();
+    });
+
+    render();
+    resetInterval();
+  }
+
+  document.querySelectorAll('.depoimentos').forEach(initDepoimentos);
+</script>

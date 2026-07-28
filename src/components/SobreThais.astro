@@ -1,0 +1,73 @@
+---
+const {
+  kicker,
+  nome,
+  paragrafos,
+  foto,
+  stats,
+} = Astro.props;
+---
+
+<section class="sobre-thais">
+  <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden">
+
+    <!-- Bloco imagem + título + cards sobrepostos -->
+    <div class="relative h-[260px] md:h-auto md:min-h-[420px]">
+      <img src={foto} alt={nome} class="sobre-thais__fundo object-[50%_30%] md:object-[70%_50%]" />
+
+      <div class="relative grid md:grid-cols-2 h-full md:py-20 px-4 md:px-0">
+        <div class="pt-5 md:pl-8 md:pr-10 md:self-start">
+          <p class="texto-livre text-[16px] md:text-[18px] text-white">{kicker}</p>
+          <h2 class="titulo-livre-lovelace text-[24px] md:text-[26px] text-(--rose-gold) mt-1 mb-4">{nome}</h2>
+
+          <!-- Parágrafo: só desktop, ao lado do título -->
+          <div class="hidden md:block">
+            {paragrafos.map((paragrafo) => (
+              <p class="texto-livre text-[11px] text-white opacity-75 leading-relaxed mb-3 last:mb-0">
+                {paragrafo}
+              </p>
+            ))}
+          </div>
+
+          <!-- Cards: só mobile, dentro do bloco de texto -->
+          <div class="flex flex-col gap-2 w-[50%] md:hidden mt-4">
+            {stats.map((stat) => (
+              <div class="sobre-thais__card h-[44px] flex items-center gap-2 px-3">
+                <span class="sobre-thais__numero text-[13px] whitespace-nowrap">{stat.destaque}</span>
+                <span class="flex flex-col leading-tight">
+                  <span class="texto-livre text-white opacity-75 text-[7px]">{stat.linha1}</span>
+                  <span class="texto-livre text-white opacity-75 text-[7px]">{stat.linha2}</span>
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div></div>
+      </div>
+
+      <!-- Cards: só desktop, alinhados na divisão dos 50% -->
+      <div class="hidden md:flex flex-col gap-2 w-[190px] absolute top-1/2 left-1/2 -translate-y-1/2">
+        {stats.map((stat) => (
+          <div class="sobre-thais__card h-[52px] flex items-center gap-3 px-4">
+            <span class="sobre-thais__numero text-[14px] whitespace-nowrap">{stat.destaque}</span>
+            <span class="flex flex-col leading-tight">
+              <span class="texto-livre text-white opacity-75 text-[7px]">{stat.linha1}</span>
+              <span class="texto-livre text-white opacity-75 text-[7px]">{stat.linha2}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Parágrafo: só mobile, abaixo da imagem, fundo preto -->
+    <div class="md:hidden bg-black px-6 py-8 text-center">
+      {paragrafos.map((paragrafo) => (
+        <p class="texto-livre text-[12px] text-white opacity-75 leading-relaxed mb-3 last:mb-0">
+          {paragrafo}
+        </p>
+      ))}
+    </div>
+
+  </div>
+</section>
