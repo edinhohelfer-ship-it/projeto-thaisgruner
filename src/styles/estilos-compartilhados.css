@@ -380,6 +380,86 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 }
 
 
+/* ===== BOTÕES (CANTO SUAVE) ===== */
+
+.botao-pri-suave-rose {
+    background: var(--rose-gold);
+    color: var(--charcoal);
+    border-radius: 4px;
+}
+.botao-pri-suave-rose:hover {
+    box-shadow: 0 0 20px rgba(204, 177, 158, 0.6);
+}
+
+.botao-pri-suave-terracota {
+    background: var(--terracota);
+    color: #FFFFFF;
+    border-radius: 4px;
+}
+.botao-pri-suave-terracota:hover {
+    box-shadow: 0 0 20px rgba(176, 108, 74, 0.6);
+}
+
+.botao-pri-suave-charcoal {
+    background: var(--charcoal);
+    color: #FFFFFF;
+    border-radius: 4px;
+}
+.botao-pri-suave-charcoal:hover {
+    box-shadow: 0 0 20px rgba(50, 49, 57, 0.6);
+}
+
+.botao-pri-suave-branco {
+    background: #FFFFFF;
+    color: var(--charcoal);
+    border-radius: 4px;
+}
+.botao-pri-suave-branco:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+
+.botao-ter-suave-rose {
+    border: 1px solid rgba(204, 177, 158, 0.5);
+    color: var(--rose-gold);
+    background: transparent;
+    border-radius: 4px;
+}
+.botao-ter-suave-rose:hover {
+    box-shadow: 0 0 14px rgba(204, 177, 158, 0.4);
+}
+
+.botao-ter-suave-terracota {
+    border: 1px solid rgba(176, 108, 74, 0.5);
+    color: var(--terracota);
+    background: transparent;
+    border-radius: 4px;
+}
+.botao-ter-suave-terracota:hover {
+    box-shadow: 0 0 14px rgba(176, 108, 74, 0.4);
+}
+
+.botao-ter-suave-charcoal {
+    border: 1px solid rgba(50, 49, 57, 0.5);
+    color: var(--charcoal);
+    background: transparent;
+    border-radius: 4px;
+}
+.botao-ter-suave-charcoal:hover {
+    box-shadow: 0 0 14px rgba(50, 49, 57, 0.4);
+}
+
+.botao-ter-suave-branco {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    color: #FFFFFF;
+    background: transparent;
+    border-radius: 4px;
+}
+.botao-ter-suave-branco:hover {
+    box-shadow: 0 0 14px rgba(255, 255, 255, 0.4);
+}
+
+
 
 /* ===== HEADER ===== */
 
