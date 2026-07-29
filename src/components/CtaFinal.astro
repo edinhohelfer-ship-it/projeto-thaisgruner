@@ -5,6 +5,8 @@ const {
   imagemFundo,
   textoBotaoPrimario,
   textoBotaoSecundario,
+  linkBotaoPrimario = '#',
+  linkBotaoSecundario = '#',
   fundo = 'preto',
 } = Astro.props;
 ---
@@ -30,8 +32,8 @@ const {
       )}
       {(textoBotaoPrimario || textoBotaoSecundario) && (
         <div class="flex flex-col md:flex-row justify-center gap-3 relative z-10">
-          {textoBotaoPrimario && <a href="#" class="botao-base botao-pri-padrao-rose">{textoBotaoPrimario}</a>}
-          {textoBotaoSecundario && <a href="#" class="botao-base botao-sec-padrao-branco">{textoBotaoSecundario}</a>}
+          {textoBotaoPrimario && <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose">{textoBotaoPrimario}</a>}
+          {textoBotaoSecundario && <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco">{textoBotaoSecundario}</a>}
         </div>
       )}
     </div>
