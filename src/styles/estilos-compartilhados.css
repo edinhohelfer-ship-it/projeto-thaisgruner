@@ -21,7 +21,7 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 
 /* ===== TIPOGRAFIA ===== */
-/* --- Títulos: fonte Lovelace, variações regular/bold/italic --- */
+/* --- Títulos Livres: fonte Lovelace, variações regular/bold/italic --- */
 .titulo-livre-lovelace {
     font-family: 'Lovelace';
     font-weight: 400;
@@ -45,9 +45,32 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     font-size: normal;
 }
 
+/* --- Textos Livres: fonte montserrat, variações regular/bold/italic --- */
 
+.texto-livre {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-style: normal;
+}
+.texto-livre-italic {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    font-style: italic;
+    font-size: normal;
+}
+.texto-livre-bold {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-style: normal;
+}
+.texto-livre-bold-italic {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    font-style: italic;
+    font-size: normal;
+}
 
-
+/* --- Títulos: fonte Lovelace, variações regular/bold/italic --- */
 .titulo-grande {
     font-family: 'Lovelace';
     font-weight: 400;
@@ -182,11 +205,7 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     font-style: italic;
     font-size: 0.75rem;
 }
-.texto-livre {
-    font-family: 'Montserrat';
-    font-weight: 400;
-    font-style: normal;
-}
+
 
 
 /* ===== MEDIDAS ESTRUTURAIS ===== */
@@ -1096,7 +1115,7 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 70px 5%;
+    padding: 30px 5%;
 }
 
 .mentoria-statement-line {
