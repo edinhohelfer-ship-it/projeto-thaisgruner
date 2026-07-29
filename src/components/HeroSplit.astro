@@ -2,45 +2,119 @@
 const {
   tema = 'claro',
   badge,
+  siglaDestaque,
   titulo,
   tituloDestaque,
   tituloFinal,
   texto,
+  textoApoio,
   textoBotaoPrimario,
   textoBotaoSecundario,
+  linkBotaoPrimario = '#',
+  linkBotaoSecundario = '#',
   microtexto,
   imagem,
 } = Astro.props;
 ---
 
 <section class={`hero-split min-h-[80svh] flex items-center hero-split--${tema}`}>
-  <div class="w-[min(90%,1200px)] mx-auto grid md:grid-cols-2">
-    <div class="contents md:flex md:order-1 md:flex-col md:justify-start md:items-start md:text-left md:px-12 md:py-24">
-      <span class="hero-split__badge texto-livre order-1 md:order-none justify-self-center w-auto inline-block text-[11px] uppercase tracking-widest px-4 py-1.5 rounded-lg border mb-6 mx-6 md:mx-0 mt-4 md:mt-0" style="border-color: rgba(50, 49, 57, 0.35); background-color: rgba(255, 255, 255, 0.25);">
+
+
+  <!-- ===== VERSÃO MOBILE (sobreposta) ===== -->
+  <!-- Ajuste os valores "top-[X%]" abaixo para mover imagem/badge/sigla para cima ou para baixo -->
+  <div class="md:hidden relative w-[min(90%,1200px)] mx-auto overflow-hidden">
+
+    <!-- Imagem: "top-[%]" controla a distância do topo -->
+    <div class="absolute top-[2%] left-[8%] right-[8%] aspect-[4/5] rounded-lg overflow-hidden">
+      <img src={imagem} alt={titulo} class="w-full h-full object-cover" />
+    </div>
+
+    <!-- Badge + Sigla: sobrepostos na imagem. "top-[34%]" controla onde começam -->
+    <div class="absolute top-[42%] left-0 right-0 flex flex-col items-center text-center px-6">
+      <span class="hero-split__badge texto-livre inline-block text-[12px] uppercase tracking-widest px-4 py-1.5 rounded-lg border mb-0" style="border-color: var(--rose-gold); background-color: var(--terracota); color: #FFFFFF;">
         {badge}
       </span>
-      <h1 class="hero-split__titulo order-2 md:order-none text-3xl md:text-5xl mb-5 w-full px-6 md:px-0 md:mx-0 text-center md:text-left">
-        <span class="titulo-livre-lovelace text-[22px]">{titulo}</span> <em class="hero-split__destaque titulo-medio-bold-italic">{tituloDestaque}</em><span class="titulo-livre-lovelace text-[22px]">{tituloFinal}</span>
+
+      {siglaDestaque && (
+        <p class="titulo-livre-lovelace-bold text-[50px] text-(--terracota) mb-3">
+          {siglaDestaque}
+        </p>
+      )}
+    </div>
+
+    <!-- Restante do conteúdo: fica abaixo da imagem, no fluxo normal -->
+    <!-- Ajuste "pt-[X%]" para controlar a distância entre a imagem e este bloco -->
+    <div class="relative pt-[110%] flex flex-col items-center text-center px-6">
+
+      <h1 class="hero-split__titulo text-[22px] mb-3">
+        <span class="titulo-livre-lovelace text-[18px]">{titulo}</span> <em class="hero-split__destaque titulo-medio-bold-italic">{tituloDestaque}</em><span class="titulo-livre-lovelace text-[18px]">{tituloFinal}</span>
       </h1>
-      <p class="hero-split__texto texto-livre text-[12px] order-4 md:order-none w-full mb-8 px-6 md:px-0 md:mx-0 text-center md:text-left mt-2 md:mt-0">
-        {texto}
-      </p>
-      <div class="order-5 md:order-none w-full flex flex-wrap md:flex-nowrap gap-4 mb-4 px-6 md:px-0 md:mx-0 justify-center md:justify-start">
-        <a href="#" class="botao-base botao-pri-padrao-charcoal">
+
+      {textoApoio && (
+        <p class="hero-split__texto texto-livre text-[13px] mb-5">
+          {textoApoio}
+        </p>
+      )}
+
+      <div class="w-full flex flex-col gap-3 mb-4">
+        <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose w-full">
           {textoBotaoPrimario}
         </a>
-        <a href="#" class="botao-base botao-sec-padrao-charcoal">
+        <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco w-full">
           {textoBotaoSecundario}
         </a>
       </div>
-      <p class="hero-split__microtexto texto-livre text-[12px] order-6 md:order-none text-xs opacity-60 mx-6 md:mx-0 text-center pb-10 md:pb-0">
+
+      <p class="hero-split__microtexto texto-livre text-[12px] opacity-60">
         {microtexto}
       </p>
     </div>
-    <div class="order-3 md:order-2 flex items-center justify-center px-6 py-2 md:items-end md:justify-center md:pt-16 md:pb-5">
-      <div class="w-full max-w-[400px] aspect-[4/5] md:max-w-[540px] md:aspect-[540/720] rounded-lg overflow-hidden mx-auto">
+  </div>
+
+
+
+  <!-- ===== VERSÃO DESKTOP (lado a lado, como já era) ===== -->
+
+  <div class="hidden md:grid w-[min(90%,1200px)] mx-auto md:grid-cols-2">
+    <div class="md:flex md:order-1 md:flex-col md:justify-start md:items-start md:text-left md:px-12 md:py-24">
+      <span class="hero-split__badge texto-livre inline-block text-[11px] uppercase tracking-widest px-4 py-1.5 rounded-lg border mb-6" style="border-color: var(--rose-gold); background-color: var(--terracota); color: #FFFFFF;">
+        {badge}
+      </span>
+
+      {siglaDestaque && (
+      <p class="titulo-livre-lovelace-bold text-[80px] text-(--terracota) mb-3">
+        {siglaDestaque}
+      </p>
+    )}
+
+      <h1 class="hero-split__titulo text-5xl mb-5 w-full text-left">
+        <span class="titulo-livre-lovelace text-[22px]">{titulo}</span> <em class="hero-split__destaque titulo-medio-bold-italic">{tituloDestaque}</em><span class="titulo-livre-lovelace text-[22px]">{tituloFinal}</span>
+      </h1>
+      <p class="hero-split__texto texto-livre text-[12px] w-full mb-8 text-left">
+        {texto}
+      </p>
+      {textoApoio && (
+        <p class="hero-split__texto texto-livre text-[13px] w-full mb-8 text-left">
+          {textoApoio}
+        </p>
+      )}
+      <div class="w-full flex flex-nowrap gap-4 mb-4 justify-start">
+        <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose">
+          {textoBotaoPrimario}
+        </a>
+        <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco">
+          {textoBotaoSecundario}
+        </a>
+      </div>
+      <p class="hero-split__microtexto texto-livre text-[12px] opacity-60 text-left">
+        {microtexto}
+      </p>
+    </div>
+    <div class="md:order-2 flex items-center justify-center md:items-end md:justify-center md:pt-16 md:pb-5">
+      <div class="w-full md:max-w-[540px] md:aspect-[540/720] rounded-lg overflow-hidden mx-auto">
         <img src={imagem} alt={titulo} class="w-full h-full object-cover">
       </div>
     </div>
   </div>
+
 </section>
