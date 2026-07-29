@@ -27,12 +27,26 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     font-weight: 400;
     font-style: normal;
 }
-
+.titulo-livre-lovelace-italic {
+    font-family: 'Lovelace';
+    font-weight: 400;
+    font-style: italic;
+    font-size: normal;
+}
 .titulo-livre-lovelace-bold {
     font-family: 'Lovelace';
     font-weight: 700;
     font-style: normal;
 }
+.titulo-livre-lovelace-bold-italic {
+    font-family: 'Lovelace';
+    font-weight: 700;
+    font-style: italic;
+    font-size: normal;
+}
+
+
+
 
 .titulo-grande {
     font-family: 'Lovelace';

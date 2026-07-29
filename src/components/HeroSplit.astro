@@ -46,8 +46,8 @@ const {
     <!-- Ajuste "pt-[X%]" para controlar a distância entre a imagem e este bloco -->
     <div class="relative pt-[100%] flex flex-col items-center text-center px-6">
 
-      <h1 class="hero-split__titulo text-[22px] mb-3">
-        <span class="titulo-livre-lovelace text-[16px]">{titulo}</span> <em class="hero-split__destaque titulo-medio-bold-italic">{tituloDestaque}</em><span class="titulo-livre-lovelace text-[16px]">{tituloFinal}</span>
+      <h1 class="hero-split__titulo text-[10px] mb-3 max-w-[320px] mx-auto">
+        <span class="titulo-livre-lovelace text-[16px]">{titulo}</span> <em class="titulo-livre-lovelace-bold-italic text-[20px] text-(--terracota)">{tituloDestaque}</em><span class="titulo-livre-lovelace text-[16px]">{tituloFinal}</span>
       </h1>
 
       {textoApoio && (
@@ -88,7 +88,7 @@ const {
     )}
 
       <h1 class="hero-split__titulo text-5xl mb-5 w-full text-left">
-        <span class="titulo-livre-lovelace text-[22px]">{titulo}</span> <em class="hero-split__destaque titulo-medio-bold-italic">{tituloDestaque}</em><span class="titulo-livre-lovelace text-[22px]">{tituloFinal}</span>
+        <span class="titulo-livre-lovelace text-[22px]">{titulo}</span> <em class="titulo-livre-lovelace-bold-italic text-[36px] text-(--terracota)">{tituloDestaque}</em><span class="titulo-livre-lovelace text-[22px]">{tituloFinal}</span>
       </h1>
       <p class="hero-split__texto texto-livre text-[12px] w-full mb-8 text-left">
         {texto}
