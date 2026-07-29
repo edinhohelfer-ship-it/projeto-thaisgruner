@@ -630,6 +630,15 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 }
 
 
+
+/* ===== HERO SIMPLES ===== */
+
+.hero-simples {
+    background-color: #000000;
+}
+
+
+
 /* ===== HERO IMERSÕES (usado no HeroImersoes.astro) ===== */
 
 .hero-overlay__botao {
@@ -1343,6 +1352,44 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     background-color: #F2E4D8;
     border-radius: 8px;
 }
+
+
+/* ===== CARDS ACESSO ===== */
+
+.cards-acesso {
+    background-color: var(--charcoal);
+}
+
+.cards-acesso__card {
+    position: relative;
+    display: block;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.cards-acesso__imagem {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cards-acesso__texto {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+
 
 /* ===== FONTES ===== */
 

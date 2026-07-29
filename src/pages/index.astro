@@ -1,90 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import HeroHome from '../components/HeroHome.astro';
-import HeroDiagnostico from '../components/HeroDiagnostico.astro';
+import HeroSimples from '../components/HeroSimples.astro';
+import CardsAcesso from '../components/CardsAcesso.astro';
 import SobreThais from '../components/SobreThais.astro';
 import { sobreThaisDados } from '../dados/sobreThais.js';
 ---
 
 <Layout temaHeader="escuro" temaFooter="escuro">
 
-  <HeroHome
-  imagemFundo="/imagens-home/hero-home.png"
-  cards={[
-    {
-      titulo: "Mentoria Impulse Beauty",
-      topicos: "Direção · Estrutura · Acompanhamento",
-      imagem: "/imagens-home/card01-home-mentoria.png",
-      textoBotao: "Acessar conteúdo da Mentoria",
-      link: "/mentoria",
-    },
-    {
-      titulo: "Consultoria Técnica",
-      topicos: "Correção · Evolução · Segurança",
-      imagem: "/imagens-home/card02-home-consultoria.png",
-      textoBotao: "Acessar conteúdo da Consultoria",
-      link: "/consultoria",
-    },
-    {
-      titulo: "Cursos e Imersões",
-      topicos: "Técnica · Prática · Aprofundamento",
-      imagem: "/imagens-home/card03-home-cursos.png",
-      textoBotao: "Acessar Cursos e Imersões",
-      link: "/perfect-lashes",
-    },
-  ]}
-/>
+  <HeroSimples
+    titulo="Thaís Grüner"
+    texto="Direção, estrutura e resultado para o seu negócio de beleza — do primeiro atendimento à consultoria mais avançada."
+    textoBotao="Conheça todos os cursos"
+    link="/perfect-lashes"
+    imagemFundo="/imagens-home/hero-home.png"
+  />
 
-<section class="mentoria-statement">
-  <hr class="mentoria-statement-line" />
-  <p class="mentoria-statement-text titulo-livre-lovelace italic text-[24px] md:text-[32px] text-(--charcoal)">
-    Ganho real se constrói com estratégia e clientes que te valorizam
-  </p>
-  <hr class="mentoria-statement-line" />
-  <p class="mentoria-statement-support texto-livre text-[14px] text-(--charcoal) max-w-[600px] mx-auto">
-    Para você, profissional da beleza que domina a técnica, mas quer aprender de vez como estruturar e ver resultados reais na sua empresa
-  </p>
-</section>
+  <CardsAcesso
+    cards={[
+      {
+        titulo: "Mentoria Impulse Beauty",
+        imagem: "/imagens-home/card01-home-mentoria.png",
+        textoBotao: "Acessar conteúdo da Mentoria",
+        link: "/mentoria",
+      },
+      {
+        titulo: "Consultoria Técnica",
+        imagem: "/imagens-home/card02-home-consultoria.png",
+        textoBotao: "Acessar conteúdo da Consultoria",
+        link: "/consultoria",
+      },
+      {
+        titulo: "Cursos e Imersões",
+        imagem: "/imagens-home/card03-home-cursos.png",
+        textoBotao: "Acessar Cursos e Imersões",
+        link: "/perfect-lashes",
+      },
+    ]}
+  />
 
+  <SobreThais {...sobreThaisDados} />
 
-<HeroDiagnostico
-  titulo="Thaís Grüner Academy"
-  texto="Descubra o próximo passo do seu negócio"
-  textoBotao="Quero meu diagnóstico"
-  imagemFundo="/imagens-home/secao-imagem-home.png"
-/>
-
-<SobreThais {...sobreThaisDados} />
-
-
-<section class="bg-(--charcoal) px-6 py-16 md:py-20 text-center">
-  <p class="texto-livre font-bold text-[16px] md:text-[18px] tracking-widest text-(--rose-gold) mb-3">
-    DIAGNÓSTICO DO SEU NEGÓCIO
-  </p>
-  <p class="texto-livre text-[13px] md:text-[14px] text-white opacity-80 max-w-[500px] mx-auto mb-6">
-    Preencha o formulário e receba um diagnóstico gratuito sobre o seu negócio Beauty
-  </p>
-  <a href="#" class="botao-base botao-pri-padrao-rose">Quero meu diagnóstico</a>
-</section>
-
+  <section class="bg-(--charcoal) px-6 py-16 md:py-20 text-center">
+    <p class="texto-livre font-bold text-[16px] md:text-[18px] tracking-widest text-(--rose-gold) mb-3">
+      DIAGNÓSTICO DO SEU NEGÓCIO
+    </p>
+    <p class="texto-livre text-[13px] md:text-[14px] text-white opacity-80 max-w-[500px] mx-auto mb-6">
+      Preencha o formulário e receba um diagnóstico gratuito sobre o seu negócio Beauty
+    </p>
+    <a href="#" class="botao-base botao-pri-padrao-rose">Quero meu diagnóstico</a>
+  </section>
 
 </Layout>
-
-
-<script>
-  (function () {
-    var target = document.querySelector('.mentoria-statement');
-    if (!target) return;
-
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.3 });
-
-    observer.observe(target);
-  })();
-</script>

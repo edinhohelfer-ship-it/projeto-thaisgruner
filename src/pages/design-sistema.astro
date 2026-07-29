@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import HeroHomeSimples from '../components/HeroHomeSimples.astro';
 import HeroOverlay from '../components/HeroOverlay.astro';
 import HeroSplit from '../components/HeroSplit.astro';
 import TecnicaMetodo from '../components/TecnicaMetodo.astro';
@@ -10,11 +11,46 @@ import Divisor from '../components/Divisor.astro';
 import SobreThais from '../components/SobreThais.astro';
 import LinhaSeparadora from '../components/LinhaSeparadora.astro';
 import CtaFinal from '../components/CtaFinal.astro';
-
+import CardsAcesso from '../components/CardsAcesso.astro';
 
 ---
 
 <Layout>
+
+<<HeroHomeSimples
+  titulo="Thaís Grüner"
+  texto="Direção, estrutura e resultado para o seu negócio de beleza — do primeiro atendimento à consultoria mais avançada."
+  textoBotao="Conheça todos os cursos"
+  link="/perfect-lashes"
+  imagemFundo="/imagens-home/hero-home.png"
+/>
+
+
+<CardsAcesso
+  cards={[
+    {
+      titulo: "Mentoria Impulse Beauty",
+      imagem: "/imagens-home/card01-home-mentoria.png",
+      textoBotao: "Acessar conteúdo da Mentoria",
+      link: "/mentoria",
+    },
+    {
+      titulo: "Consultoria Técnica",
+      imagem: "/imagens-home/card02-home-consultoria.png",
+      textoBotao: "Acessar conteúdo da Consultoria",
+      link: "/consultoria",
+    },
+    {
+      titulo: "Cursos e Imersões",
+      imagem: "/imagens-home/card03-home-cursos.png",
+      textoBotao: "Acessar Cursos e Imersões",
+      link: "/perfect-lashes",
+    },
+  ]}
+/>
+
+
+
 	<HeroOverlay
 		badge="CONSULTORIA TÉCNICA"
 		logo="/imagens-padrao/logoperfectlahesmarrom-aberto.png"
@@ -125,7 +161,6 @@ import CtaFinal from '../components/CtaFinal.astro';
   textoBotaoPrimario="Quero minha consultoria"
   textoBotaoSecundario="Agendar reunião"
 />
-
 
 
 
