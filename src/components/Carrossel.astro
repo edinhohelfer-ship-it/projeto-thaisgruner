@@ -10,7 +10,7 @@ const { itens, corDestaque = 'var(--rose-gold)' } = Astro.props;
         <li class="cf-card" data-index={index}>
           <a href={item.link || '#'}>
             <img src={item.imagem} alt={item.titulo}>
-            <span class="cf-card-title">{item.titulo}</span>
+            <span class="cf-card-title texto-livre text-[14px] md:text-[18px]">{item.titulo}</span>
           </a>
         </li>
       ))}
@@ -20,7 +20,7 @@ const { itens, corDestaque = 'var(--rose-gold)' } = Astro.props;
 
   <ul class="cf-quick-links" id="cf-quick-links">
     {itens.map((item, index) => (
-      <li><a href="#" data-index={index}>{item.titulo}</a></li>
+      <li><a href="#" data-index={index} class="texto-livre text-[14px] md:text-[18px]">{item.titulo}</a></li>
     ))}
   </ul>
 </section>
@@ -36,7 +36,7 @@ const { itens, corDestaque = 'var(--rose-gold)' } = Astro.props;
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 45%, rgba(176, 108, 74, 0.28), rgba(0, 0, 0, 0) 60%);
+    background: radial-gradient(circle at 50% 30%, rgba(176, 108, 74, 0.28), rgba(0, 0, 0, 0) 45%);
     pointer-events: none;
   }
   .coverflow-viewport {
@@ -55,16 +55,18 @@ const { itens, corDestaque = 'var(--rose-gold)' } = Astro.props;
     padding: 0;
     transform-style: preserve-3d;
   }
+
   .cf-card {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 270px;
-    height: 360px;
+    width: 360px;
+    height: 480px;
     margin-left: -135px;
-    margin-top: -180px;
+    margin-top: -220px;
     transition: transform 0.5s ease, opacity 0.5s ease;
   }
+
   .cf-card a {
     display: block;
     width: 100%;
@@ -81,7 +83,8 @@ const { itens, corDestaque = 'var(--rose-gold)' } = Astro.props;
     object-fit: cover;
     display: block;
   }
-  .cf-card-title {
+
+ .cf-card-title {
     position: absolute;
     left: 0;
     right: 0;
@@ -89,10 +92,9 @@ const { itens, corDestaque = 'var(--rose-gold)' } = Astro.props;
     padding: 0.75rem 1rem;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
     color: #FFFFFF;
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
     text-align: center;
-  }
+}
+
   .cf-card.is-active a {
     box-shadow: 0 25px 45px rgba(176, 108, 74, 0.45), 0 10px 25px rgba(0, 0, 0, 0.55);
   }
@@ -131,28 +133,30 @@ const { itens, corDestaque = 'var(--rose-gold)' } = Astro.props;
       display: none;
     }
     .coverflow-viewport {
-      height: 335px;
+      height: 350px;
     }
     .cf-card {
-      width: 190px;
-      height: 258px;
-      margin-left: -95px;
-      margin-top: -129px;
+      width: 225px;
+      height: 300px;
+      margin-left: -100px;
+      margin-top: -200px;
     }
+
     .cf-quick-links {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.75rem 1.25rem;
-      max-width: 1100px;
-      margin: 2rem auto 0;
+      gap: 0.75rem 1rem;
+      max-width: 1200px;
+      margin: -2rem auto 0;
       padding: 0 1rem;
     }
+
     .cf-quick-links a {
-      color: var(--cf-cor-destaque);
-      font-size: 12px;
-      text-decoration: none;
-    }
+    color: var(--cf-cor-destaque);
+    text-decoration: none;
+}
+
     .cf-quick-links a:hover {
       text-decoration: underline;
     }
