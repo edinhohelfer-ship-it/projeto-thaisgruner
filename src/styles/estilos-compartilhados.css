@@ -713,7 +713,7 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 }
 
 .hero-overlay__botoes-mobile {
-    background-color: #000000;
+    background-color: transparent;
 }
 
 
