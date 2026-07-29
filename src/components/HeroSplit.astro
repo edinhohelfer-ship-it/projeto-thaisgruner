@@ -25,12 +25,12 @@ const {
   <div class="md:hidden relative w-[min(90%,1200px)] mx-auto overflow-hidden">
 
     <!-- Imagem: "top-[%]" controla a distância do topo -->
-    <div class="absolute top-[2%] left-[8%] right-[8%] aspect-[4/5] rounded-lg overflow-hidden">
+    <div class="absolute top-[2%] left-[8%] right-[8%] aspect-[88/100] rounded-lg overflow-hidden">
       <img src={imagem} alt={titulo} class="w-full h-full object-cover" />
     </div>
 
-    <!-- Badge + Sigla: sobrepostos na imagem. "top-[34%]" controla onde começam -->
-    <div class="absolute top-[35%] left-0 right-0 flex flex-col items-center text-center px-6">
+    <!-- Badge + Sigla: sobrepostos na imagem. "top-[30%]" controla onde começam -->
+    <div class="absolute top-[30%] left-0 right-0 flex flex-col items-center text-center px-6">
       <span class="hero-split__badge texto-livre inline-block text-[12px] uppercase tracking-widest px-4 py-1.5 rounded-lg border mb-0" style="border-color: var(--rose-gold); background-color: var(--terracota); color: #FFFFFF;">
         {badge}
       </span>
@@ -44,10 +44,10 @@ const {
 
     <!-- Restante do conteúdo: fica abaixo da imagem, no fluxo normal -->
     <!-- Ajuste "pt-[X%]" para controlar a distância entre a imagem e este bloco -->
-    <div class="relative pt-[110%] flex flex-col items-center text-center px-6">
+    <div class="relative pt-[100%] flex flex-col items-center text-center px-6">
 
       <h1 class="hero-split__titulo text-[22px] mb-3">
-        <span class="titulo-livre-lovelace text-[18px]">{titulo}</span> <em class="hero-split__destaque titulo-medio-bold-italic">{tituloDestaque}</em><span class="titulo-livre-lovelace text-[18px]">{tituloFinal}</span>
+        <span class="titulo-livre-lovelace text-[16px]">{titulo}</span> <em class="hero-split__destaque titulo-medio-bold-italic">{tituloDestaque}</em><span class="titulo-livre-lovelace text-[16px]">{tituloFinal}</span>
       </h1>
 
       {textoApoio && (
