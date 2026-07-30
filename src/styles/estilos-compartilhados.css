@@ -753,6 +753,13 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 
 
+/* ===== HERO SPLIT OVERLAY ===== */
+
+.hero-split-overlay {
+    background-color: #FFFFFF;
+}
+
+
 /* ===== HERO SIMPLES ===== */
 
 .hero-simples {
@@ -831,6 +838,23 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 .tecnica-metodo {
     background-color: #000000;
 }
+
+.tecnica-metodo--white {
+    background-color: #FFFFFF;
+}
+.tecnica-metodo--rose {
+    background-color: var(--rose-gold);
+}
+.tecnica-metodo--charcoal {
+    background-color: var(--charcoal);
+}
+.tecnica-metodo--terracota {
+    background-color: var(--terracota);
+}
+
+
+
+
 
 .tecnica-metodo__frame {
     position: relative;
@@ -1431,6 +1455,35 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     padding: 10px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
     text-align: center;
+}
+
+
+/* ===== SEÇÃO TRÊS CARDS ===== */
+
+.secao-tres-cards {
+    background-color: var(--rose-gold);
+}
+
+.secao-tres-cards__linha {
+    width: 40%;
+    max-width: 300px;
+    height: 2px;
+    background-color: #B08D57;
+    border: none;
+    box-shadow: 0 0 8px rgba(176, 141, 87, 0.6);
+}
+
+.secao-tres-cards__card {
+    background-color: transparent;
+    border: 2px solid #B08D57;
+    border-radius: 12px;
+    box-shadow: 0 0 16px rgba(176, 141, 87, 0.45), inset 0 0 8px rgba(176, 141, 87, 0.15);
+}
+
+/* ===== SEÇÃO TEXTOS DIREITA ===== */
+
+.secao-textos-direita {
+    background-color: #FFFFFF;
 }
 
 
