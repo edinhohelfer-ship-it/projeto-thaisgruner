@@ -7,35 +7,36 @@ const {
   texto,
   textoBotaoPrimario,
   textoBotaoSecundario,
+  linkBotaoPrimario = '#',
+  linkBotaoSecundario = '#',
   imagemFundo,
 } = Astro.props;
 ---
 
 <section class={`hero-overlay hero-overlay--${tema} relative`}>
-  <div class="relative min-h-[50svh] md:min-h-[80svh] w-[min(90%,1200px)] mx-auto flex items-start overflow-hidden">
+  <div class="relative min-h-[50svh] md:min-h-[80svh] w-[min(90%,1200px)] mx-auto flex flex-col items-start overflow-hidden">
     <img src={imagemFundo} alt="" class="absolute inset-0 w-full h-full object-cover object-[52%_30%] md:object-[60%_50%]" />
 
-    <div class="relative w-full h-full grid md:grid-cols-2 pt-16 md:pt-30">
+    <div class="relative w-full min-w-0 grid md:grid-cols-2 pt-4 md:pt-30">
       <div class="hidden md:block"></div>
 
-      <div class="w-4/5 md:w-full flex flex-col items-end text-right ml-auto mt-4 md:mt-0">
-        <span class="hero-overlay__badge texto-livre text-[12px] md:text-[16px]">{badge}</span>
-        <img src={logo} alt="Perfect Lashes" class="w-[140px] md:w-[180px] h-auto mt-2" />
-        <h1 class="hero-overlay__titulo titulo-livre-lovelace text-[24px] md:text-[40px] mt-4">{titulo}</h1>
-        <p class="hero-overlay__texto texto-livre text-[14px] md:text-[16px] opacity-60 mt-8">{texto}</p>
+      <div class="w-7/10 md:w-full min-w-0 flex flex-col items-end text-right ml-auto px-2 md:px-0">
+        <span class="hero-overlay__badge texto-livre text-[16px] md:text-[16px]">{badge}</span>
+        <img src={logo} alt="Perfect Lashes" class="w-[120px] md:w-[180px] h-auto mt-2" />
+        <h1 class="hero-overlay__titulo titulo-livre-lovelace text-[22px] md:text-[40px] mt-4">{titulo}</h1>
+        <p class="hero-overlay__texto texto-livre text-[14px] md:text-[16px] opacity-75 mt-8">{texto}</p>
       </div>
     </div>
 
     <!-- Botões sobrepostos: só no desktop -->
     <div class="hidden md:flex absolute bottom-40 right-0 w-1/2 flex-row justify-center gap-3">
-      <a href="#" class="botao-base botao-pri-padrao-rose">{textoBotaoPrimario}</a>
-      <a href="#" class="botao-base botao-sec-padrao-branco">{textoBotaoSecundario}</a>
+      <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose">{textoBotaoPrimario}</a>
+      <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco">{textoBotaoSecundario}</a>
     </div>
-  </div>
 
-  <!-- Botões abaixo da imagem: só no mobile -->
-  <div class="hero-overlay__botoes-mobile flex md:hidden flex-col items-center gap-3 px-6 py-20">
-    <a href="#" class="botao-base botao-pri-padrao-rose w-full">{textoBotaoPrimario}</a>
-    <a href="#" class="botao-base botao-sec-padrao-branco w-full">{textoBotaoSecundario}</a>
+    <!-- Botões abaixo da imagem: só no mobile -->
+      <div class="hero-overlay__botoes-mobile relative z-10 w-full flex md:hidden flex-col items-center gap-3 px-6 py-8">      <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose w-full">{textoBotaoPrimario}</a>
+      <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco w-full">{textoBotaoSecundario}</a>
+    </div>
   </div>
 </section>
