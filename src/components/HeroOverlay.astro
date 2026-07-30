@@ -1,5 +1,4 @@
 ---
-
 const {
   badge,
   logo,
@@ -11,7 +10,6 @@ const {
   linkBotaoSecundario = '#',
   imagemFundo,
 } = Astro.props;
-
 ---
 
 <section class="hero-overlay relative">
@@ -28,15 +26,19 @@ const {
     </div>
 
     <!-- Botões sobrepostos: só no desktop -->
+    {(textoBotaoPrimario || textoBotaoSecundario) && (
       <div class="hidden md:flex absolute bottom-40 left-0 w-1/2 flex-row justify-center gap-3">
-        <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose">{textoBotaoPrimario}</a>
-        <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco">{textoBotaoSecundario}</a>
+        {textoBotaoPrimario && <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose">{textoBotaoPrimario}</a>}
+        {textoBotaoSecundario && <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco">{textoBotaoSecundario}</a>}
       </div>
+    )}
 
     <!-- Botões abaixo da imagem: só no mobile -->
-      <div class="hero-overlay__botoes-mobile relative z-10 flex md:hidden flex-col items-center gap-3 px-6 py-8">
-        <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose w-full">{textoBotaoPrimario}</a>
-        <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco w-full">{textoBotaoSecundario}</a>
+    {(textoBotaoPrimario || textoBotaoSecundario) && (
+      <div class="hero-overlay__botoes-mobile relative z-10 w-full flex md:hidden flex-col items-center gap-3 px-6 py-8">
+        {textoBotaoPrimario && <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose w-full">{textoBotaoPrimario}</a>}
+        {textoBotaoSecundario && <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco w-full">{textoBotaoSecundario}</a>}
       </div>
+    )}
   </div>
 </section>
