@@ -3,6 +3,7 @@ import '../styles/global.css';
 import '../styles/estilos-compartilhados.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 
 const { temaHeader = 'escuro', temaFooter = 'escuro' } = Astro.props;
 ---
@@ -21,6 +22,18 @@ const { temaHeader = 'escuro', temaFooter = 'escuro' } = Astro.props;
         <slot />
     </main>
     <Footer tema={temaFooter} />
+
+    <CookieConsent />
+
+    <script>
+      import { initMetaPixel } from '../scripts/meta-pixel.js';
+      import { initGoogleAds } from '../scripts/google-ads.js';
+      import { initTikTokPixel } from '../scripts/tiktok-pixel.js';
+
+      initMetaPixel();
+      initGoogleAds();
+      initTikTokPixel();
+    </script>
 	</body>
 	
 </html>

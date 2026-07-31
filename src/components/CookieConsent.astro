@@ -1,0 +1,93 @@
+---
+// CookieConsent.astro
+// Importado UMA VEZ no Layout.astro — aparece em todas as páginas
+// automaticamente.
+---
+
+<div id="cookie-consent-banner" class="cookie-banner" hidden>
+  <p class="cookie-banner__text">
+    Usamos cookies para melhorar sua experiência e medir o desempenho de
+    nossas campanhas. Você pode aceitar ou recusar os cookies não
+    essenciais.
+  </p>
+  <div class="cookie-banner__actions">
+    <button id="cookie-reject" class="cookie-banner__btn cookie-banner__btn--secondary" type="button">
+      Recusar
+    </button>
+    <button id="cookie-accept" class="cookie-banner__btn cookie-banner__btn--primary" type="button">
+      Aceitar
+    </button>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: #1a1a1a;
+    color: #fff;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .cookie-banner__text {
+    margin: 0;
+    font-size: 0.9rem;
+    max-width: 60ch;
+  }
+
+  .cookie-banner__actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .cookie-banner__btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .cookie-banner__btn--primary {
+    background: #cc7722; /* ajustar pra paleta oficial (rose gold / burgundy) */
+    color: #fff;
+  }
+
+  .cookie-banner__btn--secondary {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+  }
+</style>
+
+<script>
+  import { getConsent, setConsent } from '../scripts/consent.js';
+
+  const banner = document.getElementById('cookie-consent-banner');
+  const acceptBtn = document.getElementById('cookie-accept');
+  const rejectBtn = document.getElementById('cookie-reject');
+
+  if (banner && getConsent() === null) {
+    banner.hidden = false;
+  }
+
+  acceptBtn?.addEventListener('click', () => {
+    setConsent('accepted');
+    if (banner) banner.hidden = true;
+  });
+
+  rejectBtn?.addEventListener('click', () => {
+    setConsent('rejected');
+    if (banner) banner.hidden = true;
+  });
+</script>
