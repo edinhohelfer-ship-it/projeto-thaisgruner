@@ -6,6 +6,7 @@ const {
   textoBotao,
   link,
   imagemFundo,
+  imagemFundoMobile,
   corTitulo = 'var(--rose-gold)',
   corTexto = '#FFFFFF',
 } = Astro.props;
@@ -13,7 +14,12 @@ const {
 
 <section class="hero-simples relative overflow-hidden">
   <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden min-h-[70svh] md:min-h-[80svh]">
-    <img src={imagemFundo} alt="" class="absolute inset-0 w-full h-full object-cover object-[50%_50%]" />
+    <picture class="absolute inset-0 block w-full h-full">
+      {imagemFundoMobile && (
+        <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
+      )}
+      <img src={imagemFundo} alt="" class="w-full h-full object-cover object-[50%_50%]" />
+    </picture>
 
     <div class="absolute left-0 right-0 top-2/5 bottom-0 flex flex-col items-center justify-center text-center px-6">
       {tituloTopo && (
