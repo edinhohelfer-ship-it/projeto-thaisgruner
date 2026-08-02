@@ -13,8 +13,7 @@ const {
 ---
 
 <section class="hero-simples relative overflow-hidden">
-  <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden min-h-[70svh] md:min-h-[80svh]">
-    <picture class="absolute inset-0 block w-full h-full">
+<div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden min-h-[70svh] md:min-h-0 md:aspect-[16/9]">    <picture class="absolute inset-0 block w-full h-full">
       {imagemFundoMobile && (
         <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
       )}
