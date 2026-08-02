@@ -13,7 +13,7 @@ const {
 ---
 
 <section class="hero-overlay relative">
-  <div class="relative min-h-[50svh] md:min-h-[80svh] w-[min(90%,1200px)] mx-auto flex flex-col items-start overflow-hidden">
+  <div class="relative min-h-[50svh] md:min-h-0 md:aspect-[16/9] w-[min(90%,1200px)] mx-auto flex flex-col items-start overflow-hidden">
     <img src={imagemFundo} alt="" class="absolute inset-0 w-full h-full object-cover object-[60%_30%] md:object-[40%_50%]" />
 
     <div class="relative w-full min-w-0 grid md:grid-cols-2 pt-4 md:pt-30">
@@ -27,7 +27,7 @@ const {
 
     <!-- Botões sobrepostos: só no desktop -->
     {(textoBotaoPrimario || textoBotaoSecundario) && (
-      <div class="hidden md:flex absolute bottom-40 left-0 w-1/2 flex-row justify-center gap-3">
+      <div class="hidden md:flex absolute bottom-[8%] left-0 w-1/2 flex-row justify-center gap-3">
         {textoBotaoPrimario && <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose">{textoBotaoPrimario}</a>}
         {textoBotaoSecundario && <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco">{textoBotaoSecundario}</a>}
       </div>
