@@ -1,0 +1,66 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSimples from '../components/HeroSimples.astro';
+import Divisor from '../components/Divisor.astro';
+import Acesso from '../components/Acesso.astro';
+import AvisoOferta from '../components/AvisoOferta.astro';
+import TecnicaMetodo from '../components/TecnicaMetodo.astro';
+---
+
+<Layout temaHeader="escuro" temaFooter="escuro">
+
+<HeroSimples
+  tituloTopo="E-BOOK"
+  titulo="Ficha Procedimental"
+  texto="ransforme sua jornada na área da extensão de cílios (e estética) com a Ficha de Anamnese exclusiva e personalizável Perfect Lashes."
+  textoBotao="Quero adquirir"
+  corTitulotopo="var(--charcoal)"
+  corTitulo="var(--charcoal)"
+  corTexto="var(--charcoal)"
+  link="#"
+  imagemFundo="/imagens-ficha-anamnese/hero-ficha.png"
+/>
+
+
+
+ <Divisor
+  logo="/imagens-padrao/logoperfectlashesmarrom-fechado.png"
+  texto="Muito mais que uma lash. Uma Perfect Lashes!"
+/>
+
+
+<Acesso
+  destaque="Sobre o CONTEÚDO"
+  titulo=""
+  itens={[
+    "Transforme sua jornada na área da extensão de cílios (e estética) com a Ficha de Anamnese exclusiva e personalizável Perfect Lashes.",
+    "Pensada tanto para quem está iniciando na área como para quem já é experiente e está sempre em busca de maior destaque no mercado, nossa ficha guia você na criação de avaliações detalhadas e personalizadas para cada cliente. ",
+    "Com campos estratégicos para histórico de saúde, preferências estéticas e cuidados específicos, você não só oferece um serviço personalizado, mas também constrói confiança e profissionalismo.",
+  ]}
+  videoUrl="https://www.youtube.com/embed/fZY9Hs2ecbQ"
+  fundo="preto"
+/>
+
+
+
+ <AvisoOferta
+  texto="ESTA OFERTA TERMINARÁ EM BREVE."
+  textoBotao="Comprar agora"
+  linkBotaoPrimario="https://pay.hotmart.com/C95464514M"
+/>
+
+
+<TecnicaMetodo
+    frase="Ao que você terá ACESSO"
+    texto=""
+    beneficios={[
+      { imagem: "/imagens-consultoria/icone-circular-01.png", texto: "Ebook explicativo com todas as informações necessárias para uma ficha completa" },
+      { imagem: "/imagens-consultoria/icone-circular-02.png", texto: "Modelo editável em Canva totalmente personalizável" },
+      { imagem: "/imagens-consultoria/icone-circular-03.png", texto: "Vídeo aula demonstrativa de como personalizar e montar sua ficha" },
+      { imagem: "/imagens-consultoria/icone-circular-04.png", texto: "Modelo em PDF pronto para impressão (para extensão de cílios)" },
+    ]}
+  />
+
+
+</Layout>
+
