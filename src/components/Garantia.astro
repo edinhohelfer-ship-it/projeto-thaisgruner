@@ -2,12 +2,19 @@
 const {
   dias,
   subtitulo,
+  imagemSelo,
 } = Astro.props;
 ---
 
 <section class="garantia px-6 py-12 md:py-16 text-center">
   <div class="flex items-center justify-center gap-3 mb-4">
-    <span class="garantia__selo titulo-livre-lovelace-bold text-[10px] text-(--charcoal)">SELO</span>
+    {imagemSelo ? (
+      <div class="garantia__selo-imagem">
+        <img src={imagemSelo} alt="Selo de garantia" class="w-full h-full object-cover" />
+  </div>
+    ) : (
+      <span class="garantia__selo titulo-livre-lovelace-bold text-[10px] text-(--charcoal)">SELO</span>
+    )}
     <h2 class="titulo-livre-lovelace-bold text-[24px] text-(--charcoal) tracking-widest">GARANTIA</h2>
   </div>
   <hr class="garantia__linha my-6" />

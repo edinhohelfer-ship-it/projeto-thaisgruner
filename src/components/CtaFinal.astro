@@ -3,6 +3,7 @@ const {
   titulo,
   subtitulo,
   imagemFundo,
+  imagemFundoMobile,
   textoBotaoPrimario,
   textoBotaoSecundario,
   linkBotaoPrimario = '#',
@@ -13,13 +14,14 @@ const {
 
 <section id="comprar" class={`cta-final ${fundo === 'branco' ? 'cta-final--branco' : ''} relative scroll-mt-[98px]`}>
   <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden">
-    <img
-      src={imagemFundo}
-      alt=""
-      class="cta-final__fundo object-[50%_50%]"
-    />
+    <picture class="absolute inset-0 block w-full h-full">
+      {imagemFundoMobile && (
+        <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
+      )}
+      <img src={imagemFundo} alt="" class="cta-final__fundo w-full h-full object-cover object-[50%_50%]" />
+    </picture>
 
-<div class="relative px-6 pt-6 pb-2 md:pb-6 flex flex-col items-center justify-end text-center min-h-[30svh] md:min-h-[35svh]">
+    <div class="relative px-6 pt-6 pb-2 md:pb-6 flex flex-col items-center justify-end text-center min-h-[30svh] md:min-h-0 md:aspect-[21/9]">
       {titulo && (
         <h2 class="titulo-livre-lovelace text-[24px] md:text-[32px] text-(--rose-gold) mb-5 relative z-10">
           {titulo}

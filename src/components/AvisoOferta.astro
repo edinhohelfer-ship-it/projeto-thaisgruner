@@ -4,13 +4,19 @@ const {
   textoBotao,
   linkBotaoPrimario = '#',
   imagemFundo,
+  imagemFundoMobile,
 } = Astro.props;
 ---
 
 <section class="bg-white relative overflow-hidden">
   <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden">
     {imagemFundo && (
-      <img src={imagemFundo} alt="" class="absolute inset-0 w-full h-full object-cover object-[50%_50%]" />
+      <picture class="absolute inset-0 block w-full h-full">
+        {imagemFundoMobile && (
+          <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
+        )}
+        <img src={imagemFundo} alt="" class="w-full h-full object-cover object-[50%_50%]" />
+      </picture>
     )}
 
     <div class="relative z-10 px-6 py-6 md:py-10 text-center">

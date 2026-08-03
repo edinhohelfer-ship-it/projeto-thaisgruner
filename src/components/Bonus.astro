@@ -2,7 +2,8 @@
 const {
   titulo,
   imagemFundo,
-  cards, // array de { imagem, tituloCard, texto }
+  imagemFundoMobile,
+  cards,
   textoBotaoPrimario,
   textoBotaoSecundario,
   linkBotaoPrimario = '#',
@@ -12,11 +13,12 @@ const {
 
 <section class="bonus relative">
   <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden px-6 py-16 md:py-24">
-    <img
-      src={imagemFundo}
-      alt=""
-      class="bonus__fundo object-[50%_50%] md:object-[50%_50%]"
-    />
+    <picture class="absolute inset-0 block w-full h-full">
+      {imagemFundoMobile && (
+        <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
+      )}
+      <img src={imagemFundo} alt="" class="bonus__fundo w-full h-full object-cover object-[50%_50%]" />
+    </picture>
 
     <div class="bonus__conteudo max-w-[900px] mx-auto">
       <h2 class="titulo-livre-lovelace-bold font-bold text-white text-[28px] md:text-[40px] text-center mb-10 md:mb-14">

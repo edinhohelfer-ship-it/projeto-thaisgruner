@@ -1294,6 +1294,15 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     text-align: center;
 }
 
+.garantia__selo-imagem {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
 .garantia__linha {
     background: var(--charcoal);
     opacity: 0.3;
@@ -1304,8 +1313,6 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     margin-left: auto;
     margin-right: auto;
 }
-
-
 
 
 /* ===== FAQ ===== */

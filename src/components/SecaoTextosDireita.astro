@@ -4,11 +4,17 @@ const {
   tituloMedio,
   texto,
   imagemFundo,
+  imagemFundoMobile,
 } = Astro.props;
 ---
 
 <section class="secao-textos-direita relative overflow-hidden">
-  <img src={imagemFundo} alt="" class="absolute inset-0 w-full h-full object-cover object-[50%_50%]" />
+  <picture class="absolute inset-0 block w-full h-full">
+    {imagemFundoMobile && (
+      <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
+    )}
+    <img src={imagemFundo} alt="" class="w-full h-full object-cover object-[50%_50%]" />
+  </picture>
 
   <div class="relative w-[min(90%,1200px)] mx-auto grid md:grid-cols-2 py-16 md:py-24">
     <div></div>
