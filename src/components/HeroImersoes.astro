@@ -10,12 +10,18 @@ const {
   linkBotaoPrimario = '#comprar',
   linkBotaoSecundario = '#',
   imagemFundo,
+  imagemFundoMobile,
 } = Astro.props;
 ---
 
 <section class={`hero-overlay hero-overlay--${tema} relative`}>
-  <div class="relative min-h-[50svh] md:min-h-[80svh] w-[min(90%,1200px)] mx-auto flex flex-col items-start overflow-hidden">
-    <img src={imagemFundo} alt="" class="absolute inset-0 w-full h-full object-cover object-[52%_30%] md:object-[60%_50%]" />
+  <div class="relative min-h-[50svh] md:min-h-0 md:aspect-[16/9] w-[min(90%,1200px)] mx-auto flex flex-col items-start overflow-hidden">
+    <picture class="absolute inset-0 block w-full h-full">
+      {imagemFundoMobile && (
+        <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
+      )}
+      <img src={imagemFundo} alt="" class="w-full h-full object-cover object-[52%_30%] md:object-[60%_50%]" />
+    </picture>
 
     <div class="relative w-full min-w-0 grid md:grid-cols-2 pt-4 md:pt-30">
       <div class="hidden md:block"></div>
@@ -29,13 +35,14 @@ const {
     </div>
 
     <!-- Botões sobrepostos: só no desktop -->
-    <div class="hidden md:flex absolute bottom-40 right-0 w-1/2 flex-row justify-center gap-3">
+    <div class="hidden md:flex absolute bottom-[8%] right-0 w-1/2 flex-row justify-center gap-3">
       <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose">{textoBotaoPrimario}</a>
       <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco">{textoBotaoSecundario}</a>
     </div>
 
     <!-- Botões abaixo da imagem: só no mobile -->
-      <div class="hero-overlay__botoes-mobile relative z-10 w-full flex md:hidden flex-col items-center gap-3 px-6 py-8">      <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose w-full">{textoBotaoPrimario}</a>
+    <div class="hero-overlay__botoes-mobile relative z-10 w-full flex md:hidden flex-col items-center gap-3 px-6 py-8">
+      <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose w-full">{textoBotaoPrimario}</a>
       <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-branco w-full">{textoBotaoSecundario}</a>
     </div>
   </div>

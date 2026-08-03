@@ -9,12 +9,18 @@ const {
   linkBotaoPrimario = '#',
   linkBotaoSecundario = '#',
   imagemFundo,
+  imagemFundoMobile,
 } = Astro.props;
 ---
 
 <section class="hero-overlay relative">
   <div class="relative min-h-[50svh] md:min-h-0 md:aspect-[16/9] w-[min(90%,1200px)] mx-auto flex flex-col items-start overflow-hidden">
-    <img src={imagemFundo} alt="" class="absolute inset-0 w-full h-full object-cover object-[60%_30%] md:object-[40%_50%]" />
+    <picture class="absolute inset-0 block w-full h-full">
+      {imagemFundoMobile && (
+        <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
+      )}
+      <img src={imagemFundo} alt="" class="w-full h-full object-cover object-[60%_30%] md:object-[40%_50%]" />
+    </picture>
 
     <div class="relative w-full min-w-0 grid md:grid-cols-2 pt-4 md:pt-30">
       <div class="w-7/10 md:w-full min-w-0 flex flex-col items-start px-2 md:px-0">
