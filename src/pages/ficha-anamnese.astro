@@ -5,6 +5,11 @@ import Divisor from '../components/Divisor.astro';
 import Acesso from '../components/Acesso.astro';
 import AvisoOferta from '../components/AvisoOferta.astro';
 import TecnicaMetodo from '../components/TecnicaMetodo.astro';
+import SobreThais from '../components/SobreThais.astro';
+import { sobreThaisDados } from '../dados/sobreThais.js';
+import Garantia from '../components/Garantia.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import Faq from '../components/Faq.astro';
 ---
 
 <Layout temaHeader="escuro" temaFooter="escuro">
@@ -12,12 +17,12 @@ import TecnicaMetodo from '../components/TecnicaMetodo.astro';
 <HeroSimples
   tituloTopo="E-BOOK"
   titulo="Ficha Procedimental"
-  texto="ransforme sua jornada na área da extensão de cílios (e estética) com a Ficha de Anamnese exclusiva e personalizável Perfect Lashes."
-  textoBotao="Quero adquirir"
+  texto="Transforme sua jornada na área da extensão de cílios (e estética) com a Ficha de Anamnese exclusiva e personalizável Perfect Lashes."
+  textoBotao="Conhecer conteúdo"
   corTitulotopo="var(--charcoal)"
   corTitulo="var(--charcoal)"
   corTexto="var(--charcoal)"
-  link="#"
+  link="#acesso"
   imagemFundo="/imagens-ficha-anamnese/hero-ficha.png"
   imagemFundoMobile="/imagens-ficha-anamnese/hero-ficha-mobile.png"
 />
@@ -38,16 +43,15 @@ import TecnicaMetodo from '../components/TecnicaMetodo.astro';
     "Pensada tanto para quem está iniciando na área como para quem já é experiente e está sempre em busca de maior destaque no mercado, nossa ficha guia você na criação de avaliações detalhadas e personalizadas para cada cliente. ",
     "Com campos estratégicos para histórico de saúde, preferências estéticas e cuidados específicos, você não só oferece um serviço personalizado, mas também constrói confiança e profissionalismo.",
   ]}
-  videoUrl="https://www.youtube.com/embed/fZY9Hs2ecbQ"
+  videoUrl="https://www.youtube.com/embed/_dk_vrbAe7g/edit"
   fundo="preto"
 />
 
 
-
  <AvisoOferta
-  texto="ESTA OFERTA TERMINARÁ EM BREVE."
+  texto="Crie e personalize sua ficha profissional de anamnese e aumente a segurança de seus procedimentos!"
   textoBotao="Comprar agora"
-  linkBotaoPrimario="https://pay.hotmart.com/C95464514M"
+  linkBotaoPrimario="https://pay.hotmart.com/M93763716U"
 />
 
 
@@ -55,13 +59,45 @@ import TecnicaMetodo from '../components/TecnicaMetodo.astro';
     frase="Ao que você terá ACESSO"
     texto=""
     beneficios={[
-      { imagem: "/imagens-consultoria/icone-circular-01.png", texto: "Ebook explicativo com todas as informações necessárias para uma ficha completa" },
-      { imagem: "/imagens-consultoria/icone-circular-02.png", texto: "Modelo editável em Canva totalmente personalizável" },
-      { imagem: "/imagens-consultoria/icone-circular-03.png", texto: "Vídeo aula demonstrativa de como personalizar e montar sua ficha" },
-      { imagem: "/imagens-consultoria/icone-circular-04.png", texto: "Modelo em PDF pronto para impressão (para extensão de cílios)" },
+      { imagem: "/imagens-ficha-anamnese/icone-circular-01.png", texto: "Ebook explicativo com todas as informações necessárias para uma ficha completa" },
+      { imagem: "/imagens-ficha-anamnese/icone-circular-02.png", texto: "Modelo editável em Canva totalmente personalizável" },
+      { imagem: "/imagens-ficha-anamnese/icone-circular-03.png", texto: "Vídeo aula demonstrativa de como personalizar e montar sua ficha" },
+      { imagem: "/imagens-ficha-anamnese/icone-circular-04.png", texto: "Modelo em PDF pronto para impressão (para extensão de cílios)" },
     ]}
   />
 
+
+ <AvisoOferta
+  texto="ESTA OFERTA TERMINARÁ EM BREVE."
+  textoBotao="Comprar agora"
+  linkBotaoPrimario="https://pay.hotmart.com/M93763716U"
+/>
+
+
+<SobreThais {...sobreThaisDados} />
+
+<Garantia
+    dias="7"
+    subtitulo="Seu dinheiro de volta, sem questionamentos, até 7 dias depois da compra."
+    imagemSelo="/imagens-padrao/selo-garantia.png"
+  />
+
+<CtaFinal
+    imagemFundo="/imagens-saudeocular/cta-final-saude-ocular.png"
+    imagemFundoMobile="/imagens-saudeocular/cta-final-saude-ocular-mobile.png"
+    textoBotaoPrimario="Comprar agora"
+    linkBotaoPrimario="https://pay.hotmart.com/M93763716U"
+    fundo="branco"
+  />
+
+  <Faq
+    titulo="PERGUNTAS FREQUENTES"
+    perguntas={[
+      { pergunta: "Para quem é esse produto?", resposta: "Profissionais da área de beleza em geral, tanto experientes como iniciantes que buscam entregar aos seus clientes um atendimento personalizado" },
+      { pergunta: "Como funciona o Prazo de Garantia?", resposta: "O Prazo de Garantia é o período que você tem para pedir o reembolso integral do valor pago pela sua compra, caso o produto não seja satisfatório. " },
+      { pergunta: "O que é e como funciona o Certificado de Conclusão digital?", resposta: "Alguns cursos online oferecem um certificado digital de conclusão. Alunos podem emitir esse certificado ao final do curso ou entrando em contato com o Autor ou Autora. Esses certificados podem ser compartilhados em redes sociais como o LinkedIn e inseridos em informações curriculares." },
+    ]}
+  />
 
 </Layout>
 
