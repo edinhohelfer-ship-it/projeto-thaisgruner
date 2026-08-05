@@ -151,11 +151,15 @@ const pilares = [
 
   <SobreThais {...sobreThaisDados} />
 
-  <Depoimentos
+ 
+ <Depoimentos
     titulo="Depoimentos"
-    depoimentos={[]}
+    depoimentos={[
+      { foto: "/imagens-mentoria/depoimento-01.png", nome: "Cíntia Dietrich", texto: "Em pouco tempo, percebi mudanças reais na forma como conduzo minha empresa e nos meus resultados. Meu faturamento aumentou cerca de R$ 5.000 de um mês para o outro, mesmo em um período em que perdi algumas clientes por motivos particulares. Além disso, senti um crescimento muito significativo no engajamento do meu Instagram, no alcance das publicações e dos stories, o que refletiu diretamente na atração de novos clientes e alunos." },
+      { foto: "https://placehold.co/80x80", nome: "Thalize Oliveira", texto: "Um acompanhamento individual de verdade. A Thaís foi direto nas minhas dificuldades técnicas e em poucas semanas minha retenção melhorou muito." },
+      { foto: "https://placehold.co/80x80", nome: "Jéssica Weiss", texto: "Diferente de tudo que já fiz. Personalizado, prático e direto ao ponto. Saí da consultoria com muito mais confiança no meu design de lash." },
+    ]}
   />
-
 
   
 <section class="mentoria-final px-6 pt-16 pb-6 md:pt-[90px] md:pb-8 text-center">
