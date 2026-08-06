@@ -28,7 +28,7 @@ const {
     var dadosEl = section.querySelector('.depoimentos__dados');
     var itens = JSON.parse(dadosEl.textContent);
     var currentIndex = 0;
-    var intervalId = null;
+  
 
     var fotoEl = section.querySelector('.depoimentos__foto');
     var nomeEl = section.querySelector('.depoimentos__nome');
@@ -44,7 +44,7 @@ const {
       dot.setAttribute('aria-label', 'Ir para depoimento ' + (i + 1));
       dot.addEventListener('click', function () {
         goToSlide(i);
-        resetInterval();
+        
       });
       dotsEl.appendChild(dot);
     });
@@ -67,25 +67,20 @@ const {
       render();
     }
 
-    function resetInterval() {
-      clearInterval(intervalId);
-      intervalId = setInterval(function () {
-        goToSlide(currentIndex + 1);
-      }, 5000);
-    }
+   
 
     nextBtn.addEventListener('click', function () {
       goToSlide(currentIndex + 1);
-      resetInterval();
+      
     });
 
     prevBtn.addEventListener('click', function () {
       goToSlide(currentIndex - 1);
-      resetInterval();
+      
     });
 
     render();
-    resetInterval();
+    
   }
 
   document.querySelectorAll('.depoimentos').forEach(initDepoimentos);
