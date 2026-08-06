@@ -10,7 +10,7 @@ export const sobreThaisDados = {
   stats: [
     { destaque: "10 ANOS", linha1: "expertise no", linha2: "mercado beauty" },
     { destaque: "+7500", linha1: "atendimentos", linha2: "realizados" },
-    { destaque: "+5 ANOS", linha1: "liderando equipe", linha2: "de execelência" },
+    { destaque: "+5 ANOS", linha1: "liderando equipe", linha2: "de excelência" },
     { destaque: "CRIADORA", linha1: "workshop", linha2: "perfect lashes" },
   ],
 };
