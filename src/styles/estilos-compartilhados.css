@@ -1055,6 +1055,26 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     margin: 0 auto;
 }
 
+.depoimentos__texto {
+    color: var(--charcoal);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 280px;
+    margin: 0 auto;
+}
+
+
+@media (min-width: 768px) {
+    .depoimentos__slide {
+        max-width: 620px;
+    }
+    .depoimentos__texto {
+        max-width: 580px;
+    }
+}
+
+
 .depoimentos__foto {
     width: 80px;
     height: 80px;
@@ -1071,18 +1091,11 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     margin-bottom: 0.75rem;
 }
 
-.depoimentos__texto {
-    color: var(--charcoal);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    line-height: 1.7;
-    max-width: 360px;
-    margin: 0 auto;
-}
+
 
 .depoimentos__seta {
     position: absolute;
-    top: 50%;
+    top: 95px;
     transform: translateY(-50%);
     width: 32px;
     height: 32px;
