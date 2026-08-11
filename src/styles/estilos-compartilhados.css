@@ -1427,7 +1427,7 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 /* ===== CARDS ACESSO ===== */
 
 .cards-acesso {
-    background-color: var(--charcoal);
+    /* background-color removido daqui — agora definido via prop `corFundo`, inline no componente */
 }
 
 .cards-acesso__card {
@@ -1456,6 +1456,31 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     text-align: center;
 }
 
+.cards-acesso__seta {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #FFFFFF;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.cards-acesso__seta:hover {
+    border-color: #FFFFFF;
+}
+.cards-acesso__seta-prev {
+    left: -20px;
+}
+.cards-acesso__seta-next {
+    right: -20px;
+}
 
 /* ===== SEÇÃO TRÊS CARDS ===== */
 

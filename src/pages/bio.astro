@@ -1,0 +1,74 @@
+---
+import Layout from '../layouts/Layout.astro';
+import CardsAcesso from '../components/CardsAcesso.astro';
+---
+
+<Layout temaHeader="escuro" temaFooter="escuro">
+
+  <section class="px-0 pt-4 pb-0">
+    <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden rounded-lg">
+      <picture>
+        <source media="(max-width: 767px)" srcset="/imagens-bio/bio-topo-mobile.png" />
+        <img
+          src="/imagens-bio/bio-topo.png"
+          alt="Perfect Lashes"
+          class="bio-topo-imagem w-full object-cover block"
+        />
+      </picture>
+    </div>
+  </section>
+
+  <CardsAcesso
+    corFundo="#000000"
+    cards={[
+      {
+        
+        imagem: "/imagens-bio/bio-mentoria.png",
+        imagemMobile: "/imagens-bio/bio-mentoria-mobile.png",
+        textoBotao: "Clique para acessar o conteúdo",
+        link: "/mentoria",
+      },
+      {
+        titulo: "",
+        imagem: "/imagens-bio/bio-consultoria.png",
+        imagemMobile: "/imagens-bio/bio-consultoria-mobile.png",
+        textoBotao: "Clique para acessar o conteúdo",
+        link: "/consultoria",
+      },
+      {
+        titulo: "",
+        imagem: "/imagens-bio/bio-curso-tecnico.png",
+        imagemMobile: "/imagens-bio/bio-curso-tecnico-mobile.png",
+        textoBotao: "Clique para acessar o conteúdo",
+        link: "/perfect-lashes",
+      },
+      {
+        titulo: "",
+        imagem: "/imagens-bio/bio-studio.png",
+        imagemMobile: "/imagens-bio/bio-studio-mobile.png",
+        textoBotao: "Clique para acessar o conteúdo",
+        link: "https://www.instagram.com/studiothaisgruner/",
+      },
+      {
+        titulo: "",
+        imagem: "/imagens-bio/bio-perfect-lashes.png",
+        imagemMobile: "/imagens-bio/bio-perfect-lashes-mobile.png",
+        textoBotao: "Clique para acessar o conteúdo",
+        link: "https://www.instagram.com/perfectlashes.br/",
+      },
+      
+    ]}
+  />
+
+</Layout>
+
+<style>
+  .bio-topo-imagem {
+    height: 100px;
+  }
+  @media (min-width: 768px) {
+    .bio-topo-imagem {
+      height: 180px;
+    }
+  }
+</style>

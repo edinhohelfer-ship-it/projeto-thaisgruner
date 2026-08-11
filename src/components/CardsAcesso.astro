@@ -1,26 +1,87 @@
 ---
 const {
   cards, // array de { titulo, imagem, imagemMobile, textoBotao, link }
+  corFundo = 'var(--charcoal)', // nova prop — index não precisa passar, mantém o padrão atual
 } = Astro.props;
+
+const mostrarCarrossel = cards.length > 3;
 ---
 
-<section id="cursos" class="cards-acesso px-6 py-12 md:py-16 scroll-mt-[98px]">
-  <div class="max-w-[900px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-6">
-    {cards.map((card) => (
-      <div class="flex flex-col">
-        <p class="titulo-livre-lovelace text-white text-[20px] md:text-[20px] text-center mb-2.5">
-          {card.titulo}
-        </p>
-        <a href={card.link} class="cards-acesso__card aspect-auto md:aspect-[9/16] h-[140px] md:h-auto">
-          <picture class="absolute inset-0 block w-full h-full">
-            {card.imagemMobile && (
-              <source media="(max-width: 767px)" srcset={card.imagemMobile} />
+<section id="cursos" class="cards-acesso px-6 py-12 md:py-16 scroll-mt-[98px]" style={`background-color: ${corFundo};`}>
+  <div class="max-w-[900px] mx-auto relative">
+    <div class="md:overflow-hidden">
+      <div class="cards-acesso__track grid grid-cols-1 gap-6 md:flex md:gap-6" id="cards-acesso-track">
+        {cards.map((card) => (
+          <div class="flex flex-col md:flex-none md:w-[calc((100%-3rem)/3)]">
+            {card.titulo && (
+              <p class="titulo-livre-lovelace text-white text-[20px] md:text-[20px] text-center mb-2.5">
+                {card.titulo}
+              </p>
             )}
-            <img src={card.imagem} alt={card.titulo} class="cards-acesso__imagem" />
-          </picture>
-          <span class="cards-acesso__texto text-white texto-livre text-[12px]">{card.textoBotao}</span>
-        </a>
+            <a href={card.link} class="cards-acesso__card aspect-auto md:aspect-[9/16] h-[140px] md:h-auto">
+              <picture class="absolute inset-0 block w-full h-full">
+                {card.imagemMobile && (
+                  <source media="(max-width: 767px)" srcset={card.imagemMobile} />
+                )}
+                <img src={card.imagem} alt={card.titulo || ''} class="cards-acesso__imagem" />
+              </picture>
+              {card.textoBotao && (
+                <span class="cards-acesso__texto text-white texto-livre text-[12px]">{card.textoBotao}</span>
+              )}
+            </a>
+          </div>
+        ))}
       </div>
-    ))}
+    </div>
+
+    {mostrarCarrossel && (
+      <>
+        <button type="button" class="cards-acesso__seta cards-acesso__seta-prev hidden md:flex" id="cards-acesso-prev" aria-label="Anterior">&#8249;</button>
+        <button type="button" class="cards-acesso__seta cards-acesso__seta-next hidden md:flex" id="cards-acesso-next" aria-label="Próximo">&#8250;</button>
+      </>
+    )}
   </div>
 </section>
+
+<script>
+  function initCardsAcesso(section) {
+    var track = section.querySelector('#cards-acesso-track');
+    var prevBtn = section.querySelector('#cards-acesso-prev');
+    var nextBtn = section.querySelector('#cards-acesso-next');
+    if (!track || !prevBtn || !nextBtn) return;
+
+    var items = Array.prototype.slice.call(track.children);
+    var currentIndex = 0;
+    var maxIndex = Math.max(items.length - 3, 0);
+
+    function isDesktop() {
+      return window.matchMedia('(min-width: 768px)').matches;
+    }
+
+    function update() {
+      if (!isDesktop()) {
+        track.style.transform = '';
+        return;
+      }
+      var itemWidth = items[0].getBoundingClientRect().width;
+      var gap = 24;
+      var offset = currentIndex * (itemWidth + gap);
+      track.style.transform = 'translateX(-' + offset + 'px)';
+    }
+
+    nextBtn.addEventListener('click', function () {
+      currentIndex = Math.min(currentIndex + 1, maxIndex);
+      update();
+    });
+
+    prevBtn.addEventListener('click', function () {
+      currentIndex = Math.max(currentIndex - 1, 0);
+      update();
+    });
+
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  document.querySelectorAll('.cards-acesso').forEach(initCardsAcesso);
+</script>
