@@ -4,7 +4,7 @@
 import { getConsent } from './consent.js';
 
 // TODO: substituir pelo Pixel ID real quando as conversões estiverem definidas.
-const META_PIXEL_ID = 'REPLACE_ME';
+const META_PIXEL_ID = '1689331022448426';
 
 let isLoaded = false;
 
