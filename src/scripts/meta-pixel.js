@@ -3,10 +3,25 @@
 
 import { getConsent } from './consent.js';
 
-// TODO: substituir pelo Pixel ID real quando as conversões estiverem definidas.
 const META_PIXEL_ID = '1689331022448426';
 
 let isLoaded = false;
+let eventQueue = [];
+
+function fireEvent(eventName, params, eventId) {
+  if (eventId) {
+    window.fbq('track', eventName, params, { eventID: eventId });
+  } else {
+    window.fbq('track', eventName, params);
+  }
+}
+
+function flushQueue() {
+  eventQueue.forEach(({ eventName, params, eventId }) => {
+    fireEvent(eventName, params, eventId);
+  });
+  eventQueue = [];
+}
 
 function injectMetaPixelScript() {
   if (isLoaded || META_PIXEL_ID === 'REPLACE_ME') return;
@@ -34,6 +49,7 @@ function injectMetaPixelScript() {
   window.fbq('track', 'PageView');
 
   isLoaded = true;
+  flushQueue();
 }
 
 export function initMetaPixel() {
@@ -48,7 +64,10 @@ export function initMetaPixel() {
   });
 }
 
-export function trackMetaEvent(eventName, params = {}) {
-  if (!isLoaded || typeof window.fbq !== 'function') return;
-  window.fbq('track', eventName, params);
+export function trackMetaEvent(eventName, params = {}, eventId = null) {
+  if (isLoaded && typeof window.fbq === 'function') {
+    fireEvent(eventName, params, eventId);
+  } else {
+    eventQueue.push({ eventName, params, eventId });
+  }
 }

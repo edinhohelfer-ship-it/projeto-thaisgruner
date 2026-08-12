@@ -5,7 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 
-const { temaHeader = 'escuro', temaFooter = 'escuro' } = Astro.props;
+const { temaHeader = 'escuro', temaFooter = 'escuro', metaViewContent = null } = Astro.props;
 ---
 
 <html lang="pt-BR">
@@ -25,15 +25,43 @@ const { temaHeader = 'escuro', temaFooter = 'escuro' } = Astro.props;
 
     <CookieConsent />
 
+    <script define:vars={{ metaViewContent }}>
+      window.__metaViewContent = metaViewContent;
+    </script>
+
     <script>
-      import { initMetaPixel } from '../scripts/meta-pixel.js';
+      import { initMetaPixel, trackMetaEvent } from '../scripts/meta-pixel.js';
       import { initGoogleAds } from '../scripts/google-ads.js';
       import { initTikTokPixel } from '../scripts/tiktok-pixel.js';
+      import { initTrackClicks } from '../scripts/track-clicks.js';
 
       initMetaPixel();
       initGoogleAds();
       initTikTokPixel();
+      initTrackClicks();
+
+      const metaViewContent = window.__metaViewContent;
+
+      if (metaViewContent) {
+        const eventId =
+          window.crypto && window.crypto.randomUUID
+            ? window.crypto.randomUUID()
+            : 'evt-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+
+        trackMetaEvent('ViewContent', { content_name: metaViewContent }, eventId);
+
+        fetch('/api/track-event', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event_name: 'ViewContent',
+            event_id: eventId,
+            event_source_url: window.location.href,
+            custom_data: { content_name: metaViewContent },
+          }),
+        }).catch(() => {});
+      }
     </script>
 	</body>
-	
+
 </html>
