@@ -4,27 +4,34 @@
 
 import { trackMetaEvent } from './meta-pixel.js';
 
+// ⚠️ TEMPORÁRIO — usado só durante os testes no Events Manager.
+// Depois de validar, trocar o valor para null (ou apagar a linha).
+const TEST_EVENT_CODE = 'TEST17901';
+
 function gerarEventId() {
   if (window.crypto && window.crypto.randomUUID) {
     return window.crypto.randomUUID();
   }
-  // fallback simples, caso o navegador não suporte randomUUID
   return 'evt-' + Date.now() + '-' + Math.random().toString(36).slice(2);
 }
 
 function enviarParaCapi(eventName, eventId, sourceUrl) {
+  const body = {
+    event_name: eventName,
+    event_id: eventId,
+    event_source_url: sourceUrl,
+  };
+
+  if (TEST_EVENT_CODE) {
+    body.test_event_code = TEST_EVENT_CODE;
+  }
+
   fetch('/api/track-event', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      event_name: eventName,
-      event_id: eventId,
-      event_source_url: sourceUrl,
-    }),
-    keepalive: true, // garante que a requisição continue mesmo se a página navegar/fechar logo em seguida
-  }).catch(() => {
-    // falha silenciosa — não queremos travar a navegação do usuário por causa de tracking
-  });
+    body: JSON.stringify(body),
+    keepalive: true,
+  }).catch(() => {});
 }
 
 function dispararEvento(eventName, link) {

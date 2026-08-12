@@ -1,6 +1,4 @@
 // Serverless Function — recebe eventos do client e repassa pra Conversions API (Meta)
-// Esta linha é obrigatória: diz ao Astro que esta rota NÃO deve ser estática,
-// e sim executada sob demanda (server-side) a cada requisição.
 export const prerender = false;
 
 const PIXEL_ID = '1689331022448426';
@@ -9,7 +7,14 @@ const META_API_VERSION = 'v21.0';
 export async function POST({ request }) {
   try {
     const body = await request.json();
-    const { event_name, event_id, event_source_url, user_data = {}, custom_data = {} } = body;
+    const {
+      event_name,
+      event_id,
+      event_source_url,
+      user_data = {},
+      custom_data = {},
+      test_event_code, // opcional — só usado durante testes no Events Manager
+    } = body;
 
     if (!event_name || !event_id) {
       return new Response(
@@ -27,7 +32,6 @@ export async function POST({ request }) {
       );
     }
 
-    // Pega o IP real do visitante (a Vercel envia esse header automaticamente)
     const clientIp = request.headers.get('x-forwarded-for')?.split(',')[0] || '';
     const userAgent = request.headers.get('user-agent') || '';
 
@@ -48,6 +52,11 @@ export async function POST({ request }) {
         },
       ],
     };
+
+    // Só adiciona test_event_code ao payload quando o client mandar esse campo
+    if (test_event_code) {
+      payload.test_event_code = test_event_code;
+    }
 
     const metaResponse = await fetch(
       `https://graph.facebook.com/${META_API_VERSION}/${PIXEL_ID}/events?access_token=${token}`,
