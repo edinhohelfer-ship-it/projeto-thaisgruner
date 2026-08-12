@@ -6,7 +6,7 @@ import { trackMetaEvent } from './meta-pixel.js';
 
 // ⚠️ TEMPORÁRIO — usado só durante os testes no Events Manager.
 // Depois de validar, trocar o valor para null (ou apagar a linha).
-const TEST_EVENT_CODE = 'TEST17901';
+const TEST_EVENT_CODE = null;
 
 function gerarEventId() {
   if (window.crypto && window.crypto.randomUUID) {
