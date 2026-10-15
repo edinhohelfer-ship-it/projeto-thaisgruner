@@ -14,6 +14,11 @@ import CtaFinal from '../components/CtaFinal.astro';
 
 <Layout temaHeader="escuro" temaFooter="escuro">
 
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/imagens-consultoria/hero-consultoria-mobile.webp" media="(max-width: 767px)" />
+    <link rel="preload" as="image" href="/imagens-consultoria/hero-consultoria.webp" media="(min-width: 768px)" />
+  </Fragment>
+
   <HeroOverlay
     badge="Consultoria Técnica"
     logo="/imagens-padrao/logoperfectlahesmarrom-aberto.webp"

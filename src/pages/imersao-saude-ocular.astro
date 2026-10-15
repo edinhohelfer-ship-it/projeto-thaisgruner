@@ -14,6 +14,11 @@ import Faq from '../components/Faq.astro';
 
 <Layout temaHeader="escuro" temaFooter="escuro" metaViewContent="Imersão Saúde Ocular">
 
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/imagens-saudeocular/hero-saude-ocular-mobile.webp" media="(max-width: 767px)" />
+    <link rel="preload" as="image" href="/imagens-saudeocular/hero-saude-ocular.webp" media="(min-width: 768px)" />
+  </Fragment>
+
   <HeroImersoes
     tema="escuro"
     badge="Saúde Ocular"
