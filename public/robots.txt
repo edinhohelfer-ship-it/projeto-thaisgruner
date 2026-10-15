@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Páginas excluídas do índice
+Disallow: /api/
+Disallow: /design-sistema
+Disallow: /em-breve
+Disallow: /obrigado-mentoria
+Disallow: /obrigado-consultoria
+
+Sitemap: https://thaisgruner.com.br/sitemap.xml

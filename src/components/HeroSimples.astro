@@ -17,7 +17,14 @@ const {
       {imagemFundoMobile && (
         <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
       )}
-      <img src={imagemFundo} alt="" class="w-full h-full object-cover object-[50%_50%]" />
+      <img
+        src={imagemFundo}
+        alt=""
+        class="w-full h-full object-cover object-[50%_50%]"
+        fetchpriority="high"
+        loading="eager"
+        decoding="async"
+      />
     </picture>
 
     <div class="absolute left-0 right-0 top-2/5 bottom-0 flex flex-col items-center justify-center text-center px-6">

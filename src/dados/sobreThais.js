@@ -1,7 +1,7 @@
 export const sobreThaisDados = {
   kicker: "Quem é",
   nome: "Thaís Grüner",
-  foto: "/imagens-padrao/thais-gruner.png",
+  foto: "/imagens-padrao/thais-gruner.webp",
   paragrafos: [
     "Engenheira Civil por formação e empresária no mercado da beleza, construí minha trajetória unindo visão estratégica, excelência técnica e gestão.",
     "Mais do que ensinar técnicas, acredito na construção de negócios sólidos. E foi isso que me inspirou a criar o movimento M.I.B - Mulheres que Impulsionam Beleza",
