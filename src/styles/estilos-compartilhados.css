@@ -1518,7 +1518,8 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 /* Fonte Lovelace — arquivo local */
 @font-face {
     font-family: 'Lovelace';
-    src: url('/fontes-sitethais/lovelace-regular.ttf') format('truetype');
+    src: url('/fontes-sitethais/lovelace-regular.woff2') format('woff2'),
+         url('/fontes-sitethais/lovelace-regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -1526,7 +1527,8 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 @font-face {
     font-family: 'Lovelace';
-    src: url('/fontes-sitethais/lovelace-italic.ttf') format('truetype');
+    src: url('/fontes-sitethais/lovelace-italic.woff2') format('woff2'),
+         url('/fontes-sitethais/lovelace-italic.ttf') format('truetype');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
@@ -1534,7 +1536,8 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 @font-face {
     font-family: 'Lovelace';
-    src: url('/fontes-sitethais/lovelace-bold.ttf') format('truetype');
+    src: url('/fontes-sitethais/lovelace-bold.woff2') format('woff2'),
+         url('/fontes-sitethais/lovelace-bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -1542,7 +1545,8 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 @font-face {
     font-family: 'Lovelace';
-    src: url('/fontes-sitethais/lovelace-bold-italic.ttf') format('truetype');
+    src: url('/fontes-sitethais/lovelace-bold-italic.woff2') format('woff2'),
+         url('/fontes-sitethais/lovelace-bold-italic.ttf') format('truetype');
     font-weight: 700;
     font-style: italic;
     font-display: swap;
@@ -1550,7 +1554,8 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 @font-face {
     font-family: 'Montserrat';
-    src: url('/fontes-sitethais/montserrat-regular.ttf') format('truetype');
+    src: url('/fontes-sitethais/montserrat-regular.woff2') format('woff2'),
+         url('/fontes-sitethais/montserrat-regular.ttf') format('truetype');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -1558,7 +1563,8 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 @font-face {
     font-family: 'Montserrat';
-    src: url('/fontes-sitethais/montserrat-italic.ttf') format('truetype');
+    src: url('/fontes-sitethais/montserrat-italic.woff2') format('woff2'),
+         url('/fontes-sitethais/montserrat-italic.ttf') format('truetype');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
@@ -1566,7 +1572,8 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 @font-face {
     font-family: 'Montserrat';
-    src: url('/fontes-sitethais/montserrat-bold.ttf') format('truetype');
+    src: url('/fontes-sitethais/montserrat-bold.woff2') format('woff2'),
+         url('/fontes-sitethais/montserrat-bold.ttf') format('truetype');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
@@ -1574,7 +1581,8 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 @font-face {
     font-family: 'Montserrat';
-    src: url('/fontes-sitethais/montserrat-bold-italic.ttf') format('truetype');
+    src: url('/fontes-sitethais/montserrat-bold-italic.woff2') format('woff2'),
+         url('/fontes-sitethais/montserrat-bold-italic.ttf') format('truetype');
     font-weight: 700;
     font-style: italic;
     font-display: swap;
