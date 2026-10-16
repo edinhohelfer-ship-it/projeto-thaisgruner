@@ -4,6 +4,7 @@ const {
   nome,
   paragrafos,
   foto,
+  fotoMobile = null,
   stats,
 } = Astro.props;
 ---
@@ -13,7 +14,12 @@ const {
 
     <!-- Bloco imagem + título + cards sobrepostos -->
     <div class="relative h-[260px] md:h-auto md:min-h-[420px]">
-      <img src={foto} alt={nome} class="sobre-thais__fundo object-[50%_30%] md:object-[70%_50%]" />
+      <picture>
+        {fotoMobile && (
+          <source media="(max-width: 767px)" srcset={fotoMobile} />
+        )}
+        <img src={foto} alt={nome} width="1920" height="1080" class="sobre-thais__fundo object-[50%_30%] md:object-[70%_50%]" />
+      </picture>
 
       <div class="relative grid md:grid-cols-2 h-full md:py-16 px-4 md:px-0">
         <div class="pt-6 md:pl-8 md:pr-16 md:self-start">
