@@ -6,6 +6,10 @@ const {
   videoUrl,
   fundo = 'charcoal',
 } = Astro.props;
+
+// Extrair o ID do vídeo para montar a thumbnail sem carregar o player
+const videoId = videoUrl?.split('/embed/')[1]?.split('?')[0] ?? '';
+const thumbnailUrl = videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '';
 ---
 
 <section id="acesso" class={`acesso ${fundo === 'preto' ? 'acesso--preto' : ''} px-6 py-16 md:py-24 scroll-mt-[98px]`}>
@@ -27,15 +31,103 @@ const {
       </ul>
     </div>
     <div>
-      <iframe
-        src={videoUrl}
-        title="Vídeo"
-        class="acesso__video w-full"
-        frameborder="0"
-        loading="lazy"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
+      <!-- Facade: carrega apenas a thumbnail; o player YouTube só é criado ao clicar -->
+      <div
+        class="acesso__video acesso__facade"
+        data-video-url={`${videoUrl}?autoplay=1`}
+        role="button"
+        tabindex="0"
+        aria-label="Reproduzir vídeo"
+      >
+        {thumbnailUrl && (
+          <img
+            src={thumbnailUrl}
+            alt="Prévia do vídeo"
+            loading="lazy"
+            width="480"
+            height="360"
+            class="acesso__facade-thumb"
+          />
+        )}
+        <span class="acesso__facade-play" aria-hidden="true">
+          <svg viewBox="0 0 68 48" width="68" height="48" xmlns="http://www.w3.org/2000/svg">
+            <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C0 13.05 0 24 0 24s0 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C68 34.95 68 24 68 24s0-10.95-1.48-16.26z" fill="#f00"/>
+            <path d="M45 24 27 14v20z" fill="#fff"/>
+          </svg>
+        </span>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .acesso__facade {
+    position: relative;
+    cursor: pointer;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .acesso__facade-thumb {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .acesso__facade-play {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.15);
+    transition: background 0.2s ease;
+  }
+  .acesso__facade:hover .acesso__facade-play,
+  .acesso__facade:focus-visible .acesso__facade-play {
+    background: rgba(0, 0, 0, 0.35);
+  }
+  .acesso__facade-play svg {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.6));
+    transition: transform 0.15s ease;
+  }
+  .acesso__facade:hover .acesso__facade-play svg,
+  .acesso__facade:focus-visible .acesso__facade-play svg {
+    transform: scale(1.08);
+  }
+  /* iframe injetado ao clicar */
+  .acesso__facade iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+  }
+</style>
+
+<script>
+  function initFacades() {
+    document.querySelectorAll('.acesso__facade').forEach(function (facade) {
+      function activate() {
+        var url = facade.dataset.videoUrl;
+        if (!url) return;
+        var iframe = document.createElement('iframe');
+        iframe.src = url;
+        iframe.title = 'Vídeo';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.setAttribute('allowfullscreen', '');
+        facade.innerHTML = '';
+        facade.appendChild(iframe);
+      }
+      facade.addEventListener('click', activate, { once: true });
+      facade.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activate();
+        }
+      }, { once: true });
+    });
+  }
+  initFacades();
+</script>

@@ -15,8 +15,8 @@ import Faq from '../components/Faq.astro';
 <Layout temaHeader="escuro" temaFooter="escuro" metaViewContent="Imersão Tricologia">
 
   <Fragment slot="head">
-    <link rel="preload" as="image" href="/imagens-tricologia/hero-tricologia-mobile.webp" media="(max-width: 767px)" />
-    <link rel="preload" as="image" href="/imagens-tricologia/hero-tricologia.webp" media="(min-width: 768px)" />
+    <link rel="preload" as="image" href="/imagens-tricologia/hero-tricologia-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/imagens-tricologia/hero-tricologia.webp" media="(min-width: 768px)" fetchpriority="high" />
     <!-- Schema.org: Course -->
     <script type="application/ld+json">
     {
