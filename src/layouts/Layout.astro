@@ -113,16 +113,18 @@ const tituloCompleto = titulo === 'Thaís Grüner'
 
         trackMetaEvent('ViewContent', customData, eventId);
 
-        fetch('/api/track-event', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-            event_name: 'ViewContent',
-            event_id: eventId,
-            event_source_url: window.location.href,
-            custom_data: customData,
-            }),
-        }).catch(() => {});
+        setTimeout(() => {
+          fetch('/api/track-event', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+              event_name: 'ViewContent',
+              event_id: eventId,
+              event_source_url: window.location.href,
+              custom_data: customData,
+              }),
+          }).catch(() => {});
+        }, 3000);
         }
 
     </script>
