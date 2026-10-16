@@ -51,6 +51,21 @@ const tituloCompleto = titulo === 'Thaís Grüner'
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+		<!-- Schema.org: Person (global) -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Thaís Grüner",
+			"url": "https://thaisgruner.com.br",
+			"image": "https://thaisgruner.com.br/imagens-padrao/thais-gruner.webp",
+			"jobTitle": "Educadora e Consultora do Mercado Beauty",
+			"description": "Engenheira Civil e empresária no mercado da beleza. Criadora do movimento M.I.B — Mulheres que Impulsionam Beleza. Especialista em formação de profissionais da beleza.",
+			"knowsAbout": ["Extensão de Cílios", "Tricologia Avançada", "Saúde Ocular aplicada à Estética", "Gestão de Negócios em Beleza"]
+		}
+		</script>
+
 		<slot name="head" />
 	</head>
 	<body class="bg-black">

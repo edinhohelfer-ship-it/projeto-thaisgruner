@@ -17,6 +17,34 @@ import Faq from '../components/Faq.astro';
   <Fragment slot="head">
     <link rel="preload" as="image" href="/imagens-saudeocular/hero-saude-ocular-mobile.webp" media="(max-width: 767px)" />
     <link rel="preload" as="image" href="/imagens-saudeocular/hero-saude-ocular.webp" media="(min-width: 768px)" />
+    <!-- Schema.org: Course -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": "Saúde Ocular para lashes",
+      "description": "Uma imersão técnica aprofundada, com ênfase em saúde ocular diretamente aplicada ao procedimento de extensão de cílios e entenda como preservar e cuidar da saúde dos olhos da sua cliente principalmente aliada ao uso das extensões.",
+      "url": "https://thaisgruner.com.br/imersao-saude-ocular",
+      "inLanguage": "pt-BR",
+      "provider": {
+        "@type": "Person",
+        "name": "Thaís Grüner",
+        "url": "https://thaisgruner.com.br"
+      },
+      "hasCourseInstance": {
+        "@type": "CourseInstance",
+        "courseMode": "online",
+        "courseWorkload": "PT10H"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://pay.hotmart.com/B96811621B?off=9mts0iil",
+        "priceCurrency": "BRL",
+        "availability": "https://schema.org/InStock",
+        "category": "Paid"
+      }
+    }
+    </script>
   </Fragment>
 
   <HeroImersoes
