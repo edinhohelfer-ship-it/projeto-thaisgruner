@@ -18,7 +18,7 @@ const {
       {imagemFundoMobile && (
         <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
       )}
-      <img src={imagemFundo} alt="" width="1920" height="1080" class="cta-final__fundo w-full h-full object-cover object-[50%_50%]" />
+      <img src={imagemFundo} alt="" loading="lazy" class="cta-final__fundo w-full h-full object-cover object-[50%_50%]" />
     </picture>
 
     <div class="relative px-6 pt-6 pb-2 md:pb-6 flex flex-col items-center justify-end text-center min-h-[30svh] md:min-h-0 md:aspect-[21/9]">

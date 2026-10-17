@@ -15,8 +15,32 @@ import CtaFinal from '../components/CtaFinal.astro';
 <Layout temaHeader="escuro" temaFooter="escuro">
 
   <Fragment slot="head">
-    <link rel="preload" as="image" href="/imagens-consultoria/hero-consultoria-mobile.webp" media="(max-width: 767px)" />
-    <link rel="preload" as="image" href="/imagens-consultoria/hero-consultoria.webp" media="(min-width: 768px)" />
+    <link rel="preload" as="image" href="/imagens-consultoria/hero-consultoria-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/imagens-consultoria/hero-consultoria.webp" media="(min-width: 768px)" fetchpriority="high" />
+    <!-- Schema.org: Service -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Consultoria Técnica Perfect Lashes",
+      "description": "Consultoria online, individual e personalizada, focada nas dificuldades técnicas reais de lash designers. Inclui acesso aos cursos Perfect Lashes e 3 encontros individuais com Thaís Grüner.",
+      "url": "https://thaisgruner.com.br/consultoria",
+      "inLanguage": "pt-BR",
+      "provider": {
+        "@type": "Person",
+        "name": "Thaís Grüner",
+        "url": "https://thaisgruner.com.br"
+      },
+      "serviceType": "Consultoria online individual para lash designers",
+      "areaServed": "BR",
+      "offers": {
+        "@type": "Offer",
+        "url": "https://tally.so/r/VL7JKv",
+        "priceCurrency": "BRL",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
   </Fragment>
 
   <HeroOverlay
