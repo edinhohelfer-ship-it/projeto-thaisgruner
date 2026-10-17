@@ -17,7 +17,7 @@ const {
       {imagemFundoMobile && (
         <source media="(max-width: 767px)" srcset={imagemFundoMobile} />
       )}
-      <img src={imagemFundo} alt="" class="bonus__fundo w-full h-full object-cover object-[50%_50%]" />
+      <img src={imagemFundo} alt="" width="1920" height="1080" loading="lazy" class="bonus__fundo w-full h-full object-cover object-[50%_50%]" />
     </picture>
 
     <div class="bonus__conteudo max-w-[900px] mx-auto">
@@ -31,6 +31,9 @@ const {
             <img
               src={card.imagem}
               alt={card.tituloCard}
+              width="860"
+              height="400"
+              loading="lazy"
               class="bonus__card-imagem w-full h-[160px] md:h-[200px] object-[50%_50%] mb-5"
             />
             <h3 class="titulo-livre-lovelace-bold text-(--rose-gold) uppercase text-[13px] md:text-[14px] tracking-wide mb-2">
