@@ -15,36 +15,8 @@ import Faq from '../components/Faq.astro';
 <Layout temaHeader="escuro" temaFooter="escuro" metaViewContent="Imersão Tricologia">
 
   <Fragment slot="head">
-    <link rel="preload" as="image" href="/imagens-tricologia/hero-tricologia-mobile.webp" media="(max-width: 767px)" fetchpriority="high" />
-    <link rel="preload" as="image" href="/imagens-tricologia/hero-tricologia.webp" media="(min-width: 768px)" fetchpriority="high" />
-    <!-- Schema.org: Course -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Course",
-      "name": "Tricologia Avançada para lashes",
-      "description": "Conteúdo técnico aprofundado, com ênfase em tricologia dos cílios para entender como preservar a saúde dos fios naturais durante o uso da extensão de cílios.",
-      "url": "https://thaisgruner.com.br/imersao-tricologia",
-      "inLanguage": "pt-BR",
-      "provider": {
-        "@type": "Person",
-        "name": "Thaís Grüner",
-        "url": "https://thaisgruner.com.br"
-      },
-      "hasCourseInstance": {
-        "@type": "CourseInstance",
-        "courseMode": "online",
-        "courseWorkload": "PT10H"
-      },
-      "offers": {
-        "@type": "Offer",
-        "url": "https://pay.hotmart.com/C95464514M?off=ukaq42dc",
-        "priceCurrency": "BRL",
-        "availability": "https://schema.org/InStock",
-        "category": "Paid"
-      }
-    }
-    </script>
+    <link rel="preload" as="image" href="/imagens-tricologia/hero-tricologia-mobile.webp" media="(max-width: 767px)" />
+    <link rel="preload" as="image" href="/imagens-tricologia/hero-tricologia.webp" media="(min-width: 768px)" />
   </Fragment>
 
 <HeroImersoes
