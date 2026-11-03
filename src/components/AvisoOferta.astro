@@ -6,10 +6,15 @@ const {
   linkBotaoPrimario = '#',
   imagemFundo,
   imagemFundoMobile,
+  precoAntigo,
+  precoNovo,
+  tema = 'claro',
 } = Astro.props;
+
+const escuro = tema === 'escuro';
 ---
 
-<section class="bg-white relative overflow-hidden">
+<section class={`aviso-oferta ${escuro ? 'aviso-oferta--escuro' : 'bg-white'} relative overflow-hidden`}>
   <div class="relative w-[min(90%,1200px)] mx-auto overflow-hidden">
     {imagemFundo && (
       <picture class="absolute inset-0 block w-full h-full">
@@ -20,15 +25,24 @@ const {
       </picture>
     )}
 
-    <div class="relative z-10 px-6 py-6 md:py-10 text-center">
-      <p class="titulo-livre-lovelace-bold text-[16px] md:text-[24px] text-black mb-4 md:mb-6">
-        {texto}
-      </p>
+    <div class={`relative z-10 px-6 ${escuro ? 'py-10 md:py-16' : 'py-6 md:py-10'} text-center flex flex-col items-center`}>
+      <p
+        class={`titulo-livre-lovelace-bold text-[16px] md:text-[24px] ${escuro ? 'mb-8 md:mb-10 text-white' : 'mb-4 md:mb-6 text-black'}`}
+        set:html={texto}
+      />
 
       {textoApoio && (
-      <p class="texto-livre text-[14px] md:text-[20px] text-black opacity-70 mb-10 whitespace-pre-line">
-        {textoApoio}
-      </p>
+        <p class={`texto-livre text-[14px] md:text-[20px] opacity-70 mb-10 whitespace-pre-line ${escuro ? 'text-white' : 'text-black'}`}>
+          {textoApoio}
+        </p>
+      )}
+
+      {(precoAntigo || precoNovo) && (
+        <div class="aviso-oferta__preco-bloco">
+          {precoAntigo && <span class="aviso-oferta__preco-antigo">De {precoAntigo}</span>}
+          <span class="aviso-oferta__preco-por">por</span>
+          {precoNovo && <span class="aviso-oferta__preco-novo">{precoNovo}</span>}
+        </div>
       )}
 
       <a href={linkBotaoPrimario} class="botao-base botao-pri-suave-rose">{textoBotao}</a>

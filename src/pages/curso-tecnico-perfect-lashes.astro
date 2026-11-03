@@ -1,11 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import HeroSplitOverlay from '../components/HeroSplitOverlay.astro';
+import HeroCursos from '../components/HeroCursos.astro';
 import SecaoTresCards from '../components/SecaoTresCards.astro';
-import SecaoTextosDireita from '../components/SecaoTextosDireita.astro';
-import TecnicaMetodo from '../components/TecnicaMetodo.astro';
 import AvisoOferta from '../components/AvisoOferta.astro';
-import Depoimentos from '../components/Depoimentos.astro';
 import SobreThais from '../components/SobreThais.astro';
 import { sobreThaisDados } from '../dados/sobreThais.js';
 import Garantia from '../components/Garantia.astro';
@@ -16,72 +13,49 @@ import CtaFinal from '../components/CtaFinal.astro';
 
 
 
-  <HeroSplitOverlay
-    titulo="Transforme sua carreira através do Perfect Lashes"
-    texto="Muito além de um curso que só te ensina a colar fios, aqui você encontrará um conteúdo diferenciado que te mostra tudo o que você precisa para ser uma Lash Designer bem sucedida. Não apenas uma Lash, uma Perfect Lash!"
-    textoBotaoPrimario="Quero ser uma Perfect Lash"
-    textoBotaoSecundario="Conheça o conteúdo"
-    linkBotaoPrimario="#comprar"
-    linkBotaoSecundario="#conteudo"
-    imagemFundo="/imagens-curso-tecnico/hero-fundo-curso-tecnico.webp"
-    imagemFundoMobile="/imagens-curso-tecnico/hero-fundo-curso-tecnico-mobile.webp"
-    imagemSobreposta="/imagens-curso-tecnico/hero-destaque-curso-tecnico.webp"
-  />
+  <HeroCursos
+  titulo="Você está no lugar certo."
+   texto={`Ser lash designer dá sim um bom dinheiro mas para quem trabalha certo. Mas eu não vou te ajudar. <span class="hero-cursos__destaque">Eu vou mudar a sua vida.</span> Só depende de você acreditar e dar o próximo passo.`}
+  videoId="jKK-OIEIAbo"
+  textoBotaoPrimario="Garantir meu combo"
+  linkBotaoPrimario="https://pay.hotmart.com/LINK_DO_COMBO"
+  textoBotaoSecundario="Falar com a Thaís"
+  linkBotaoSecundario="https://wa.me/5551995183025"
+/>
+
 
 
 <SecaoTresCards
-  titulo="Título da Seção"
+  titulo="Tudo que você vai aprender"
   cards={[
-    "Texto do card 1 aqui, centralizado",
-    "Texto do card 2 aqui, centralizado",
-    "Texto do card 3 aqui, centralizado",
-  ]}
-/>
-
-
-<SecaoTextosDireita
-  tituloGrande="Título Grande"
-  tituloMedio="Título Médio"
-  texto="Texto de apoio explicando o conteúdo desta seção, alinhado à esquerda dentro da metade direita da tela."
-  imagemFundo="/imagens-curso-tecnico/fundo-textos-direita.webp"
-  imagemFundoMobile="/imagens-curso-tecnico/fundo-textos-direita-mobile.webp"
-/>
-
-
-<TecnicaMetodo
-  frase="Muito além de um curso que só te ensina a colar fios!"
-  texto="Um conteúdo diferenciado que te mostra tudo o que você precisa para ser uma Lash Designer bem sucedida, com técnica de excelência e um negócio estruturado."
-  fundo="charcoal"
-  beneficios={[
-    { imagem: "/imagens-curso-tecnico/icone-01.webp", texto: "Extensão de Cílios — como surgiu o procedimento, evolução dos materiais e curiosidades." },
-    { imagem: "/imagens-curso-tecnico/icone-02.webp", texto: "Saúde e Segurança — saúde ocular, anatomia dos cílios, contraindicações e biossegurança." },
-    { imagem: "/imagens-curso-tecnico/icone-03.webp", texto: "Harmonização — visagismo aplicado, lash mapping e formatos de olhos." },
-    { imagem: "/imagens-curso-tecnico/icone-04.webp", texto: "Técnica — volumes clássico e tecnológico, manutenções e remoções." },
-    { imagem: "/imagens-curso-tecnico/icone-05.webp", texto: "Materiais — fios sintéticos, acessórios e adesivos profissionais." },
-    { imagem: "/imagens-curso-tecnico/icone-06.webp", texto: "Atendimento — ficha de avaliação, cuidados pré e pós procedimento." },
-    { imagem: "/imagens-curso-tecnico/icone-07.webp", texto: "Seu Negócio — dicas de fotografia, precificação e marketing." },
+    {
+      titulo: "Técnico",
+      descricao: "Teoria, treinos, práticas, aplicação, remoção e manutenções. O conteúdo mais completo do mercado. Volumes Clássico — Tecnológicos — Híbridos e Russo.",
+      horas: "Total: 9 horas aula",
+    },
+    {
+      titulo: "Avançados e Exclusivos",
+      descricao: "Tricologia dos cílios, Saúde Ocular, Biossegurança e Fichas de anamnese pronta e personalizável.",
+      horas: "Total: 6 horas aula",
+    },
+    {
+      titulo: "Negócio Lucrativo",
+      descricao: "Estratégias para captar e conquistar clientes, Financeiro completo para você cobrar certo e ganhar dinheiro de verdade com o seu trabalho.",
+      horas: "Total: 5 horas aula",
+    },
   ]}
 />
 
 
 <AvisoOferta
-  texto="ESTA OFERTA TERMINARÁ EM BREVE."
+  texto={`Todos os meus cursos Perfect Lashes em um único acesso. É a sua chance de <span class="aviso-oferta__destaque">mudar de vida agora!</span>`}
   textoBotao="Comprar agora"
-  linkBotaoPrimario="https://pay.hotmart.com/D69140627P"
-  imagemFundo="/imagens-curso-tecnico/fundo-oferta.webp"
-  imagemFundoMobile="/imagens-curso-tecnico/fundo-oferta-mobile.webp"
+  linkBotaoPrimario="https://pay.hotmart.com/LINK_DO_COMBO"
+  precoAntigo="R$ 1.980,00"
+  precoNovo="R$ 197,00"
+  tema="escuro"
 />
 
-
-<Depoimentos
-  titulo="A experiência Perfect Lashes"
-  depoimentos={[
-    { foto: "/imagens-curso-tecnico/depo-card-01.webp", nome: "Aluna 1", texto: "Depoimento real da aluna aqui." },
-    { foto: "/imagens-curso-tecnico/depo-card-02.webp", nome: "Aluna 2", texto: "Depoimento real da aluna aqui." },
-    { foto: "/imagens-curso-tecnico/depo-card-03.webp", nome: "Aluna 3", texto: "Depoimento real da aluna aqui." },
-    { foto: "/imagens-curso-tecnico/depo-card-04.webp", nome: "Aluna 4", texto: "Depoimento real da aluna aqui." },
-  ]}
-/>
 
 
 <SobreThais {...sobreThaisDados} />
@@ -95,7 +69,7 @@ import CtaFinal from '../components/CtaFinal.astro';
 
 
 <CtaFinal
-  titulo="Sua carreira como Lash Designer começa agora"
+  titulo="Sua carreira Lash depende dessa decisão"
   subtitulo="Não apenas uma Lash, uma Perfect Lash!"
   imagemFundo="/imagens-curso-tecnico/cta-final-curso-tecnico.webp"
   imagemFundoMobile="/imagens-curso-tecnico/cta-final-curso-tecnico-mobile.webp"

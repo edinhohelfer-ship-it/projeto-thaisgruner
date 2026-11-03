@@ -1,7 +1,7 @@
 ---
 const {
   titulo,
-  cards, // array de strings, um por card
+  cards, // array de objetos: { titulo, descricao, horas }
 } = Astro.props;
 ---
 
@@ -14,11 +14,12 @@ const {
     <hr class="secao-tres-cards__linha mx-auto mb-10 md:mb-14" />
 
     <div class="flex flex-col md:flex-row justify-center gap-[3.5%] md:gap-[4.16%]">
-      {cards.map((cardTexto) => (
-        <div class="secao-tres-cards__card w-full md:w-[25%] h-[90px] md:h-auto md:aspect-square flex items-center justify-center p-4">
-          <p class="texto-livre text-(--charcoal) text-[13px] text-center">
-            {cardTexto}
-          </p>
+      {cards.map((card) => (
+        <div class="secao-tres-cards__card w-full md:w-[25%] text-left p-6 md:p-8">
+          <h3 class="secao-tres-cards__card-titulo">{card.titulo}</h3>
+          <hr class="secao-tres-cards__card-divisor" />
+          <p class="secao-tres-cards__card-descricao">{card.descricao}</p>
+          <div class="secao-tres-cards__card-horas">{card.horas}</div>
         </div>
       ))}
     </div>

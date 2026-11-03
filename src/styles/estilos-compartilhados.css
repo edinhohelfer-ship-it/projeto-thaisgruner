@@ -833,6 +833,66 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 }
 
 
+/* ===== HERO CURSOS ===== */
+
+.hero-cursos {
+    background-color: #0B0A09;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top:    clamp(56px, 9vw, 88px);
+    padding-bottom: clamp(56px, 9vw, 88px);
+    padding-left:   max(24px, env(safe-area-inset-left,  0px));
+    padding-right:  max(24px, env(safe-area-inset-right, 0px));
+}
+
+.hero-cursos__titulo {
+    font-family: 'Lovelace', serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: clamp(2rem, 5.5vw, 3.2rem);
+    color: var(--terracota);
+    text-align: center;
+    margin: 0;
+    line-height: 1.25;
+    text-wrap: balance;
+}
+
+.hero-cursos__copy {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(12px, 2.1vw, 20px);
+    font-weight: 400;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 1.75;
+    margin: 0;
+    text-wrap: balance;
+}
+
+.hero-cursos__destaque {
+    font-weight: 700;
+    font-style: italic;
+    font-size: clamp(15px, 2.6vw, 25px);
+    color: var(--terracota);
+}
+
+.hero-cursos__video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.hero-cursos__video iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+}
+
+
+
+
 /* ===== TÉCNICA/MÉTODO ===== */
 
 .tecnica-metodo {
@@ -1498,11 +1558,55 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 }
 
 .secao-tres-cards__card {
-    background-color: transparent;
+    background-color: #FFFFFF;
     border: 2px solid #B08D57;
     border-radius: 12px;
     box-shadow: 0 0 16px rgba(176, 141, 87, 0.45), inset 0 0 8px rgba(176, 141, 87, 0.15);
+    display: flex;
+    flex-direction: column;
 }
+
+.secao-tres-cards__card-titulo {
+    font-family: 'Lovelace', Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: clamp(1rem, 1.8vw, 1.25rem);
+    color: var(--terracota);
+    margin: 0 0 12px;
+    line-height: 1.25;
+}
+
+.secao-tres-cards__card-divisor {
+    width: 26px;
+    height: 1px;
+    background: var(--terracota);
+    border: none;
+    margin: 0 0 16px;
+    opacity: 0.45;
+}
+
+.secao-tres-cards__card-descricao {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--charcoal);
+    line-height: 1.78;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.secao-tres-cards__card-horas {
+    margin-top: 20px;
+    padding-top: 13px;
+    border-top: 1px solid rgba(204, 177, 158, 0.55);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--terracota);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+}
+
+
 
 /* ===== SEÇÃO TEXTOS DIREITA ===== */
 
@@ -1511,6 +1615,54 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 }
 
 
+/* ===== AVISO OFERTA (complemento) ===== */
+
+.aviso-oferta--escuro {
+    background: linear-gradient(160deg, #3D3C45 0%, #2C2B33 45%, #1E1D24 100%);
+}
+
+.aviso-oferta__destaque {
+    font-style: italic;
+    color: var(--rose-gold);
+}
+
+.aviso-oferta__preco-bloco {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 32px;
+}
+
+.aviso-oferta__preco-antigo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    font-weight: 500;
+    color: #E57373;
+    text-decoration: line-through;
+    text-decoration-thickness: 1.5px;
+}
+
+.aviso-oferta__preco-por {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-top: 2px;
+}
+
+.aviso-oferta__preco-novo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    color: #FFFFFF;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+    margin-top: 4px;
+}
 
 
 /* ===== FONTES ===== */
