@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import HeroCursos from '../components/HeroCursos.astro';
 import ModeloSecaoCards from '../components/ModeloSecaoCards.astro';
-import AvisoOferta from '../components/AvisoOferta.astro';
 import SobreThais from '../components/SobreThais.astro';
 import { sobreThaisDados } from '../dados/sobreThais.js';
 ---
@@ -34,10 +33,8 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
     titulo="Você está no lugar certo."
     texto={`Ser lash designer dá sim um bom dinheiro mas para quem trabalha certo. Mas eu não vou te ajudar. <span class="hero-cursos__destaque">Eu vou mudar a sua vida.</span> Só depende de você acreditar e dar o próximo passo.`}
     videoId="jKK-OIEIAbo"
-    textoBotaoPrimario="Garantir meu combo"
-    linkBotaoPrimario="https://pay.hotmart.com/R108358048X?off=qe33o1ac"
-    textoBotaoSecundario="Falar com a Thaís"
-    linkBotaoSecundario="https://wa.me/5551995183025"
+    textoBotaoPrimario="Garantir meu acesso"
+    linkBotaoPrimario="#preco"
     botaoPrimarioGlass={true}
     fundoTransparente={true}
   />
@@ -103,24 +100,13 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
     ]}
   />
 
-  <AvisoOferta
-    texto={`Todos os meus cursos Perfect Lashes em um único acesso. É a sua chance de <span class="aviso-oferta__destaque">mudar de vida agora!</span>`}
-    textoBotao="Comprar agora"
-    linkBotaoPrimario="https://pay.hotmart.com/R108358048X?off=qe33o1ac"
-    precoAntigo="R$ 1.980,00"
-    precoNovo="R$ 197,00"
-    tema="escuro"
-  />
-
-  <SobreThais {...sobreThaisDados} />
-
-  <!-- Seção Preço -->
-  <section class="pgct-preco">
+   <!-- Seção Preço -->
+  <section class="pgct-preco" id="preco">
     <div class="pgct-preco__inner">
       <header class="pgct-preco__header">
         <p class="pgct-preco__label">Todos os cursos Perfect Lashes em um único acesso</p>
         <h2 class="pgct-preco__titulo">
-          Investimento que se paga com
+          <span class="pgct-preco__titulo-l1">Investimento que se paga com</span>
           <span class="pgct-preco__destaque">uma única cliente</span>
         </h2>
       </header>
@@ -141,11 +127,13 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
             <i class="pgct-btn-terracota__ponto"></i>
             <i class="pgct-btn-terracota__ponto"></i>
           </div>
-          <span class="pgct-btn-terracota__inner">Garantir meu combo</span>
+          <span class="pgct-btn-terracota__inner">Comprar agora</span>
         </a>
       </article>
     </div>
   </section>
+
+  <SobreThais {...sobreThaisDados} />
 
   <!-- Seção Comece Hoje -->
   <section class="pgct-cta">
@@ -187,7 +175,7 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
                 </svg>
               </div>
               <span class="whitespace-nowrap relative z-10 font-medium tracking-tight text-base text-white/95 group-hover:text-white transition-colors">
-                Garantir meu combo
+                Comprar agora
               </span>
               <span class="inline-flex items-center justify-center z-10 bg-white/10 w-6 h-6 rounded-full ml-1 relative group-hover:translate-x-0.5 transition-transform text-white/80 group-hover:text-white">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -197,7 +185,7 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
             </div>
           </a>
           <!-- Botão terracota com pontos -->
-          <a href="https://wa.me/5551995183025" class="pgct-btn-terracota">
+          <a href="https://wa.me/5551995183025?text=Ol%C3%A1%20Tha%C3%ADs.%0AVim%20pelo%20site%20e%20ainda%20tenho%20d%C3%BAvidas%20sobre%20o%20curso%20t%C3%A9cnico%20Perfect%20Lashes." class="pgct-btn-terracota">
             <div class="pgct-btn-terracota__pontos">
               <i class="pgct-btn-terracota__ponto"></i>
               <i class="pgct-btn-terracota__ponto"></i>

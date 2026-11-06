@@ -68,9 +68,11 @@ const {
           {textoBotaoPrimario}
         </a>
       )}
-      <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-rose w-full md:w-auto">
-        {textoBotaoSecundario}
-      </a>
+      {textoBotaoSecundario && (
+        <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-rose w-full md:w-auto">
+          {textoBotaoSecundario}
+        </a>
+      )}
     </div>
   </div>
 

@@ -2111,6 +2111,7 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 .secao-marquee__trilho {
     flex: 1;
     overflow: hidden;
+    width: 100%;
     -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
     mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
     min-width: 0;
@@ -2370,4 +2371,119 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 .pgct-btn-terracota:hover .pgct-btn-terracota__inner svg {
     transform: translateX(2px);
+}
+
+/* ============================================================
+   SEÇÃO PREÇO — Curso Técnico Perfect Lashes
+   ============================================================ */
+
+.pgct-preco {
+    padding: clamp(48px,8vw,96px) clamp(16px,5vw,32px);
+    background: transparent;
+}
+
+.pgct-preco__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(32px,4vw,48px);
+}
+
+.pgct-preco__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.pgct-preco__label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+}
+
+.pgct-preco__titulo {
+    font-size: clamp(2rem,4.5vw,5rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #fff;
+}
+
+@media (min-width: 1024px) {
+    .pgct-preco__titulo-l1 {
+        white-space: nowrap;
+    }
+}
+
+.pgct-preco__destaque {
+    display: block;
+    font-family: Lovelace, serif;
+    font-style: italic;
+    background: linear-gradient(90deg, var(--rose-gold), var(--terracota));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+}
+
+.pgct-preco__card {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    border-radius: 12px;
+    border: 1px solid rgba(176,108,74,0.4);
+    background: linear-gradient(to bottom, rgba(176,108,74,0.15), rgba(176,108,74,0.04), rgba(255,255,255,0.02));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 0 60px -20px rgba(176,108,74,0.5);
+    padding: clamp(32px,5vw,48px) clamp(24px,4vw,40px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.pgct-preco__copy {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+    max-width: 380px;
+}
+
+.pgct-preco__valores {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+}
+
+.pgct-preco__de {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.35);
+    text-decoration: line-through;
+    text-decoration-color: rgba(255,255,255,0.3);
+}
+
+.pgct-preco__por {
+    font-size: clamp(2.75rem,7vw,4.5rem);
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: #fff;
+    line-height: 1;
+}
+
+.pgct-preco__parcelado {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.4);
+    margin-top: 0.3rem;
+}
+
+.pgct-btn-terracota--full {
+    width: 100%;
+    justify-content: center;
 }
