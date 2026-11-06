@@ -1739,3 +1739,635 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     font-style: italic;
     font-display: swap;
 }
+
+/* ===== MODELO SECAO CARDS ===== */
+
+@keyframes fadeSlideIn {
+    0%   { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+    100% { opacity: 1; transform: translateY(0);    filter: blur(0);   }
+}
+
+.fx {
+    animation: fadeSlideIn 1s cubic-bezier(.2,.8,.2,1) var(--d, 0s) both;
+}
+
+.animate-on-scroll {
+    animation-play-state: paused !important;
+}
+.animate-on-scroll.animate {
+    animation-play-state: running !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .fx { opacity: 1 !important; transform: none !important; filter: none !important; }
+}
+
+.modelo-secao-cards {
+    background-color: #0B0A09;
+    padding-top:    clamp(56px, 9vw, 88px);
+    padding-bottom: clamp(56px, 9vw, 88px);
+    padding-left:   max(24px, env(safe-area-inset-left,  0px));
+    padding-right:  max(24px, env(safe-area-inset-right, 0px));
+}
+
+.modelo-secao-cards__inner {
+    width: min(90%, 1200px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.modelo-secao-cards__header {
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.modelo-secao-cards__etiqueta {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.modelo-secao-cards__titulo {
+    font-family: 'Lovelace', serif;
+    font-size: clamp(2rem, 5.5vw, 3.2rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin: 0;
+}
+
+.modelo-secao-cards__titulo-destaque {
+    font-style: italic;
+    font-weight: 400;
+    color: transparent;
+    background: linear-gradient(to right, var(--rose-gold), var(--terracota));
+    -webkit-background-clip: text;
+    background-clip: text;
+    padding-right: 4px;
+}
+
+.modelo-secao-cards__subtitulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(14px, 2vw, 18px);
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 560px;
+}
+
+.modelo-secao-cards__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+@media (min-width: 768px) {
+    .modelo-secao-cards__grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.modelo-secao-cards__card {
+    display: flex;
+    flex-direction: column;
+    min-height: 320px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+.modelo-secao-cards__card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateY(-4px);
+    border-color: rgba(176, 108, 74, 0.5);
+}
+
+.modelo-secao-cards__card-top {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modelo-secao-cards__numero {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.15);
+}
+
+.modelo-secao-cards__categoria {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 2rem;
+}
+
+.modelo-secao-cards__card-titulo {
+    font-family: 'Lovelace', serif;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    margin: 0.5rem 0 0;
+}
+
+.modelo-secao-cards__card-descricao {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.55);
+    font-weight: 500;
+    margin: 0.75rem 0 0;
+}
+
+.modelo-secao-cards__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 2rem;
+}
+
+.modelo-secao-cards__tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.375rem 0.75rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.modelo-secao-cards__separador {
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1.25rem 0 1rem;
+}
+
+.modelo-secao-cards__horas {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--rose-gold);
+}
+
+
+/* ===================================================
+   MODIFICADORES TRANSPARENTES (uso exclusivo curso-técnico)
+   =================================================== */
+
+.hero-cursos--transparente {
+    background-color: transparent;
+}
+
+.modelo-secao-cards--transparente {
+    background-color: transparent;
+}
+
+
+/* ===================================================
+   BACKGROUND FIXO — CURSO TÉCNICO (pgct)
+   =================================================== */
+
+@keyframes pgct-beam-fall {
+    0%   { transform: translateY(-100%); opacity: 0; }
+    5%   { opacity: 0.4; }
+    50%  { opacity: 1; }
+    95%  { opacity: 0.4; }
+    100% { transform: translateY(120vh); opacity: 0; }
+}
+
+.pgct-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-color: #0B0A09;
+}
+
+.pgct-bg__gradiente-1 {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 10%, rgba(176, 108, 74, 0.18), transparent 55%);
+}
+
+.pgct-bg__gradiente-2 {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 10% 80%, rgba(176, 108, 74, 0.08), transparent 50%);
+}
+
+.pgct-bg__gradiente-3 {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(204, 177, 158, 0.04), transparent 60%);
+}
+
+.pgct-bg__marca-dagua {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(260px, 50vw, 620px);
+    opacity: 0.06;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.pgct-bg__grade {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    display: flex;
+    opacity: 0.4;
+}
+
+.pgct-bg__coluna {
+    flex: 1;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.pgct-bg__coluna:last-child {
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pgct-bg__feixe {
+    position: absolute;
+    top: 0;
+    left: -1px;
+    width: 1px;
+    pointer-events: none;
+}
+
+.pgct-bg__feixe--1 {
+    height: 160px;
+    background: linear-gradient(to bottom, transparent, rgba(176, 108, 74, 0.5), transparent);
+    animation: pgct-beam-fall 7s linear infinite;
+}
+
+.pgct-bg__feixe--2 {
+    height: 260px;
+    background: linear-gradient(to bottom, transparent, rgba(176, 108, 74, 0.7), transparent);
+    animation: pgct-beam-fall 6s linear infinite;
+    animation-delay: 2s;
+}
+
+.pgct-bg__feixe--3 {
+    height: 320px;
+    background: linear-gradient(to bottom, transparent, rgba(204, 177, 158, 0.6), transparent);
+    animation: pgct-beam-fall 8s linear infinite;
+    animation-delay: 4s;
+}
+
+.pgct-bg__feixe--4 {
+    height: 200px;
+    background: linear-gradient(to bottom, transparent, rgba(176, 108, 74, 0.5), transparent);
+    animation: pgct-beam-fall 9s linear infinite;
+    animation-delay: 1s;
+}
+
+.pgct-bg__feixe--5 {
+    height: 240px;
+    background: linear-gradient(to bottom, transparent, rgba(176, 108, 74, 0.4), transparent);
+    animation: pgct-beam-fall 10s linear infinite;
+    animation-delay: 5.5s;
+}
+
+
+/* ===================================================
+   SEÇÃO MARQUEE — CURSO TÉCNICO
+   =================================================== */
+
+@keyframes pgct-marquee-scroll {
+    to { transform: translateX(-50%); }
+}
+
+.secao-marquee {
+    padding: clamp(24px, 4vw, 36px) max(24px, env(safe-area-inset-left, 0px));
+    background: transparent;
+}
+
+.secao-marquee__inner {
+    width: min(90%, 1200px);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+    .secao-marquee__inner {
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
+.secao-marquee__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 8px 14px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(204, 177, 158, 0.85);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.secao-marquee__pill-circulo {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, var(--rose-gold), var(--terracota));
+    flex-shrink: 0;
+}
+
+.secao-marquee__trilho {
+    flex: 1;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+    min-width: 0;
+}
+
+.secao-marquee__fita {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: pgct-marquee-scroll 40s linear infinite;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.4);
+    align-items: center;
+}
+
+.secao-marquee__separador {
+    color: rgba(176, 108, 74, 0.5);
+    flex-shrink: 0;
+    font-size: 0.6rem;
+}
+
+
+/* ===================================================
+   SEÇÃO CTA "COMECE HOJE" — CURSO TÉCNICO (pgct-cta)
+   =================================================== */
+
+.pgct-cta {
+    padding: clamp(32px, 5vw, 60px) max(24px, min(5vw, 40px));
+}
+
+.pgct-cta__card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    padding: clamp(48px, 7vw, 112px) 24px;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pgct-cta__brilho {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -200px;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(176, 108, 74, 0.25);
+    filter: blur(100px);
+    pointer-events: none;
+}
+
+.pgct-cta__grade {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0 79px,
+        rgba(255, 255, 255, 0.025) 79px 80px
+    );
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black);
+    mask-image: linear-gradient(to bottom, transparent, black);
+    pointer-events: none;
+}
+
+.pgct-cta__feixe {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 1px;
+    height: 160px;
+    background: linear-gradient(to bottom, transparent, rgba(176, 108, 74, 0.8), transparent);
+    animation: pgct-beam-fall 7s linear infinite;
+    pointer-events: none;
+}
+
+.pgct-cta__conteudo {
+    position: relative;
+    z-index: 1;
+}
+
+.pgct-cta__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.pgct-cta__badge-ponto {
+    display: flex;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--terracota);
+    flex-shrink: 0;
+}
+
+.pgct-cta__badge-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(176, 108, 74, 0.8);
+}
+
+.pgct-cta__titulo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 6vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+    color: #ffffff;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.pgct-cta__titulo-destaque {
+    display: block;
+    font-family: 'Lovelace', serif;
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(to right, var(--rose-gold), var(--terracota));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-right: 8px;
+}
+
+.pgct-cta__copy {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.55);
+    max-width: 540px;
+    margin: 24px auto 0;
+}
+
+.pgct-cta__botoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
+
+/* --- Botão terracota com pontos flutuantes (pgct-btn-terracota) --- */
+
+@keyframes pgct-floating-points {
+    0%   { transform: translateY(0); }
+    85%  { opacity: 0; }
+    100% { transform: translateY(-55px); opacity: 0; }
+}
+
+.pgct-btn-terracota {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    border-radius: 9999px;
+    border: none;
+    padding: 10px 24px;
+    min-height: 44px;
+    text-decoration: none;
+    background:
+        radial-gradient(65.28% 65.28% at 50% 100%, rgba(204, 177, 158, 0.7) 0%, rgba(204, 177, 158, 0) 100%),
+        linear-gradient(0deg, #B06C4A, #B06C4A);
+}
+
+.pgct-btn-terracota:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 30px rgba(176, 108, 74, 0.45);
+}
+
+.pgct-btn-terracota::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 9999px;
+    z-index: 0;
+    transition: all 0.5s ease-in-out;
+    background: linear-gradient(177.95deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.pgct-btn-terracota::after {
+    content: "";
+    position: absolute;
+    inset: 2px;
+    border-radius: 9999px;
+    z-index: 0;
+    transition: all 0.5s ease-in-out;
+    background:
+        radial-gradient(65.28% 65.28% at 50% 100%, rgba(204, 177, 158, 0.7) 0%, rgba(204, 177, 158, 0) 100%),
+        linear-gradient(0deg, #B06C4A, #B06C4A);
+}
+
+.pgct-btn-terracota__pontos {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.pgct-btn-terracota__ponto {
+    bottom: -10px;
+    position: absolute;
+    animation: pgct-floating-points infinite ease-in-out;
+    pointer-events: none;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 9999px;
+}
+
+.pgct-btn-terracota__ponto:nth-child(1) { left: 10%; opacity: 1;   animation-duration: 2.35s; animation-delay: 0.2s; }
+.pgct-btn-terracota__ponto:nth-child(2) { left: 30%; opacity: 0.7; animation-duration: 2.5s;  animation-delay: 0.5s; }
+.pgct-btn-terracota__ponto:nth-child(3) { left: 25%; opacity: 0.8; animation-duration: 2.2s;  animation-delay: 0.1s; }
+.pgct-btn-terracota__ponto:nth-child(4) { left: 44%; opacity: 0.6; animation-duration: 2.05s; }
+.pgct-btn-terracota__ponto:nth-child(5) { left: 50%; opacity: 1;   animation-duration: 1.9s;  }
+.pgct-btn-terracota__ponto:nth-child(6) { left: 75%; opacity: 0.5; animation-duration: 1.5s;  animation-delay: 1.5s; }
+.pgct-btn-terracota__ponto:nth-child(7) { left: 88%; opacity: 0.9; animation-duration: 2.2s;  animation-delay: 0.2s; }
+
+.pgct-btn-terracota__inner {
+    z-index: 2;
+    gap: 6px;
+    position: relative;
+    width: 100%;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.pgct-btn-terracota__inner svg {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+}
+
+.pgct-btn-terracota:hover .pgct-btn-terracota__inner svg {
+    transform: translateX(2px);
+}

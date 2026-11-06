@@ -1,0 +1,72 @@
+---
+const {
+  etiqueta = '',
+  titulo = '',
+  tituloDestaque = '',
+  subtitulo = '',
+  cards = [],
+  fundoTransparente = false,
+} = Astro.props;
+---
+
+<section class={fundoTransparente ? "modelo-secao-cards modelo-secao-cards--transparente" : "modelo-secao-cards"}>
+  <div class="modelo-secao-cards__inner">
+
+    <div class="modelo-secao-cards__header">
+      {etiqueta && (
+        <div class="modelo-secao-cards__etiqueta animate-on-scroll fx">{etiqueta}</div>
+      )}
+      <h2 class="modelo-secao-cards__titulo animate-on-scroll fx" style="--d:.1s">
+        {titulo}{tituloDestaque && <span class="modelo-secao-cards__titulo-destaque"> {tituloDestaque}</span>}
+      </h2>
+      {subtitulo && (
+        <p class="modelo-secao-cards__subtitulo animate-on-scroll fx" style="--d:.2s">{subtitulo}</p>
+      )}
+    </div>
+
+    <div class="modelo-secao-cards__grid">
+      {cards.map((card, i) => (
+        <article class="modelo-secao-cards__card animate-on-scroll fx" style={`--d:${(i * 0.12).toFixed(2)}s`}>
+          <div class="modelo-secao-cards__card-top">
+            <span class="modelo-secao-cards__numero">0{i + 1}</span>
+          </div>
+          {card.categoria && (
+            <div class="modelo-secao-cards__categoria">{card.categoria}</div>
+          )}
+          <h3 class="modelo-secao-cards__card-titulo">{card.titulo}</h3>
+          <p class="modelo-secao-cards__card-descricao">{card.descricao}</p>
+          {card.horas && (
+            <>
+              <hr class="modelo-secao-cards__separador" />
+              <span class="modelo-secao-cards__horas">{card.horas}</span>
+            </>
+          )}
+          {card.tags && card.tags.length > 0 && (
+            <div class="modelo-secao-cards__tags">
+              {card.tags.map((tag) => (
+                <span class="modelo-secao-cards__tag">{tag}</span>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.modelo-secao-cards .animate-on-scroll').forEach(function (el) {
+    io.observe(el);
+  });
+})();
+</script>

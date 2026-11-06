@@ -1,84 +1,223 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import HeroCursos from '../components/HeroCursos.astro';
-import SecaoTresCards from '../components/SecaoTresCards.astro';
+import ModeloSecaoCards from '../components/ModeloSecaoCards.astro';
 import AvisoOferta from '../components/AvisoOferta.astro';
 import SobreThais from '../components/SobreThais.astro';
 import { sobreThaisDados } from '../dados/sobreThais.js';
-import Garantia from '../components/Garantia.astro';
-import CtaFinal from '../components/CtaFinal.astro';
 ---
 
-<Layout temaHeader="claro" temaFooter="claro" metaViewContent="Curso Técnico Perfect Lashes">
+<Layout temaHeader="escuro" temaFooter="escuro" metaViewContent="Curso Técnico Perfect Lashes">
 
-
+  <!-- Background fixo da página -->
+  <div class="pgct-bg" aria-hidden="true">
+    <div class="pgct-bg__gradiente-1"></div>
+    <div class="pgct-bg__gradiente-2"></div>
+    <div class="pgct-bg__gradiente-3"></div>
+    <img
+      class="pgct-bg__marca-dagua"
+      src="/imagens-padrao/logomarrom-sem-fundo.webp"
+      alt=""
+      width="620"
+      height="399"
+    />
+  </div>
+  <div class="pgct-bg__grade" aria-hidden="true">
+    <div class="pgct-bg__coluna"><div class="pgct-bg__feixe pgct-bg__feixe--1"></div></div>
+    <div class="pgct-bg__coluna"><div class="pgct-bg__feixe pgct-bg__feixe--2"></div></div>
+    <div class="pgct-bg__coluna"><div class="pgct-bg__feixe pgct-bg__feixe--3"></div></div>
+    <div class="pgct-bg__coluna"><div class="pgct-bg__feixe pgct-bg__feixe--4"></div></div>
+    <div class="pgct-bg__coluna"><div class="pgct-bg__feixe pgct-bg__feixe--5"></div></div>
+  </div>
 
   <HeroCursos
-  titulo="Você está no lugar certo."
-   texto={`Ser lash designer dá sim um bom dinheiro mas para quem trabalha certo. Mas eu não vou te ajudar. <span class="hero-cursos__destaque">Eu vou mudar a sua vida.</span> Só depende de você acreditar e dar o próximo passo.`}
-  videoId="jKK-OIEIAbo"
-  textoBotaoPrimario="Garantir meu combo"
-  linkBotaoPrimario="https://pay.hotmart.com/LINK_DO_COMBO"
-  textoBotaoSecundario="Falar com a Thaís"
-  linkBotaoSecundario="https://wa.me/5551995183025"
-/>
+    titulo="Você está no lugar certo."
+    texto={`Ser lash designer dá sim um bom dinheiro mas para quem trabalha certo. Mas eu não vou te ajudar. <span class="hero-cursos__destaque">Eu vou mudar a sua vida.</span> Só depende de você acreditar e dar o próximo passo.`}
+    videoId="jKK-OIEIAbo"
+    textoBotaoPrimario="Garantir meu combo"
+    linkBotaoPrimario="https://pay.hotmart.com/R108358048X?off=qe33o1ac"
+    textoBotaoSecundario="Falar com a Thaís"
+    linkBotaoSecundario="https://wa.me/5551995183025"
+    botaoPrimarioGlass={true}
+    fundoTransparente={true}
+  />
 
+  <!-- Seção marquee: o conteúdo -->
+  <section class="secao-marquee">
+    <div class="secao-marquee__inner">
+      <div class="secao-marquee__pill">
+        <span class="secao-marquee__pill-circulo"></span>
+        O conteúdo
+      </div>
+      <div class="secao-marquee__trilho">
+        <div class="secao-marquee__fita">
+          <span>A base tudo</span><span class="secao-marquee__separador">✦</span>
+          <span>Perfect Lashes Clássico e Tecnológicos</span><span class="secao-marquee__separador">✦</span>
+          <span>Perfect Lashes Russo e Híbrido</span><span class="secao-marquee__separador">✦</span>
+          <span>Ficha de Anamnese</span><span class="secao-marquee__separador">✦</span>
+          <span>Tricologia Avançada para Lashes</span><span class="secao-marquee__separador">✦</span>
+          <span>Saúde Ocular</span><span class="secao-marquee__separador">✦</span>
+          <span>Photo Lash</span><span class="secao-marquee__separador">✦</span>
+          <span>Imersão Financeiro</span><span class="secao-marquee__separador">✦</span>
+          <span>Operação Impulse</span><span class="secao-marquee__separador">✦</span>
+          <span>A base tudo</span><span class="secao-marquee__separador">✦</span>
+          <span>Perfect Lashes Clássico e Tecnológicos</span><span class="secao-marquee__separador">✦</span>
+          <span>Perfect Lashes Russo e Híbrido</span><span class="secao-marquee__separador">✦</span>
+          <span>Ficha de Anamnese</span><span class="secao-marquee__separador">✦</span>
+          <span>Tricologia Avançada para Lashes</span><span class="secao-marquee__separador">✦</span>
+          <span>Saúde Ocular</span><span class="secao-marquee__separador">✦</span>
+          <span>Photo Lash</span><span class="secao-marquee__separador">✦</span>
+          <span>Imersão Financeiro</span><span class="secao-marquee__separador">✦</span>
+          <span>Operação Impulse</span><span class="secao-marquee__separador">✦</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <ModeloSecaoCards
+    etiqueta="Perfect Lashes"
+    titulo="Tudo que você vai aprender"
+    fundoTransparente={true}
+    cards={[
+      {
+        categoria: "Módulo 01",
+        titulo: "Técnico",
+        descricao: "Teoria, treinos, práticas, aplicação, remoção e manutenções. O conteúdo mais completo do mercado. Volumes Clássico — Tecnológicos — Híbridos e Russo.",
+        horas: "Total: 9 horas aula",
+        tags: ["Clássico", "Tecnológicos", "Híbridos", "Russo"],
+      },
+      {
+        categoria: "Módulo 02",
+        titulo: "Avançados e Exclusivos",
+        descricao: "Tricologia dos cílios, Saúde Ocular, Biossegurança e Fichas de anamnese pronta e personalizável.",
+        horas: "Total: 6 horas aula",
+        tags: ["Tricologia", "Saúde Ocular", "Biossegurança", "Fichas de anamnese"],
+      },
+      {
+        categoria: "Módulo 03",
+        titulo: "Negócio Lucrativo",
+        descricao: "Estratégias para captar e conquistar clientes, Financeiro completo para você cobrar certo e ganhar dinheiro de verdade com o seu trabalho.",
+        horas: "Total: 5 horas aula",
+        tags: ["Captação de clientes", "Financeiro", "Precificação"],
+      },
+    ]}
+  />
 
-<SecaoTresCards
-  titulo="Tudo que você vai aprender"
-  cards={[
-    {
-      titulo: "Técnico",
-      descricao: "Teoria, treinos, práticas, aplicação, remoção e manutenções. O conteúdo mais completo do mercado. Volumes Clássico — Tecnológicos — Híbridos e Russo.",
-      horas: "Total: 9 horas aula",
-    },
-    {
-      titulo: "Avançados e Exclusivos",
-      descricao: "Tricologia dos cílios, Saúde Ocular, Biossegurança e Fichas de anamnese pronta e personalizável.",
-      horas: "Total: 6 horas aula",
-    },
-    {
-      titulo: "Negócio Lucrativo",
-      descricao: "Estratégias para captar e conquistar clientes, Financeiro completo para você cobrar certo e ganhar dinheiro de verdade com o seu trabalho.",
-      horas: "Total: 5 horas aula",
-    },
-  ]}
-/>
+  <AvisoOferta
+    texto={`Todos os meus cursos Perfect Lashes em um único acesso. É a sua chance de <span class="aviso-oferta__destaque">mudar de vida agora!</span>`}
+    textoBotao="Comprar agora"
+    linkBotaoPrimario="https://pay.hotmart.com/R108358048X?off=qe33o1ac"
+    precoAntigo="R$ 1.980,00"
+    precoNovo="R$ 197,00"
+    tema="escuro"
+  />
 
+  <SobreThais {...sobreThaisDados} />
 
-<AvisoOferta
-  texto={`Todos os meus cursos Perfect Lashes em um único acesso. É a sua chance de <span class="aviso-oferta__destaque">mudar de vida agora!</span>`}
-  textoBotao="Comprar agora"
-  linkBotaoPrimario="https://pay.hotmart.com/LINK_DO_COMBO"
-  precoAntigo="R$ 1.980,00"
-  precoNovo="R$ 197,00"
-  tema="escuro"
-/>
+  <!-- Seção Preço -->
+  <section class="pgct-preco">
+    <div class="pgct-preco__inner">
+      <header class="pgct-preco__header">
+        <p class="pgct-preco__label">Todos os cursos Perfect Lashes em um único acesso</p>
+        <h2 class="pgct-preco__titulo">
+          Investimento que se paga com
+          <span class="pgct-preco__destaque">uma única cliente</span>
+        </h2>
+      </header>
+      <article class="pgct-preco__card">
+        <p class="pgct-preco__copy">É a sua chance de mudar de vida agora! Essa campanha não ficará disponível por muito tempo.</p>
+        <div class="pgct-preco__valores">
+          <span class="pgct-preco__de">De R$1.980,00</span>
+          <span class="pgct-preco__por">R$197,00</span>
+          <span class="pgct-preco__parcelado">ou 12 x de R$20,37</span>
+        </div>
+        <a href="https://pay.hotmart.com/R108358048X?off=qe33o1ac" class="pgct-btn-terracota pgct-btn-terracota--full">
+          <div class="pgct-btn-terracota__pontos">
+            <i class="pgct-btn-terracota__ponto"></i>
+            <i class="pgct-btn-terracota__ponto"></i>
+            <i class="pgct-btn-terracota__ponto"></i>
+            <i class="pgct-btn-terracota__ponto"></i>
+            <i class="pgct-btn-terracota__ponto"></i>
+            <i class="pgct-btn-terracota__ponto"></i>
+            <i class="pgct-btn-terracota__ponto"></i>
+          </div>
+          <span class="pgct-btn-terracota__inner">Garantir meu combo</span>
+        </a>
+      </article>
+    </div>
+  </section>
 
-
-
-<SobreThais {...sobreThaisDados} />
-
-
-<Garantia
-  dias="7"
-  subtitulo="Se você assistir às aulas, pôr em prática e mesmo assim achar que o curso não é para você, é só entrar em contato e a gente devolve seu dinheiro."
-  imagemSelo="/imagens-padrao/selo-garantia.webp"
-/>
-
-
-<CtaFinal
-  titulo="Sua carreira Lash depende dessa decisão"
-  subtitulo="Não apenas uma Lash, uma Perfect Lash!"
-  imagemFundo="/imagens-curso-tecnico/cta-final-curso-tecnico.webp"
-  imagemFundoMobile="/imagens-curso-tecnico/cta-final-curso-tecnico-mobile.webp"
-  textoBotaoPrimario="Comprar agora"
-  linkBotaoPrimario="https://pay.hotmart.com/D69140627P"
-  fundo="preto"
-/>
-
-
+  <!-- Seção Comece Hoje -->
+  <section class="pgct-cta">
+    <div class="pgct-cta__card">
+      <div class="pgct-cta__brilho" aria-hidden="true"></div>
+      <div class="pgct-cta__grade" aria-hidden="true"></div>
+      <div class="pgct-cta__feixe" aria-hidden="true"></div>
+      <div class="pgct-cta__conteudo">
+        <div class="pgct-cta__badge">
+          <span class="pgct-cta__badge-ponto"></span>
+          <span class="pgct-cta__badge-label">Comece hoje</span>
+        </div>
+        <h2 class="pgct-cta__titulo">
+          Não espere.
+          <span class="pgct-cta__titulo-destaque">Você só tem a ganhar, evoluir e crescer!</span>
+        </h2>
+        <p class="pgct-cta__copy">Acesso pela Hotmart com garantia de 7 dias. Se você entender que o conteúdo não é para você, é só solicitar o reembolso.</p>
+        <div class="pgct-cta__botoes">
+          <!-- Botão glass -->
+          <a
+            class="group isolate inline-flex cursor-pointer overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_10px_rgba(176,108,74,0.45)] bg-gradient-to-b from-white/20 via-white/0 to-white/5 rounded-full relative shadow-[0_0_25px_rgba(176,108,74,0.3),0_8px_40px_rgba(176,108,74,0.15)]"
+            href="https://pay.hotmart.com/R108358048X?off=qe33o1ac"
+          >
+            <div class="absolute inset-0 overflow-hidden rounded-full">
+              <div
+                class="absolute inset-[-100%] w-[300%] h-[300%] left-[-100%] top-[-100%] animate-[spin_3s_linear_infinite]"
+                style="background:conic-gradient(from 0deg,transparent 0deg,transparent 80deg,rgba(204,177,158,0.8) 180deg,transparent 280deg,transparent 360deg)"
+              ></div>
+            </div>
+            <div class="absolute inset-[1px] rounded-full backdrop-blur-xl z-0 bg-neutral-950/90"></div>
+            <div class="z-10 flex gap-3 overflow-hidden text-sm font-medium text-white rounded-full py-3 pr-5 pl-4 relative items-center">
+              <div
+                class="relative z-20 w-7 h-7 rounded-full flex items-center justify-center ring-1 ring-white/20 group-hover:scale-110 transition-transform duration-300"
+                style="background:linear-gradient(to bottom,#CCB19E,#B06C4A);box-shadow:0 4px 12px rgba(176,108,74,0.3)"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                  <path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/>
+                </svg>
+              </div>
+              <span class="whitespace-nowrap relative z-10 font-medium tracking-tight text-base text-white/95 group-hover:text-white transition-colors">
+                Garantir meu combo
+              </span>
+              <span class="inline-flex items-center justify-center z-10 bg-white/10 w-6 h-6 rounded-full ml-1 relative group-hover:translate-x-0.5 transition-transform text-white/80 group-hover:text-white">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+                </svg>
+              </span>
+            </div>
+          </a>
+          <!-- Botão terracota com pontos -->
+          <a href="https://wa.me/5551995183025" class="pgct-btn-terracota">
+            <div class="pgct-btn-terracota__pontos">
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+            </div>
+            <span class="pgct-btn-terracota__inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+              Falar com a Thaís
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
 </Layout>

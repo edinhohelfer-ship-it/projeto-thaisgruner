@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Essenza — Agenda, finanças e clientes para quem cuida de pessoas</title>
+<meta name="description" content="Essenza é o sistema de gestão de agenda, finanças e clientes para profissionais de estética, saúde e bem-estar."/>
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        serif: ['"Instrument Serif"', 'serif']
+      }
+    }
+  }
+};
+</script>
+<style>
+  html{scroll-behavior:smooth}
+  ::-webkit-scrollbar{width:0}
+
+  /* ---------- Border gradient (design system) ---------- */
+  [style*="--border-gradient"]::before{
+    content:"";position:absolute;inset:0;padding:1px;
+    border-radius:var(--border-radius-before,inherit);
+    -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;mask-composite:exclude;
+    background:var(--border-gradient);pointer-events:none;
+  }
+
+  /* ---------- Primary button with particles (design system) ---------- */
+  .button-custom{
+    cursor:pointer;position:relative;display:inline-flex;align-items:center;justify-content:center;overflow:hidden;
+    transition:all .25s ease;border-radius:9999px;border:none;padding:10px 24px;min-height:44px;
+    background:radial-gradient(65.28% 65.28% at 50% 100%,rgba(251,191,36,.8) 0%,rgba(251,191,36,0) 100%),linear-gradient(0deg,#ea580c,#ea580c);
+  }
+  .button-custom:hover{transform:translateY(-1px);box-shadow:0 0 30px rgba(249,115,22,.45)}
+  .button-custom::before{content:"";position:absolute;inset:1px;border-radius:9999px;z-index:0;transition:all .5s ease-in-out;
+    background:linear-gradient(177.95deg,rgba(255,255,255,.3) 0%,rgba(255,255,255,0) 100%)}
+  .button-custom::after{content:"";position:absolute;inset:2px;border-radius:9999px;z-index:0;transition:all .5s ease-in-out;
+    background:radial-gradient(65.28% 65.28% at 50% 100%,rgba(251,191,36,.8) 0%,rgba(251,191,36,0) 100%),linear-gradient(0deg,#ea580c,#ea580c)}
+  .button-custom:hover .inner svg{transform:translateX(2px)}
+  .inner{z-index:2;gap:6px;position:relative;width:100%;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.875rem;font-weight:500;white-space:nowrap}
+  .inner svg{width:16px;height:16px;transition:transform .3s ease}
+  .points_wrapper{overflow:hidden;width:100%;height:100%;pointer-events:none;position:absolute;inset:0;z-index:1}
+  .points_wrapper .point{bottom:-10px;position:absolute;animation:floating-points infinite ease-in-out;pointer-events:none;width:2px;height:2px;background:#fff;border-radius:9999px}
+  @keyframes floating-points{0%{transform:translateY(0)}85%{opacity:0}100%{transform:translateY(-55px);opacity:0}}
+  .points_wrapper .point:nth-child(1){left:10%;opacity:1;animation-duration:2.35s;animation-delay:.2s}
+  .points_wrapper .point:nth-child(2){left:30%;opacity:.7;animation-duration:2.5s;animation-delay:.5s}
+  .points_wrapper .point:nth-child(3){left:25%;opacity:.8;animation-duration:2.2s;animation-delay:.1s}
+  .points_wrapper .point:nth-child(4){left:44%;opacity:.6;animation-duration:2.05s}
+  .points_wrapper .point:nth-child(5){left:50%;opacity:1;animation-duration:1.9s}
+  .points_wrapper .point:nth-child(6){left:75%;opacity:.5;animation-duration:1.5s;animation-delay:1.5s}
+  .points_wrapper .point:nth-child(7){left:88%;opacity:.9;animation-duration:2.2s;animation-delay:.2s}
+
+  /* ---------- Falling beams (design system "rain") ---------- */
+  @keyframes beam-fall{
+    0%{transform:translateY(-100%);opacity:0}5%{opacity:.5}50%{opacity:1}95%{opacity:.5}100%{transform:translateY(120vh);opacity:0}
+  }
+  .animate-beam-1{animation:beam-fall 6s linear infinite}
+  .animate-beam-2{animation:beam-fall 8s linear infinite;animation-delay:2s}
+  .animate-beam-3{animation:beam-fall 7s linear infinite;animation-delay:4s}
+  .animate-beam-4{animation:beam-fall 9s linear infinite;animation-delay:3s}
+  .animate-beam-5{animation:beam-fall 10s linear infinite;animation-delay:5.5s}
+
+  /* ---------- Scroll reveal (design system) ---------- */
+  @keyframes fadeSlideIn{0%{opacity:0;transform:translateY(30px);filter:blur(8px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
+  .fx{animation:fadeSlideIn 1s cubic-bezier(.2,.8,.2,1) var(--d,0s) both}
+  .fx-slow{animation-duration:1.2s}
+  .animate-on-scroll{animation-play-state:paused!important}
+  .animate-on-scroll.animate{animation-play-state:running!important}
+
+  /* ---------- Card stack (design system) ---------- */
+  .card-stack-item{transition:transform .6s cubic-bezier(.34,1.56,.64,1),opacity .5s ease,z-index 0s}
+
+  /* ---------- Step progress ---------- */
+  .step-item .bar{position:absolute;left:8px;right:8px;bottom:0;height:1px;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#f97316,#fdba74)}
+  .step-item.is-active .bar{animation:fillbar 3.6s linear forwards}
+  @keyframes fillbar{to{transform:scaleX(1)}}
+
+  /* ---------- Marquee ---------- */
+  @keyframes marquee{to{transform:translateX(-50%)}}
+  .marquee{animation:marquee 45s linear infinite}
+
+  /* ---------- Misc ---------- */
+  .chart-line{stroke-dasharray:600;stroke-dashoffset:600}
+  .animate .chart-line{animation:draw 2.2s cubic-bezier(.2,.8,.2,1) .4s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes typing{0%,60%,100%{opacity:.25;transform:none}30%{opacity:1;transform:translateY(-3px)}}
+  .dot-typing i{animation:typing 1.2s infinite}
+  .dot-typing i:nth-child(2){animation-delay:.15s}
+  .dot-typing i:nth-child(3){animation-delay:.3s}
+  details summary::-webkit-details-marker{display:none}
+  details[open] .faq-icon{transform:rotate(45deg);background:#f97316;border-color:#f97316;color:#000}
+  .amt{transition:opacity .25s,transform .35s cubic-bezier(.2,.8,.2,1)}
+  .amt.swap{opacity:0;transform:translateY(-10px)}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .fx{opacity:1!important;transform:none!important;filter:none!important}
+  }
+</style>
+</head>
+<body class="bg-[#050505] text-white font-sans antialiased overflow-x-hidden selection:bg-orange-500/30 flex flex-col min-h-screen">
+
+<!-- ================= BACKGROUND ================= -->
+<div class="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_10%,rgba(234,88,12,0.18),transparent_55%)]"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_10%_80%,rgba(234,88,12,0.08),transparent_50%)]"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-orange-900/10 via-[#050505]/0 to-[#050505]/0"></div>
+  <!-- horizon glow -->
+  <div class="absolute left-1/2 -translate-x-1/2 top-[55vh] w-[140vw] h-[70vh] rounded-[100%] border-t border-orange-500/10 bg-gradient-to-b from-orange-500/[0.04] to-transparent"></div>
+</div>
+
+<!-- Vertical grid lines with falling beams -->
+<div class="fixed inset-0 z-0 pointer-events-none flex w-full max-w-7xl mx-auto border-r border-white/5 opacity-60" aria-hidden="true">
+  <div class="flex-1 border-l border-white/5 h-full relative overflow-hidden">
+    <div class="absolute top-0 -left-[1px] w-[1px] h-40 bg-gradient-to-b from-transparent via-orange-500/40 to-transparent animate-beam-4"></div>
+    <span class="absolute bottom-8 left-4 text-white/10 text-xs font-mono">01</span>
+  </div>
+  <div class="flex-1 border-l border-white/5 h-full relative overflow-hidden">
+    <div class="absolute top-0 -left-[1px] w-[1px] h-64 bg-gradient-to-b from-transparent via-orange-500/60 to-transparent animate-beam-1"></div>
+    <span class="absolute bottom-8 left-4 text-white/10 text-xs font-mono">02</span>
+  </div>
+  <div class="flex-1 border-l border-white/5 h-full flex justify-center relative overflow-hidden">
+    <div class="absolute top-0 -left-[1px] w-[1px] h-96 bg-gradient-to-b from-transparent via-orange-500/80 to-transparent animate-beam-2"></div>
+    <div class="h-full border-r border-dashed border-orange-500/20 w-px"></div>
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-64 bg-gradient-to-b from-transparent via-orange-500 to-transparent animate-beam-1" style="animation-delay:1.5s"></div>
+    <span class="absolute bottom-8 text-orange-500/30 text-xs font-mono">03</span>
+  </div>
+  <div class="flex-1 border-l border-white/5 h-full relative overflow-hidden">
+    <div class="absolute top-0 -left-[1px] w-[1px] h-48 bg-gradient-to-b from-transparent via-orange-500/60 to-transparent animate-beam-3"></div>
+    <span class="absolute bottom-8 left-4 text-white/10 text-xs font-mono">04</span>
+  </div>
+  <div class="flex-1 border-l border-white/5 h-full relative overflow-hidden">
+    <div class="absolute top-0 -left-[1px] w-[1px] h-56 bg-gradient-to-b from-transparent via-orange-500/50 to-transparent animate-beam-5"></div>
+    <span class="absolute bottom-8 left-4 text-white/10 text-xs font-mono">05</span>
+  </div>
+</div>
+
+<!-- ================= CONTENT ================= -->
+<div class="flex-1 flex flex-col w-full max-w-7xl mx-auto relative z-10">
+
+  <!-- NAV -->
+  <nav id="nav" class="flex justify-between items-center py-6 md:py-8 px-6 md:px-10 sticky top-0 z-50 bg-[#050505]/80 backdrop-blur-md border-b border-white/5">
+    <a href="#top" class="flex items-center gap-3 group">
+      <div class="flex bg-gradient-to-tr from-orange-500 to-amber-500 w-8 h-8 rounded-full items-center justify-center shadow-[0_0_20px_rgba(249,115,22,0.4)]" style="position:relative;--border-gradient:linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0));--border-radius-before:9999px">
+        <div class="w-2.5 h-2.5 bg-black rounded-full group-hover:scale-125 transition-transform"></div>
+      </div>
+      <span class="text-lg font-semibold tracking-tight text-white">Essenza</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a class="text-xs font-medium tracking-widest uppercase hover:text-white transition-colors text-neutral-400" href="#para-quem">Para quem</a>
+      <a class="text-xs font-medium tracking-widest uppercase hover:text-white transition-colors text-neutral-400" href="#recursos">Recursos</a>
+      <a class="text-xs font-medium tracking-widest uppercase hover:text-white transition-colors text-neutral-400" href="#como-funciona">Como funciona</a>
+      <a class="text-xs font-medium tracking-widest uppercase hover:text-white transition-colors text-neutral-400" href="#planos">Planos</a>
+    </div>
+    <div class="flex items-center gap-6">
+      <a href="#" class="hidden sm:inline text-sm font-medium hover:text-white transition-colors text-neutral-400">Entrar</a>
+      <a href="#planos" class="button-custom">
+        <div class="points_wrapper"><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i></div>
+        <span class="inner">Testar grátis</span>
+      </a>
+      <button id="burger" class="md:hidden w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center" aria-label="Abrir menu"><i data-lucide="menu" class="w-4 h-4"></i></button>
+    </div>
+    <div id="mobileMenu" class="hidden md:hidden absolute top-full left-0 right-0 bg-[#050505]/95 backdrop-blur-md border-b border-white/5 px-6 py-4 flex-col">
+      <a class="py-4 border-b border-white/5 text-xs font-medium tracking-widest uppercase text-neutral-300" href="#para-quem">Para quem</a>
+      <a class="py-4 border-b border-white/5 text-xs font-medium tracking-widest uppercase text-neutral-300" href="#recursos">Recursos</a>
+      <a class="py-4 border-b border-white/5 text-xs font-medium tracking-widest uppercase text-neutral-300" href="#como-funciona">Como funciona</a>
+      <a class="py-4 text-xs font-medium tracking-widest uppercase text-neutral-300" href="#planos">Planos</a>
+    </div>
+  </nav>
+
+  <main id="top">
+
+  <!-- ================= HERO ================= -->
+  <section class="grid grid-cols-1 lg:grid-cols-12 pt-16 md:pt-24 pb-20 gap-y-16 items-center min-h-[calc(100vh-97px)]">
+    <!-- Left -->
+    <div class="lg:col-span-7 px-6 md:pl-10 flex flex-col justify-center">
+      <div class="inline-flex items-center gap-2 mb-8 animate-on-scroll fx" style="--d:.1s">
+        <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75 animate-ping"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-orange-500"></span></span>
+        <span class="text-xs font-bold tracking-widest uppercase text-orange-500/80">Gestão completa · Versão 3.0</span>
+      </div>
+      <h1 class="text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-tighter text-white font-medium mb-8 animate-on-scroll fx" style="--d:.2s">
+        Agenda cheia.<br/>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500">Mente </span><span class="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-orange-600 pr-2">leve.</span>
+      </h1>
+      <p class="leading-relaxed text-lg font-medium text-white/60 max-w-lg animate-on-scroll fx" style="--d:.35s">
+        Agenda, finanças e clientes em um só lugar. O Essenza organiza sua rotina de atendimentos no automático, para você focar no que faz de melhor: <span class="text-white">cuidar de pessoas.</span>
+      </p>
+      <div class="mt-10 flex flex-wrap gap-6 items-center animate-on-scroll fx" style="--d:.5s">
+        <!-- Glass button (design system) -->
+        <a class="group isolate inline-flex cursor-pointer overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_10px_rgba(249,115,22,0.45)] bg-gradient-to-b from-white/20 via-white/0 to-white/5 rounded-full relative shadow-[0_0_25px_rgba(249,115,22,0.3),0_8px_40px_rgba(249,115,22,0.15)]" href="#planos">
+          <div class="absolute inset-0 overflow-hidden rounded-full">
+            <div class="absolute inset-[-100%] w-[300%] h-[300%] left-[-100%] top-[-100%] animate-[spin_3s_linear_infinite]" style="background:conic-gradient(from 0deg,transparent 0deg,transparent 80deg,rgba(253,186,116,0.8) 180deg,transparent 280deg,transparent 360deg)"></div>
+          </div>
+          <div class="absolute inset-[1px] rounded-full backdrop-blur-xl z-0 bg-neutral-950/90"></div>
+          <div class="z-10 flex gap-3 overflow-hidden text-sm font-medium text-white rounded-full py-3 pr-5 pl-4 relative items-center">
+            <div class="relative z-20 w-7 h-7 rounded-full bg-gradient-to-b from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30 ring-1 ring-white/20 group-hover:scale-110 transition-transform duration-300">
+              <i data-lucide="sparkles" class="w-3.5 h-3.5 text-white"></i>
+            </div>
+            <span class="whitespace-nowrap relative z-10 font-medium tracking-tight text-base text-white/95 group-hover:text-white transition-colors">Começar agora</span>
+            <span class="inline-flex items-center justify-center z-10 bg-white/10 w-6 h-6 rounded-full ml-1 relative group-hover:translate-x-0.5 transition-transform text-white/80 group-hover:text-white"><i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+          </div>
+        </a>
+        <div class="flex items-center gap-2 text-xs font-medium text-neutral-500">
+          <i data-lucide="check" class="w-3.5 h-3.5 text-orange-500"></i>
+          <span>14 dias grátis · sem cartão de crédito</span>
+        </div>
+      </div>
+
+      <div class="mt-14 flex flex-wrap gap-x-10 gap-y-4 animate-on-scroll fx" style="--d:.65s">
+        <div><div class="text-2xl font-medium tracking-tight">+12 mil</div><div class="text-xs font-medium tracking-widest uppercase text-neutral-500 mt-1">Profissionais</div></div>
+        <div class="w-px bg-white/10 hidden sm:block"></div>
+        <div><div class="text-2xl font-medium tracking-tight">4,9 <span class="text-orange-500">★</span></div><div class="text-xs font-medium tracking-widest uppercase text-neutral-500 mt-1">Avaliação média</div></div>
+        <div class="w-px bg-white/10 hidden sm:block"></div>
+        <div><div class="text-2xl font-medium tracking-tight">-63%</div><div class="text-xs font-medium tracking-widest uppercase text-neutral-500 mt-1">Faltas</div></div>
+      </div>
+    </div>
+
+    <!-- Right: card stack + steps -->
+    <div class="lg:col-span-5 px-6 md:pr-10 flex flex-col items-center lg:items-end justify-center">
+      <div class="relative mb-14 w-full max-w-[340px] aspect-[4/3] group animate-on-scroll fx fx-slow" style="--d:.4s">
+        <div class="absolute -inset-10 bg-orange-500/20 blur-3xl -z-10 opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
+        <div class="relative w-full h-full" id="stack">
+
+          <!-- Card 1: Agenda -->
+          <div class="card-stack-item absolute inset-0 rounded-lg overflow-hidden border border-white/10 shadow-2xl origin-bottom bg-neutral-900" data-card="0">
+            <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-orange-950/40"></div>
+            <div class="relative h-full p-4 flex flex-col">
+              <div class="flex items-center justify-between">
+                <div>
+                  <div class="text-[10px] font-bold tracking-widest uppercase text-neutral-500">Hoje · Quarta</div>
+                  <div class="text-sm font-semibold mt-0.5">6 atendimentos</div>
+                </div>
+                <div class="text-[10px] font-medium px-2 py-1 rounded-full bg-orange-500/15 text-orange-400 border border-orange-500/20">Agenda online</div>
+              </div>
+              <div class="mt-3 flex flex-col gap-1.5 flex-1">
+                <div class="flex items-center gap-2.5 rounded-md bg-white/5 border-l-2 border-orange-500 px-2.5 py-1.5"><span class="text-[10px] text-neutral-500 w-8">09:00</span><span class="text-xs font-medium flex-1">Lash lifting</span><span class="text-[10px] text-neutral-400">Ana P.</span></div>
+                <div class="flex items-center gap-2.5 rounded-md bg-white/5 border-l-2 border-sky-400 px-2.5 py-1.5"><span class="text-[10px] text-neutral-500 w-8">10:00</span><span class="text-xs font-medium flex-1">Fisioterapia</span><span class="text-[10px] text-neutral-400">Carlos M.</span></div>
+                <div class="flex items-center gap-2.5 rounded-md bg-white/5 border-l-2 border-emerald-400 px-2.5 py-1.5"><span class="text-[10px] text-neutral-500 w-8">11:30</span><span class="text-xs font-medium flex-1">Pilates · Turma 4</span><span class="text-[10px] text-neutral-400">5/6</span></div>
+                <div class="flex items-center gap-2.5 rounded-md bg-white/5 border-l-2 border-fuchsia-400 px-2.5 py-1.5"><span class="text-[10px] text-neutral-500 w-8">14:30</span><span class="text-xs font-medium flex-1">Psicoterapia</span><span class="text-[10px] text-neutral-400">Online</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Lembrete -->
+          <div class="card-stack-item absolute inset-0 rounded-lg overflow-hidden border border-white/10 shadow-2xl origin-bottom bg-neutral-900" data-card="1">
+            <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-emerald-950/30"></div>
+            <div class="relative h-full p-4 flex flex-col">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center"><i data-lucide="message-circle" class="w-4 h-4 text-emerald-400"></i></div>
+                <div><div class="text-xs font-semibold">Lembrete automático</div><div class="text-[10px] text-neutral-500">Enviado 24h antes</div></div>
+              </div>
+              <div class="mt-3 flex flex-col gap-2 flex-1">
+                <div class="max-w-[88%] rounded-xl rounded-bl-sm bg-emerald-950/60 border border-emerald-500/20 px-3 py-2 text-[11px] leading-relaxed text-emerald-50/90">Oi, Júlia! Lembrando do seu horário amanhã às 14:30: Design de sobrancelhas. Confirma? ✨</div>
+                <div class="self-end rounded-xl rounded-br-sm bg-white/10 border border-white/10 px-3 py-2 text-[11px] text-white/90">Confirmado! 💛</div>
+                <div class="dot-typing flex gap-1 px-3 py-2.5 rounded-xl bg-white/5 w-max"><i class="w-1.5 h-1.5 rounded-full bg-neutral-400 block"></i><i class="w-1.5 h-1.5 rounded-full bg-neutral-400 block"></i><i class="w-1.5 h-1.5 rounded-full bg-neutral-400 block"></i></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Financeiro -->
+          <div class="card-stack-item absolute inset-0 rounded-lg overflow-hidden border border-white/10 shadow-2xl origin-bottom bg-neutral-900" data-card="2">
+            <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-950 to-orange-950/50"></div>
+            <div class="relative h-full p-4 flex flex-col">
+              <div class="text-[10px] font-bold tracking-widest uppercase text-neutral-500">Faturamento · Novembro</div>
+              <div class="flex items-baseline gap-2 mt-1">
+                <div class="text-2xl font-semibold tracking-tight">R$ 18.420</div>
+                <div class="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded-full">+24%</div>
+              </div>
+              <svg viewBox="0 0 260 80" class="w-full flex-1 mt-2" preserveAspectRatio="none">
+                <defs><linearGradient id="hg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f97316" stop-opacity=".35"/><stop offset="1" stop-color="#f97316" stop-opacity="0"/></linearGradient></defs>
+                <path d="M0 66 C30 64 40 50 65 52 S105 36 130 42 S170 20 195 25 S235 8 260 5 L260 80 L0 80Z" fill="url(#hg)"/>
+                <path d="M0 66 C30 64 40 50 65 52 S105 36 130 42 S170 20 195 25 S235 8 260 5" fill="none" stroke="#fb923c" stroke-width="2"/>
+              </svg>
+              <div class="flex items-center gap-2 mt-2 text-[11px]">
+                <span class="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center"><i data-lucide="check" class="w-3 h-3 text-emerald-400"></i></span>
+                <span class="text-neutral-300">Pix recebido · <b class="text-white font-semibold">R$ 180,00</b> · Pilates</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- play -->
+          <button class="absolute -bottom-5 -left-5 z-40 flex transition-transform hover:scale-110 bg-gradient-to-br from-white/10 via-white/0 to-white/10 w-12 h-12 rounded-full shadow-2xl backdrop-blur-md items-center justify-center border border-white/20" aria-label="Ver tour de 90 segundos">
+            <i data-lucide="play" class="w-4 h-4 fill-white text-white ml-0.5"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="flex flex-col gap-3 w-full max-w-xs animate-on-scroll fx" style="--d:.6s" id="steps">
+        <div class="step-item flex cursor-pointer transition-all duration-300 rounded-lg p-2 gap-4 items-center relative" style="position:relative;--border-gradient:linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0));--border-radius-before:8px">
+          <div class="num w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-colors duration-300">01</div>
+          <span class="lbl text-sm font-medium transition-colors duration-300">Cliente agenda online</span>
+          <i data-lucide="calendar-check" class="ico w-3 h-3 ml-auto transition-all duration-300"></i>
+          <span class="bar"></span>
+        </div>
+        <div class="step-item flex cursor-pointer transition-all duration-300 rounded-lg p-2 gap-4 items-center relative" style="position:relative;--border-gradient:linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0));--border-radius-before:8px">
+          <div class="num w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-colors duration-300">02</div>
+          <span class="lbl text-sm font-medium transition-colors duration-300">Lembrete no WhatsApp</span>
+          <i data-lucide="bell-ring" class="ico w-3 h-3 ml-auto transition-all duration-300"></i>
+          <span class="bar"></span>
+        </div>
+        <div class="step-item flex cursor-pointer transition-all duration-300 rounded-lg p-2 gap-4 items-center relative" style="position:relative;--border-gradient:linear-gradient(180deg,rgba(255,255,255,0.1),rgba(255,255,255,0));--border-radius-before:8px">
+          <div class="num w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-colors duration-300">03</div>
+          <span class="lbl text-sm font-medium transition-colors duration-300">Pagamento conciliado</span>
+          <i data-lucide="wallet" class="ico w-3 h-3 ml-auto transition-all duration-300"></i>
+          <span class="bar"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= STATEMENT ================= -->
+  <section class="px-6 md:px-10 py-24 border-t border-white/5">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-5 animate-on-scroll fx">
+        <div class="flex flex-col min-h-[200px] max-w-md transition-transform hover:-translate-y-1 duration-300 text-black bg-gradient-to-b from-orange-400 to-orange-600 rounded-xl p-8 shadow-2xl shadow-orange-500/20 justify-between" style="position:relative;--border-gradient:linear-gradient(180deg,rgba(255,255,255,0.3),rgba(255,255,255,0));--border-radius-before:12px">
+          <div class="flex items-start justify-between mb-6">
+            <div class="flex -space-x-2">
+              <span class="w-8 h-8 rounded-full ring-2 ring-orange-400 bg-gradient-to-br from-amber-800 to-stone-900 text-[10px] font-bold text-white flex items-center justify-center">JL</span>
+              <span class="w-8 h-8 rounded-full ring-2 ring-orange-400 bg-gradient-to-br from-orange-800 to-stone-900 text-[10px] font-bold text-white flex items-center justify-center">RC</span>
+              <span class="w-8 h-8 rounded-full ring-2 ring-orange-400 bg-black text-[10px] font-bold text-white flex items-center justify-center">+12k</span>
+            </div>
+            <i data-lucide="quote" class="w-6 h-6 text-black/40"></i>
+          </div>
+          <div>
+            <p class="text-lg font-semibold leading-snug tracking-tight max-w-[90%]">"Parei de responder agendamento às 23h. O Essenza devolveu minhas noites."</p>
+            <div class="mt-4 pt-4 border-t border-black/10 flex items-center gap-2 text-xs font-medium uppercase tracking-wide opacity-70">
+              <span>Lash designer</span><span class="w-1 h-1 bg-black rounded-full"></span><span>5,0 de avaliação</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-7">
+        <div class="inline-flex items-center gap-2 text-orange-500 mb-6 animate-on-scroll fx">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span class="text-xs font-bold tracking-widest uppercase text-orange-500/80">Feito para quem atende</span>
+        </div>
+        <h2 class="text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight text-white font-medium animate-on-scroll fx" style="--d:.1s">
+          Feito para quem <span class="font-serif italic font-normal text-neutral-400">cuida de pessoas.</span>
+        </h2>
+        <p class="leading-relaxed text-lg font-medium text-white/60 max-w-xl mt-6 animate-on-scroll fx" style="--d:.2s">
+          Do estúdio de cílios ao consultório de psicologia, do box de pilates ao personal que atende em domicílio: um sistema pensado para quem trabalha por horário, por sessão e por relacionamento.
+        </p>
+      </div>
+    </div>
+
+    <div class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row items-start md:items-center gap-8 animate-on-scroll fx">
+      <a href="#para-quem" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 hover:border-orange-500/50 transition-colors text-xs font-bold tracking-widest uppercase text-orange-500/90 shrink-0">
+        <i data-lucide="info" class="w-3.5 h-3.5"></i>Para quem é
+      </a>
+      <div class="flex-1 w-full overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]">
+        <div class="marquee flex gap-10 w-max text-sm font-medium text-neutral-500">
+          <span>Extensão de cílios</span><span class="text-orange-500/60">✦</span><span>Design de sobrancelhas</span><span class="text-orange-500/60">✦</span><span>Nail designers</span><span class="text-orange-500/60">✦</span><span>Depilação</span><span class="text-orange-500/60">✦</span><span>Massoterapia</span><span class="text-orange-500/60">✦</span><span>Fisioterapia</span><span class="text-orange-500/60">✦</span><span>Pilates</span><span class="text-orange-500/60">✦</span><span>Psicologia</span><span class="text-orange-500/60">✦</span><span>Terapias integrativas</span><span class="text-orange-500/60">✦</span><span>Personal trainers</span><span class="text-orange-500/60">✦</span>
+          <span>Extensão de cílios</span><span class="text-orange-500/60">✦</span><span>Design de sobrancelhas</span><span class="text-orange-500/60">✦</span><span>Nail designers</span><span class="text-orange-500/60">✦</span><span>Depilação</span><span class="text-orange-500/60">✦</span><span>Massoterapia</span><span class="text-orange-500/60">✦</span><span>Fisioterapia</span><span class="text-orange-500/60">✦</span><span>Pilates</span><span class="text-orange-500/60">✦</span><span>Psicologia</span><span class="text-orange-500/60">✦</span><span>Terapias integrativas</span><span class="text-orange-500/60">✦</span><span>Personal trainers</span><span class="text-orange-500/60">✦</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PARA QUEM ================= -->
+  <section id="para-quem" class="px-6 md:px-10 py-24 border-t border-white/5 scroll-mt-24">
+    <div class="mb-16 max-w-3xl">
+      <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mb-4 animate-on-scroll fx">Três universos, um sistema</div>
+      <h2 class="text-5xl md:text-6xl font-medium tracking-tighter text-white mb-4 animate-on-scroll fx" style="--d:.1s">Uma ferramenta que fala <span class="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-orange-600 pr-1">a sua língua.</span></h2>
+      <p class="text-lg text-neutral-400 max-w-2xl animate-on-scroll fx" style="--d:.2s">Fichas, durações, pacotes e lembretes se adaptam ao tipo de atendimento que você oferece.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Beleza -->
+      <article class="group flex flex-col min-h-[380px] bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-all duration-300 hover:bg-white/[0.07] hover:-translate-y-1 hover:border-orange-500/50 animate-on-scroll fx">
+        <div class="flex items-center justify-between">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-b from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30 ring-1 ring-white/20 group-hover:scale-110 transition-transform"><i data-lucide="flower-2" class="w-5 h-5 text-white"></i></div>
+          <span class="text-xs font-mono text-white/20">01</span>
+        </div>
+        <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mt-8">Estética</div>
+        <h3 class="text-2xl md:text-3xl leading-tight tracking-tight text-white font-semibold mt-2">Beleza</h3>
+        <p class="text-sm leading-relaxed text-white/60 font-medium mt-3">Controle de retornos e manutenções, fotos de antes e depois e ficha técnica de cada cliente.</p>
+        <div class="flex flex-wrap gap-2 mt-auto pt-8">
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Cílios</span>
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Sobrancelhas</span>
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Unhas</span>
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Depilação</span>
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Massagem</span>
+        </div>
+      </article>
+      <!-- Saúde -->
+      <article class="group flex flex-col min-h-[380px] bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-all duration-300 hover:bg-white/[0.07] hover:-translate-y-1 hover:border-orange-500/50 animate-on-scroll fx" style="--d:.12s">
+        <div class="flex items-center justify-between">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-b from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30 ring-1 ring-white/20 group-hover:scale-110 transition-transform"><i data-lucide="heart-pulse" class="w-5 h-5 text-white"></i></div>
+          <span class="text-xs font-mono text-white/20">02</span>
+        </div>
+        <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mt-8">Clínico</div>
+        <h3 class="text-2xl md:text-3xl leading-tight tracking-tight text-white font-semibold mt-2">Saúde</h3>
+        <p class="text-sm leading-relaxed text-white/60 font-medium mt-3">Prontuário seguro, evolução por sessão, pacotes de tratamento e recibos para reembolso.</p>
+        <div class="flex flex-wrap gap-2 mt-auto pt-8">
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Fisioterapia</span>
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Pilates</span>
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Terapia</span>
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Psicologia</span>
+        </div>
+      </article>
+      <!-- Bem-estar -->
+      <article class="group flex flex-col min-h-[380px] bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-all duration-300 hover:bg-white/[0.07] hover:-translate-y-1 hover:border-orange-500/50 animate-on-scroll fx" style="--d:.24s">
+        <div class="flex items-center justify-between">
+          <div class="w-12 h-12 rounded-full bg-gradient-to-b from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30 ring-1 ring-white/20 group-hover:scale-110 transition-transform"><i data-lucide="dumbbell" class="w-5 h-5 text-white"></i></div>
+          <span class="text-xs font-mono text-white/20">03</span>
+        </div>
+        <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mt-8">Performance</div>
+        <h3 class="text-2xl md:text-3xl leading-tight tracking-tight text-white font-semibold mt-2">Bem-estar</h3>
+        <p class="text-sm leading-relaxed text-white/60 font-medium mt-3">Agenda por local (academia, estúdio ou domicílio), mensalidades recorrentes e avaliações físicas.</p>
+        <div class="flex flex-wrap gap-2 mt-auto pt-8">
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Personal trainers</span>
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Treino funcional</span>
+          <span class="text-xs font-medium px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-300">Consultoria online</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= RECURSOS ================= -->
+  <section id="recursos" class="px-6 md:px-10 py-24 border-t border-white/5 scroll-mt-24">
+    <div class="mb-16 max-w-3xl">
+      <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mb-4 animate-on-scroll fx">Recursos</div>
+      <h2 class="text-5xl md:text-6xl font-medium tracking-tighter text-white mb-4 animate-on-scroll fx" style="--d:.1s">Tudo o que sua rotina precisa. <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500">Nada do que atrapalha.</span></h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- Agenda -->
+      <article class="lg:col-span-7 flex flex-col bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-colors duration-300 hover:border-orange-500/50 animate-on-scroll fx">
+        <div class="flex items-center gap-3"><i data-lucide="calendar-days" class="w-5 h-5 text-orange-500"></i><h3 class="text-xl font-semibold text-white">Agenda inteligente</h3></div>
+        <p class="text-sm text-neutral-400 mt-2 max-w-md">Dia, semana ou mês. Bloqueie intervalos, defina durações por serviço e evite encaixes impossíveis.</p>
+        <div class="mt-8 grid grid-cols-[40px_repeat(3,1fr)] sm:grid-cols-[40px_repeat(5,1fr)] gap-1.5 text-[10px]">
+          <span></span>
+          <span class="text-center font-bold tracking-widest text-neutral-500 pb-1">SEG</span>
+          <span class="text-center font-bold tracking-widest text-neutral-500 pb-1">TER</span>
+          <span class="text-center font-bold tracking-widest text-orange-500 pb-1">QUA</span>
+          <span class="hidden sm:block text-center font-bold tracking-widest text-neutral-500 pb-1">QUI</span>
+          <span class="hidden sm:block text-center font-bold tracking-widest text-neutral-500 pb-1">SEX</span>
+
+          <span class="text-neutral-600 font-mono pt-1">09h</span>
+          <div class="h-9 rounded bg-orange-500/15 border-l-2 border-orange-500 px-2 py-1 truncate"><b class="font-semibold text-white">Lash lifting</b><br><span class="text-neutral-400">Ana P.</span></div>
+          <div class="h-9 rounded border border-dashed border-white/5"></div>
+          <div class="h-[78px] row-span-2 rounded bg-sky-500/10 border-l-2 border-sky-400 px-2 py-1 truncate"><b class="font-semibold text-white">Fisioterapia</b><br><span class="text-neutral-400">Carlos M. · 2 sessões</span></div>
+          <div class="hidden sm:block h-9 rounded bg-emerald-500/10 border-l-2 border-emerald-400 px-2 py-1 truncate"><b class="font-semibold text-white">Pilates</b><br><span class="text-neutral-400">Turma 4</span></div>
+          <div class="hidden sm:block h-9 rounded border border-dashed border-white/5"></div>
+
+          <span class="text-neutral-600 font-mono pt-1">10h</span>
+          <div class="h-9 rounded border border-dashed border-white/5"></div>
+          <div class="h-9 rounded bg-fuchsia-500/10 border-l-2 border-fuchsia-400 px-2 py-1 truncate"><b class="font-semibold text-white">Psicoterapia</b><br><span class="text-neutral-400">Online</span></div>
+          <div class="hidden sm:block h-9 rounded border border-dashed border-white/5"></div>
+          <div class="hidden sm:block h-9 rounded bg-orange-500/15 border-l-2 border-orange-500 px-2 py-1 truncate"><b class="font-semibold text-white">Unhas em gel</b><br><span class="text-neutral-400">Bia R.</span></div>
+
+          <span class="text-neutral-600 font-mono pt-1">11h</span>
+          <div class="h-9 rounded bg-emerald-500/10 border-l-2 border-emerald-400 px-2 py-1 truncate"><b class="font-semibold text-white">Personal</b><br><span class="text-neutral-400">Lucas · Academia</span></div>
+          <div class="h-9 rounded bg-orange-500/15 border-l-2 border-orange-500 px-2 py-1 truncate"><b class="font-semibold text-white">Sobrancelha</b><br><span class="text-neutral-400">Júlia S.</span></div>
+          <div class="h-9 rounded bg-orange-500/15 border-l-2 border-orange-500 px-2 py-1 truncate"><b class="font-semibold text-white">Massagem</b><br><span class="text-neutral-400">Relaxante 60'</span></div>
+          <div class="hidden sm:block h-9 rounded border border-dashed border-white/5"></div>
+          <div class="hidden sm:block h-9 rounded bg-sky-500/10 border-l-2 border-sky-400 px-2 py-1 truncate"><b class="font-semibold text-white">RPG</b><br><span class="text-neutral-400">Marta F.</span></div>
+        </div>
+      </article>
+
+      <!-- Finanças -->
+      <article class="lg:col-span-5 flex flex-col bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-colors duration-300 hover:border-orange-500/50 animate-on-scroll fx" style="--d:.1s">
+        <div class="flex items-center gap-3"><i data-lucide="trending-up" class="w-5 h-5 text-orange-500"></i><h3 class="text-xl font-semibold text-white">Finanças</h3></div>
+        <p class="text-sm text-neutral-400 mt-2">Entradas, despesas, comissões e Pix em um painel claro.</p>
+        <div class="mt-auto pt-8">
+          <div class="flex items-baseline gap-3">
+            <div class="text-4xl font-medium tracking-tighter">R$ <span data-count="18420" data-format="br">0</span></div>
+            <span class="text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">+24%</span>
+          </div>
+          <svg viewBox="0 0 260 90" class="w-full h-24 mt-3" preserveAspectRatio="none">
+            <defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f97316" stop-opacity=".3"/><stop offset="1" stop-color="#f97316" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0 72 C30 70 40 55 65 58 S105 40 130 46 S170 22 195 28 S235 8 260 6 L260 90 L0 90Z" fill="url(#fg)"/>
+            <path class="chart-line" d="M0 72 C30 70 40 55 65 58 S105 40 130 46 S170 22 195 28 S235 8 260 6" fill="none" stroke="#fb923c" stroke-width="2"/>
+          </svg>
+          <div class="grid grid-cols-2 gap-3 mt-4">
+            <div class="rounded-lg bg-white/5 border border-white/10 px-3 py-2.5"><div class="text-[10px] font-bold tracking-widest uppercase text-neutral-500">Recebido</div><div class="text-sm font-semibold mt-0.5">R$ 15.980</div></div>
+            <div class="rounded-lg bg-white/5 border border-white/10 px-3 py-2.5"><div class="text-[10px] font-bold tracking-widest uppercase text-neutral-500">A receber</div><div class="text-sm font-semibold mt-0.5">R$ 2.440</div></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Clientes -->
+      <article class="lg:col-span-4 flex flex-col bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-colors duration-300 hover:border-orange-500/50 animate-on-scroll fx">
+        <div class="flex items-center gap-3"><i data-lucide="users" class="w-5 h-5 text-orange-500"></i><h3 class="text-xl font-semibold text-white">Clientes & fichas</h3></div>
+        <p class="text-sm text-neutral-400 mt-2">Anamnese, prontuário, histórico e preferências.</p>
+        <div class="mt-auto pt-8 flex flex-col gap-2">
+          <div class="flex items-center gap-3 rounded-lg bg-white/5 border border-white/10 p-2.5"><span class="w-8 h-8 rounded-full bg-orange-500/15 text-orange-300 text-[11px] font-bold flex items-center justify-center">AP</span><div class="flex-1 min-w-0"><div class="text-sm font-medium">Ana Paula</div><div class="text-[11px] text-neutral-500 truncate">Manutenção de cílios em 3 dias</div></div><span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-orange-500/15 text-orange-400">Retorno</span></div>
+          <div class="flex items-center gap-3 rounded-lg bg-white/5 border border-white/10 p-2.5"><span class="w-8 h-8 rounded-full bg-sky-500/15 text-sky-300 text-[11px] font-bold flex items-center justify-center">CM</span><div class="flex-1 min-w-0"><div class="text-sm font-medium">Carlos Mendes</div><div class="text-[11px] text-neutral-500 truncate">Sessão 6 de 10 · Joelho</div></div><span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-300">Pacote</span></div>
+          <div class="flex items-center gap-3 rounded-lg bg-white/5 border border-white/10 p-2.5"><span class="w-8 h-8 rounded-full bg-emerald-500/15 text-emerald-300 text-[11px] font-bold flex items-center justify-center">LS</span><div class="flex-1 min-w-0"><div class="text-sm font-medium">Larissa Souza</div><div class="text-[11px] text-neutral-500 truncate">Aniversário hoje 🎉</div></div><span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300">VIP</span></div>
+        </div>
+      </article>
+
+      <!-- WhatsApp -->
+      <article class="lg:col-span-4 flex flex-col bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-colors duration-300 hover:border-orange-500/50 animate-on-scroll fx" style="--d:.1s">
+        <div class="flex items-center gap-3"><i data-lucide="message-circle" class="w-5 h-5 text-orange-500"></i><h3 class="text-xl font-semibold text-white">Lembretes no WhatsApp</h3></div>
+        <p class="text-sm text-neutral-400 mt-2">Confirmações automáticas que reduzem faltas em até 63%.</p>
+        <div class="mt-auto pt-8 flex flex-col gap-2">
+          <div class="max-w-[90%] rounded-xl rounded-bl-sm bg-emerald-950/50 border border-emerald-500/20 px-3.5 py-2.5 text-xs leading-relaxed text-emerald-50/90">Oi, Renata! Sua aula de pilates é amanhã às 07:00. Confirma presença?<div class="text-right text-[10px] text-emerald-400/70 mt-1">09:00 ✓✓</div></div>
+          <div class="self-end rounded-xl rounded-br-sm bg-white/10 border border-white/10 px-3.5 py-2.5 text-xs">Confirmado! Até amanhã 💛</div>
+          <div class="dot-typing flex gap-1 px-3.5 py-3 rounded-xl bg-white/5 w-max"><i class="w-1.5 h-1.5 rounded-full bg-neutral-400 block"></i><i class="w-1.5 h-1.5 rounded-full bg-neutral-400 block"></i><i class="w-1.5 h-1.5 rounded-full bg-neutral-400 block"></i></div>
+        </div>
+      </article>
+
+      <!-- Link -->
+      <article class="lg:col-span-4 flex flex-col bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-colors duration-300 hover:border-orange-500/50 animate-on-scroll fx" style="--d:.2s">
+        <div class="flex items-center gap-3"><i data-lucide="link" class="w-5 h-5 text-orange-500"></i><h3 class="text-xl font-semibold text-white">Agendamento online</h3></div>
+        <p class="text-sm text-neutral-400 mt-2">Seu link na bio: o cliente escolhe o horário sozinho.</p>
+        <div class="mt-auto pt-8">
+          <div class="flex items-center gap-2 rounded-full bg-black/40 border border-white/10 pl-4 pr-1.5 py-1.5 text-sm">
+            <span class="flex-1 truncate text-neutral-300">essenza.app/<b class="text-orange-400 font-semibold">studiolume</b></span>
+            <button id="copyBtn" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-orange-500/15 text-orange-400 hover:bg-orange-500/25 transition-colors">Copiar</button>
+          </div>
+          <div class="flex flex-wrap gap-2 mt-4 text-xs font-medium" id="slots">
+            <span class="px-3 py-1.5 rounded-lg border border-white/10 text-neutral-600 line-through">08:00</span>
+            <button class="slot px-3 py-1.5 rounded-lg border border-white/10 text-neutral-300 transition-all">09:30</button>
+            <button class="slot px-3 py-1.5 rounded-lg border transition-all bg-orange-500 border-orange-500 text-black shadow-lg shadow-orange-500/30">11:00</button>
+            <button class="slot px-3 py-1.5 rounded-lg border border-white/10 text-neutral-300 transition-all">13:30</button>
+            <span class="px-3 py-1.5 rounded-lg border border-white/10 text-neutral-600 line-through">15:00</span>
+            <button class="slot px-3 py-1.5 rounded-lg border border-white/10 text-neutral-300 transition-all">16:30</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Extras -->
+      <article class="lg:col-span-12 bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 animate-on-scroll fx">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x divide-white/5">
+          <div class="lg:pr-8"><i data-lucide="package" class="w-5 h-5 text-orange-500 mb-4"></i><h4 class="text-base font-semibold">Pacotes & mensalidades</h4><p class="text-sm text-neutral-400 mt-1.5">Sessões de fisio, planos de pilates e consultorias recorrentes.</p></div>
+          <div class="lg:px-8"><i data-lucide="shield-check" class="w-5 h-5 text-orange-500 mb-4"></i><h4 class="text-base font-semibold">Dados protegidos</h4><p class="text-sm text-neutral-400 mt-1.5">Criptografia e conformidade com a LGPD para prontuários.</p></div>
+          <div class="lg:px-8"><i data-lucide="activity" class="w-5 h-5 text-orange-500 mb-4"></i><h4 class="text-base font-semibold">Relatórios</h4><p class="text-sm text-neutral-400 mt-1.5">Serviços mais vendidos, ticket médio e taxa de retorno.</p></div>
+          <div class="lg:pl-8"><i data-lucide="smartphone" class="w-5 h-5 text-orange-500 mb-4"></i><h4 class="text-base font-semibold">App no celular</h4><p class="text-sm text-neutral-400 mt-1.5">Tudo na palma da mão, entre um atendimento e outro.</p></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= COMO FUNCIONA ================= -->
+  <section id="como-funciona" class="px-6 md:px-10 py-24 border-t border-white/5 scroll-mt-24">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-5">
+        <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mb-4 animate-on-scroll fx">Como funciona</div>
+        <h2 class="text-5xl md:text-6xl font-medium tracking-tighter text-white mb-4 animate-on-scroll fx" style="--d:.1s">Pronto em <span class="font-serif italic font-normal text-orange-500">10 minutos.</span></h2>
+        <p class="text-lg text-neutral-400 max-w-md animate-on-scroll fx" style="--d:.2s">Sem instalação, sem treinamento. Você configura uma vez e o Essenza trabalha todos os dias.</p>
+      </div>
+      <div class="lg:col-span-7 flex flex-col">
+        <div class="flex gap-6 py-8 border-b border-white/5 group animate-on-scroll fx">
+          <span class="text-5xl font-medium tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-orange-400 to-orange-600/0 w-20 shrink-0">01</span>
+          <div><h3 class="text-2xl font-semibold tracking-tight group-hover:text-orange-400 transition-colors">Cadastre seus serviços</h3><p class="text-sm leading-relaxed text-white/60 font-medium mt-2">Nomes, durações, valores e intervalos. Importe seus clientes de uma planilha ou da agenda do celular.</p></div>
+        </div>
+        <div class="flex gap-6 py-8 border-b border-white/5 group animate-on-scroll fx" style="--d:.12s">
+          <span class="text-5xl font-medium tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-orange-400 to-orange-600/0 w-20 shrink-0">02</span>
+          <div><h3 class="text-2xl font-semibold tracking-tight group-hover:text-orange-400 transition-colors">Compartilhe seu link</h3><p class="text-sm leading-relaxed text-white/60 font-medium mt-2">No Instagram e no WhatsApp. Os clientes reservam e recebem confirmação na hora.</p></div>
+        </div>
+        <div class="flex gap-6 py-8 group animate-on-scroll fx" style="--d:.24s">
+          <span class="text-5xl font-medium tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-orange-400 to-orange-600/0 w-20 shrink-0">03</span>
+          <div><h3 class="text-2xl font-semibold tracking-tight group-hover:text-orange-400 transition-colors">Acompanhe e cresça</h3><p class="text-sm leading-relaxed text-white/60 font-medium mt-2">Receba no Pix, veja o caixa do mês e descubra quem está há tempo demais sem voltar.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="mt-20 grid grid-cols-2 lg:grid-cols-4 rounded-lg border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden animate-on-scroll fx">
+      <div class="p-8 border-white/10"><div class="text-5xl md:text-6xl font-medium tracking-tighter"><span data-count="12">0</span><span class="text-orange-500">k+</span></div><p class="text-xs font-medium tracking-widest uppercase text-neutral-500 mt-3">Profissionais ativos</p></div>
+      <div class="p-8 border-l border-white/10"><div class="text-5xl md:text-6xl font-medium tracking-tighter"><span data-count="2.8" data-dec="1">0</span><span class="text-orange-500">M</span></div><p class="text-xs font-medium tracking-widest uppercase text-neutral-500 mt-3">Atendimentos em 2026</p></div>
+      <div class="p-8 border-t lg:border-t-0 lg:border-l border-white/10"><div class="text-5xl md:text-6xl font-medium tracking-tighter"><span data-count="63">0</span><span class="text-orange-500">%</span></div><p class="text-xs font-medium tracking-widest uppercase text-neutral-500 mt-3">Menos faltas</p></div>
+      <div class="p-8 border-t border-l lg:border-t-0 border-white/10"><div class="text-5xl md:text-6xl font-medium tracking-tighter"><span data-count="6">0</span><span class="text-orange-500">h</span></div><p class="text-xs font-medium tracking-widest uppercase text-neutral-500 mt-3">Economizadas / semana</p></div>
+    </div>
+  </section>
+
+  <!-- ================= DEPOIMENTOS ================= -->
+  <section class="px-6 md:px-10 py-24 border-t border-white/5">
+    <div class="mb-16 text-center max-w-3xl mx-auto">
+      <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mb-4 animate-on-scroll fx">Depoimentos</div>
+      <h2 class="text-5xl md:text-6xl font-medium tracking-tighter text-white animate-on-scroll fx" style="--d:.1s">Quem usa, <span class="font-serif italic font-normal text-neutral-400">não volta pro caderninho.</span></h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <article class="flex flex-col bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.07] animate-on-scroll fx">
+        <div class="flex gap-1 text-orange-500 text-sm">★★★★★</div>
+        <p class="text-base leading-relaxed text-white/80 mt-5">"Os lembretes no WhatsApp acabaram com as faltas no meu estúdio de pilates. E os pacotes controlam sozinhos quantas aulas cada aluna ainda tem."</p>
+        <div class="flex items-center gap-3 mt-auto pt-6 border-t border-white/5"><span class="w-10 h-10 rounded-full bg-emerald-500/15 text-emerald-300 text-xs font-bold flex items-center justify-center">RF</span><div><div class="text-sm font-semibold">Renata F.</div><div class="text-xs text-neutral-500">Instrutora de Pilates</div></div></div>
+      </article>
+      <article class="flex flex-col bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.07] animate-on-scroll fx" style="--d:.12s">
+        <div class="flex gap-1 text-orange-500 text-sm">★★★★★</div>
+        <p class="text-base leading-relaxed text-white/80 mt-5">"O prontuário é simples e seguro. Registro a evolução de cada paciente logo após a sessão e emito recibo em dois cliques."</p>
+        <div class="flex items-center gap-3 mt-auto pt-6 border-t border-white/5"><span class="w-10 h-10 rounded-full bg-sky-500/15 text-sky-300 text-xs font-bold flex items-center justify-center">DT</span><div><div class="text-sm font-semibold">Diego T.</div><div class="text-xs text-neutral-500">Fisioterapeuta</div></div></div>
+      </article>
+      <article class="flex flex-col bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.07] animate-on-scroll fx" style="--d:.24s">
+        <div class="flex gap-1 text-orange-500 text-sm">★★★★★</div>
+        <p class="text-base leading-relaxed text-white/80 mt-5">"Minhas clientes marcam manutenção de cílios pelo link da bio. Eu só abro o app de manhã e vejo o dia inteiro organizado."</p>
+        <div class="flex items-center gap-3 mt-auto pt-6 border-t border-white/5"><span class="w-10 h-10 rounded-full bg-orange-500/15 text-orange-300 text-xs font-bold flex items-center justify-center">CS</span><div><div class="text-sm font-semibold">Camila S.</div><div class="text-xs text-neutral-500">Lash designer</div></div></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= PLANOS ================= -->
+  <section id="planos" class="px-6 md:px-10 py-24 border-t border-white/5 scroll-mt-24">
+    <div class="mb-16 text-center max-w-3xl mx-auto">
+      <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mb-4 animate-on-scroll fx">Planos</div>
+      <h2 class="text-5xl md:text-6xl font-medium tracking-tighter text-white animate-on-scroll fx" style="--d:.1s">Investimento que <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-neutral-200 to-neutral-500">se paga no primeiro mês.</span></h2>
+      <div class="mt-10 inline-flex relative p-1 rounded-full bg-white/5 border border-white/10 animate-on-scroll fx" style="--d:.2s" id="toggle">
+        <span id="knob" class="absolute top-1 bottom-1 left-1 rounded-full bg-orange-500 shadow-lg shadow-orange-500/30 transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)]"></span>
+        <button data-mode="m" class="relative z-10 px-5 py-2 rounded-full text-sm font-medium text-black transition-colors">Mensal</button>
+        <button data-mode="y" class="relative z-10 px-5 py-2 rounded-full text-sm font-medium text-neutral-400 transition-colors">Anual <span class="ml-1 text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400">-20%</span></button>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+      <!-- Essencial -->
+      <article class="flex flex-col bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-colors duration-300 hover:border-orange-500/50 animate-on-scroll fx">
+        <h3 class="text-xl font-semibold">Essencial</h3>
+        <p class="text-sm text-neutral-400 mt-2 min-h-[40px]">Para quem está começando e atende sozinho.</p>
+        <div class="flex items-baseline gap-1.5 mt-8"><span class="text-lg text-neutral-500 font-medium">R$</span><span class="amt text-6xl font-medium tracking-tighter inline-block" data-m="39" data-y="31">39</span><span class="text-sm text-neutral-500">/mês</span></div>
+        <div class="bill text-xs text-neutral-500 mt-1 h-4" data-m="Cobrado mensalmente" data-y="R$ 372 cobrados anualmente">Cobrado mensalmente</div>
+        <ul class="flex flex-col gap-3 mt-8 pt-8 border-t border-white/5 text-sm text-neutral-300 mb-10">
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>1 profissional</li>
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Agenda e link de agendamento</li>
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Clientes ilimitados</li>
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Controle financeiro básico</li>
+        </ul>
+        <a href="#" class="mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-orange-500/50 transition-all py-3 text-sm font-medium">Começar grátis <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </article>
+
+      <!-- Profissional -->
+      <article class="relative flex flex-col rounded-lg border border-orange-500/40 bg-gradient-to-b from-orange-500/15 via-orange-500/[0.04] to-white/[0.02] backdrop-blur-md p-8 shadow-[0_0_60px_-20px_rgba(249,115,22,0.5)] animate-on-scroll fx" style="--d:.12s">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xl font-semibold">Profissional</h3>
+          <span class="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full bg-orange-500 text-black">Mais escolhido</span>
+        </div>
+        <p class="text-sm text-neutral-400 mt-2 min-h-[40px]">Automação completa para lotar a agenda sem esforço.</p>
+        <div class="flex items-baseline gap-1.5 mt-8"><span class="text-lg text-neutral-500 font-medium">R$</span><span class="amt text-6xl font-medium tracking-tighter inline-block" data-m="79" data-y="63">79</span><span class="text-sm text-neutral-500">/mês</span></div>
+        <div class="bill text-xs text-neutral-500 mt-1 h-4" data-m="Cobrado mensalmente" data-y="R$ 756 cobrados anualmente">Cobrado mensalmente</div>
+        <ul class="flex flex-col gap-3 mt-8 pt-8 border-t border-white/10 text-sm text-neutral-200 mb-10">
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Tudo do Essencial</li>
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Lembretes automáticos no WhatsApp</li>
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Fichas de anamnese e prontuário</li>
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Pacotes, mensalidades e Pix</li>
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Relatórios completos</li>
+        </ul>
+        <a href="#" class="button-custom mt-auto w-full">
+          <div class="points_wrapper"><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i></div>
+          <span class="inner">Testar 14 dias grátis <i data-lucide="arrow-right"></i></span>
+        </a>
+      </article>
+
+      <!-- Clínica -->
+      <article class="flex flex-col bg-white/5 rounded-lg border border-white/10 backdrop-blur-md p-8 transition-colors duration-300 hover:border-orange-500/50 animate-on-scroll fx" style="--d:.24s">
+        <h3 class="text-xl font-semibold">Clínica & Estúdio</h3>
+        <p class="text-sm text-neutral-400 mt-2 min-h-[40px]">Para equipes, salas e múltiplos profissionais.</p>
+        <div class="flex items-baseline gap-1.5 mt-8"><span class="text-lg text-neutral-500 font-medium">R$</span><span class="amt text-6xl font-medium tracking-tighter inline-block" data-m="149" data-y="119">149</span><span class="text-sm text-neutral-500">/mês</span></div>
+        <div class="bill text-xs text-neutral-500 mt-1 h-4" data-m="Cobrado mensalmente" data-y="R$ 1.428 cobrados anualmente">Cobrado mensalmente</div>
+        <ul class="flex flex-col gap-3 mt-8 pt-8 border-t border-white/5 text-sm text-neutral-300 mb-10">
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Tudo do Profissional</li>
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Até 10 profissionais</li>
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Gestão de salas e equipamentos</li>
+          <li class="flex gap-3"><i data-lucide="check" class="w-4 h-4 text-orange-500 shrink-0 mt-0.5"></i>Comissões automáticas</li>
+        </ul>
+        <a href="#" class="mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 hover:border-orange-500/50 transition-all py-3 text-sm font-medium">Falar com especialista <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="px-6 md:px-10 py-24 border-t border-white/5">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-5">
+        <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mb-4 animate-on-scroll fx">Dúvidas</div>
+        <h2 class="text-5xl md:text-6xl font-medium tracking-tighter text-white mb-4 animate-on-scroll fx" style="--d:.1s">Perguntas <span class="font-serif italic font-normal text-neutral-400">frequentes.</span></h2>
+        <p class="text-lg text-neutral-400 max-w-md animate-on-scroll fx" style="--d:.2s">Não encontrou o que procurava? Nosso time responde pelo WhatsApp em poucos minutos.</p>
+      </div>
+      <div class="lg:col-span-7 border-t border-white/5 animate-on-scroll fx" style="--d:.15s" id="faq">
+        <details class="group border-b border-white/5" open>
+          <summary class="flex justify-between items-center gap-6 py-6 cursor-pointer list-none text-lg font-medium tracking-tight hover:text-orange-400 transition-colors">Preciso instalar alguma coisa?<span class="faq-icon w-8 h-8 shrink-0 rounded-full border border-white/10 flex items-center justify-center transition-all duration-300"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
+          <p class="text-sm leading-relaxed text-white/60 font-medium pb-6 pr-12">Não. O Essenza funciona no navegador e também tem app para Android e iPhone. Seus dados ficam sincronizados em todos os dispositivos.</p>
+        </details>
+        <details class="group border-b border-white/5">
+          <summary class="flex justify-between items-center gap-6 py-6 cursor-pointer list-none text-lg font-medium tracking-tight hover:text-orange-400 transition-colors">Serve para psicólogos e fisioterapeutas?<span class="faq-icon w-8 h-8 shrink-0 rounded-full border border-white/10 flex items-center justify-center transition-all duration-300"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
+          <p class="text-sm leading-relaxed text-white/60 font-medium pb-6 pr-12">Sim. Há prontuário eletrônico com registro de evolução por sessão, controle de pacotes de tratamento e emissão de recibos para reembolso de convênio.</p>
+        </details>
+        <details class="group border-b border-white/5">
+          <summary class="flex justify-between items-center gap-6 py-6 cursor-pointer list-none text-lg font-medium tracking-tight hover:text-orange-400 transition-colors">Como funcionam os lembretes no WhatsApp?<span class="faq-icon w-8 h-8 shrink-0 rounded-full border border-white/10 flex items-center justify-center transition-all duration-300"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
+          <p class="text-sm leading-relaxed text-white/60 font-medium pb-6 pr-12">O sistema envia mensagens automáticas de confirmação e lembrete antes de cada atendimento. O cliente confirma ou remarca com um toque, e a agenda é atualizada na hora.</p>
+        </details>
+        <details class="group border-b border-white/5">
+          <summary class="flex justify-between items-center gap-6 py-6 cursor-pointer list-none text-lg font-medium tracking-tight hover:text-orange-400 transition-colors">Meus dados e os dos meus clientes estão seguros?<span class="faq-icon w-8 h-8 shrink-0 rounded-full border border-white/10 flex items-center justify-center transition-all duration-300"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
+          <p class="text-sm leading-relaxed text-white/60 font-medium pb-6 pr-12">Sim. Usamos criptografia, backups diários e seguimos a LGPD. Prontuários têm acesso restrito ao profissional responsável.</p>
+        </details>
+        <details class="group border-b border-white/5">
+          <summary class="flex justify-between items-center gap-6 py-6 cursor-pointer list-none text-lg font-medium tracking-tight hover:text-orange-400 transition-colors">Posso cancelar quando quiser?<span class="faq-icon w-8 h-8 shrink-0 rounded-full border border-white/10 flex items-center justify-center transition-all duration-300"><i data-lucide="plus" class="w-4 h-4"></i></span></summary>
+          <p class="text-sm leading-relaxed text-white/60 font-medium pb-6 pr-12">Pode. Sem fidelidade e sem multa, e você pode exportar todos os seus dados a qualquer momento.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="px-6 md:px-10 py-24">
+    <div class="relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.03] px-6 py-20 md:py-28 text-center animate-on-scroll fx" style="position:relative;--border-gradient:linear-gradient(180deg,rgba(249,115,22,0.5),rgba(255,255,255,0));--border-radius-before:12px">
+      <div class="absolute left-1/2 -translate-x-1/2 -bottom-64 w-[560px] h-[560px] rounded-full bg-orange-500/30 blur-[100px] pointer-events-none"></div>
+      <div class="absolute inset-0 bg-[repeating-linear-gradient(90deg,transparent_0_79px,rgba(255,255,255,0.03)_79px_80px)] [mask-image:linear-gradient(to_bottom,transparent,black)] pointer-events-none"></div>
+      <div class="absolute top-0 left-1/2 w-[1px] h-40 bg-gradient-to-b from-transparent via-orange-500 to-transparent animate-beam-1 pointer-events-none"></div>
+      <div class="relative">
+        <div class="inline-flex items-center gap-2 mb-6">
+          <span class="flex h-2 w-2 rounded-full bg-orange-500"></span>
+          <span class="text-xs font-bold tracking-widest uppercase text-orange-500/80">Comece hoje</span>
+        </div>
+        <h2 class="text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight font-medium max-w-4xl mx-auto">Menos planilha. <span class="font-serif italic font-normal text-transparent bg-clip-text bg-gradient-to-r from-orange-300 to-orange-600 pr-2">Mais tempo para cuidar.</span></h2>
+        <p class="leading-relaxed text-lg font-medium text-white/60 max-w-xl mx-auto mt-6">Teste o Essenza por 14 dias, sem cartão de crédito. Em minutos sua agenda estará online.</p>
+        <div class="mt-10 flex flex-wrap gap-6 items-center justify-center">
+          <a class="group isolate inline-flex cursor-pointer overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_10px_rgba(249,115,22,0.45)] bg-gradient-to-b from-white/20 via-white/0 to-white/5 rounded-full relative shadow-[0_0_25px_rgba(249,115,22,0.3),0_8px_40px_rgba(249,115,22,0.15)]" href="#planos">
+            <div class="absolute inset-0 overflow-hidden rounded-full">
+              <div class="absolute inset-[-100%] w-[300%] h-[300%] left-[-100%] top-[-100%] animate-[spin_3s_linear_infinite]" style="background:conic-gradient(from 0deg,transparent 0deg,transparent 80deg,rgba(253,186,116,0.8) 180deg,transparent 280deg,transparent 360deg)"></div>
+            </div>
+            <div class="absolute inset-[1px] rounded-full backdrop-blur-xl z-0 bg-neutral-950/90"></div>
+            <div class="z-10 flex gap-3 overflow-hidden text-sm font-medium text-white rounded-full py-3 pr-5 pl-4 relative items-center">
+              <div class="relative z-20 w-7 h-7 rounded-full bg-gradient-to-b from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30 ring-1 ring-white/20 group-hover:scale-110 transition-transform duration-300"><i data-lucide="sparkles" class="w-3.5 h-3.5 text-white"></i></div>
+              <span class="whitespace-nowrap relative z-10 font-medium tracking-tight text-base text-white/95">Criar minha conta</span>
+              <span class="inline-flex items-center justify-center z-10 bg-white/10 w-6 h-6 rounded-full ml-1 relative group-hover:translate-x-0.5 transition-transform"><i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+            </div>
+          </a>
+          <a href="#" class="button-custom">
+            <div class="points_wrapper"><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i><i class="point"></i></div>
+            <span class="inner"><i data-lucide="message-circle"></i>Falar no WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="px-6 md:px-10 pt-20 pb-10 border-t border-white/5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-5">
+        <a href="#top" class="flex items-center gap-3">
+          <div class="flex bg-gradient-to-tr from-orange-500 to-amber-500 w-8 h-8 rounded-full items-center justify-center" style="position:relative;--border-gradient:linear-gradient(180deg,rgba(255,255,255,0.5),rgba(255,255,255,0));--border-radius-before:9999px"><div class="w-2.5 h-2.5 bg-black rounded-full"></div></div>
+          <span class="text-lg font-semibold tracking-tight">Essenza</span>
+        </a>
+        <p class="text-sm text-neutral-400 mt-4 max-w-xs">Agenda, finanças e clientes para profissionais de estética, saúde e bem-estar.</p>
+        <div class="flex gap-3 mt-6">
+          <a href="#" aria-label="Instagram" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-orange-500 hover:border-orange-500/50 transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+          <a href="#" aria-label="WhatsApp" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-orange-500 hover:border-orange-500/50 transition-colors"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+          <a href="#" aria-label="YouTube" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-orange-500 hover:border-orange-500/50 transition-colors"><i data-lucide="youtube" class="w-4 h-4"></i></a>
+        </div>
+      </div>
+      <div class="lg:col-span-2">
+        <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mb-5">Produto</div>
+        <ul class="flex flex-col gap-3 text-sm"><li><a class="text-neutral-400 hover:text-white transition-colors" href="#recursos">Recursos</a></li><li><a class="text-neutral-400 hover:text-white transition-colors" href="#planos">Planos</a></li><li><a class="text-neutral-400 hover:text-white transition-colors" href="#como-funciona">Como funciona</a></li><li><a class="text-neutral-400 hover:text-white transition-colors" href="#">Novidades</a></li></ul>
+      </div>
+      <div class="lg:col-span-2">
+        <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mb-5">Para quem</div>
+        <ul class="flex flex-col gap-3 text-sm"><li><a class="text-neutral-400 hover:text-white transition-colors" href="#para-quem">Estética</a></li><li><a class="text-neutral-400 hover:text-white transition-colors" href="#para-quem">Saúde</a></li><li><a class="text-neutral-400 hover:text-white transition-colors" href="#para-quem">Bem-estar</a></li><li><a class="text-neutral-400 hover:text-white transition-colors" href="#para-quem">Clínicas e estúdios</a></li></ul>
+      </div>
+      <div class="lg:col-span-3">
+        <div class="text-xs font-bold tracking-widest uppercase text-neutral-500 mb-5">Empresa</div>
+        <ul class="flex flex-col gap-3 text-sm"><li><a class="text-neutral-400 hover:text-white transition-colors" href="#">Sobre nós</a></li><li><a class="text-neutral-400 hover:text-white transition-colors" href="#">Central de ajuda</a></li><li><a class="text-neutral-400 hover:text-white transition-colors" href="#">Privacidade</a></li><li><a class="text-neutral-400 hover:text-white transition-colors" href="#">Termos de uso</a></li></ul>
+      </div>
+    </div>
+    <div class="mt-20 text-center select-none leading-[0.8] text-[22vw] lg:text-[240px] font-semibold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white/10 to-white/0" aria-hidden="true">essenza</div>
+    <div class="mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between gap-4 text-xs font-medium text-neutral-500">
+      <span>© <span id="year"></span> Essenza. Todos os direitos reservados.</span>
+      <span>Feito com cuidado no Brasil 🧡</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  /* Icons */
+  lucide.createIcons({ attrs: { 'stroke-width': 1.5 } });
+
+  /* Scroll reveal (design system pattern) + counters */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate');
+        entry.target.querySelectorAll('[data-count]').forEach(countUp);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.animate-on-scroll').forEach(el => io.observe(el));
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function countUp(el){
+    if (el.dataset.done) return; el.dataset.done = 1;
+    const target = parseFloat(el.dataset.count), dec = +(el.dataset.dec || 0), br = el.dataset.format === 'br';
+    const fmt = v => br ? Math.round(v).toLocaleString('pt-BR') : v.toFixed(dec).replace('.', ',');
+    if (reduce) { el.textContent = fmt(target); return; }
+    const t0 = performance.now(), dur = 1800;
+    (function tick(t){
+      const p = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - p, 4);
+      el.textContent = fmt(target * e);
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  /* Hero: card stack + steps */
+  const cards = [...document.querySelectorAll('#stack [data-card]')];
+  const steps = [...document.querySelectorAll('#steps .step-item')];
+  const POS = [
+    { t: 'translateY(0px) scale(1)',     z: 30, o: 1 },
+    { t: 'translateY(14px) scale(0.95)', z: 20, o: .6 },
+    { t: 'translateY(28px) scale(0.9)',  z: 10, o: .4 }
+  ];
+  let active = 0, timer;
+  function setActive(i){
+    active = i;
+    cards.forEach((c, k) => {
+      const p = POS[(k - i + cards.length) % cards.length];
+      c.style.transform = p.t; c.style.zIndex = p.z; c.style.opacity = p.o;
+    });
+    steps.forEach((s, k) => {
+      const on = k === i;
+      s.classList.toggle('is-active', on);
+      s.classList.toggle('bg-white/5', on);
+      s.classList.toggle('shadow-xl', on);
+      s.classList.toggle('backdrop-blur-md', on);
+      s.classList.toggle('-translate-x-[10px]', on);
+      const num = s.querySelector('.num'), lbl = s.querySelector('.lbl'), ico = s.querySelector('.ico');
+      num.className = 'num w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-colors duration-300 ' +
+        (on ? 'bg-orange-500 text-black shadow-lg shadow-orange-500/20' : 'bg-transparent text-neutral-500');
+      lbl.classList.toggle('text-white', on); lbl.classList.toggle('text-neutral-400', !on);
+      if (ico) { ico.style.opacity = on ? 1 : 0; ico.style.color = on ? '#f97316' : ''; }
+      const bar = s.querySelector('.bar'); bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = '';
+    });
+  }
+  function loop(){ clearInterval(timer); timer = setInterval(() => setActive((active + 1) % cards.length), 3600); }
+  steps.forEach((s, k) => s.addEventListener('click', () => { setActive(k); loop(); }));
+  setActive(0); loop();
+
+  /* Mobile menu */
+  const burger = document.getElementById('burger'), menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => { menu.classList.toggle('hidden'); menu.classList.toggle('flex'); });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.add('hidden'); menu.classList.remove('flex'); }));
+
+  /* Pricing toggle */
+  const knob = document.getElementById('knob');
+  const tbtns = [...document.querySelectorAll('#toggle button')];
+  const place = b => { knob.style.width = b.offsetWidth + 'px'; knob.style.transform = `translateX(${b.offsetLeft - 4}px)`; };
+  tbtns.forEach(b => b.addEventListener('click', () => {
+    tbtns.forEach(x => { x.classList.toggle('text-black', x === b); x.classList.toggle('text-neutral-400', x !== b); x.dataset.on = x === b ? 1 : ''; });
+    place(b);
+    const m = b.dataset.mode;
+    document.querySelectorAll('.amt').forEach(a => { a.classList.add('swap'); setTimeout(() => { a.textContent = a.dataset[m]; a.classList.remove('swap'); }, 220); });
+    document.querySelectorAll('.bill').forEach(x => x.textContent = x.dataset[m]);
+  }));
+  tbtns[0].dataset.on = 1;
+  requestAnimationFrame(() => place(tbtns[0]));
+  addEventListener('resize', () => place(tbtns.find(b => b.dataset.on) || tbtns[0]));
+  document.fonts && document.fonts.ready.then(() => place(tbtns.find(b => b.dataset.on) || tbtns[0]));
+
+  /* FAQ: one open at a time */
+  const dets = [...document.querySelectorAll('#faq details')];
+  dets.forEach(d => d.addEventListener('toggle', () => { if (d.open) dets.forEach(o => o !== d && (o.open = false)); }));
+
+  /* Booking slots */
+  const slots = [...document.querySelectorAll('#slots .slot')];
+  const ON = ['bg-orange-500','border-orange-500','text-black','shadow-lg','shadow-orange-500/30'], OFF = ['border-white/10','text-neutral-300'];
+  slots.forEach(s => s.addEventListener('click', () => {
+    slots.forEach(x => { x.classList.remove(...ON); x.classList.add(...OFF); });
+    s.classList.remove(...OFF); s.classList.add(...ON);
+  }));
+
+  /* Copy link */
+  const cb = document.getElementById('copyBtn');
+  cb.addEventListener('click', () => {
+    try { navigator.clipboard && navigator.clipboard.writeText('https://essenza.app/studiolume'); } catch (e) {}
+    cb.textContent = 'Copiado ✓'; setTimeout(() => cb.textContent = 'Copiar', 1600);
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
