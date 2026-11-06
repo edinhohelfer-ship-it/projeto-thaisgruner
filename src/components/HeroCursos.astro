@@ -10,6 +10,8 @@ const {
   botaoPrimarioGlass = false,
   fundoTransparente = false,
 } = Astro.props;
+
+const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
 ---
 
 <section class={fundoTransparente ? "hero-cursos hero-cursos--transparente" : "hero-cursos"}>
@@ -20,14 +22,29 @@ const {
   </div>
 
   <div class="w-full max-w-[780px] flex flex-col items-center gap-10">
-    <div class="hero-cursos__video animate-on-scroll fx fx-slow" style="--d:.35s">
-      <iframe
-        src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0`}
-        title={`Vídeo: ${titulo}`}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
+    <div
+      class="hero-cursos__video hero-cursos__facade animate-on-scroll fx fx-slow"
+      data-video-id={videoId}
+      style="--d:.35s"
+      role="button"
+      tabindex="0"
+      aria-label="Reproduzir vídeo"
+    >
+      <img
+        src={thumbnailUrl}
+        alt="Pré-visualização do vídeo"
+        class="hero-cursos__thumb"
+        width="480"
+        height="360"
         loading="lazy"
-      ></iframe>
+        decoding="async"
+      />
+      <span class="hero-cursos__play" aria-hidden="true">
+        <svg width="68" height="48" viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
+          <path d="M66.5 7.5C65.7 4.7 63.5 2.5 60.8 1.7C55.4 0 34 0 34 0C34 0 12.6 0 7.2 1.7C4.5 2.5 2.3 4.7 1.5 7.5C0 12.9 0 24 0 24C0 24 0 35.1 1.5 40.5C2.3 43.3 4.5 45.5 7.2 46.3C12.6 48 34 48 34 48C34 48 55.4 48 60.8 46.3C63.5 45.5 65.7 43.3 66.5 40.5C68 35.1 68 24 68 24C68 24 68 12.9 66.5 7.5Z" fill="#FF0000"/>
+          <path d="M27 34L45 24L27 14V34Z" fill="white"/>
+        </svg>
+      </span>
     </div>
 
     <div class="flex flex-col gap-3 w-full md:flex-row md:w-auto md:gap-4 animate-on-scroll fx" style="--d:.5s">
@@ -92,4 +109,24 @@ const {
       io.observe(el);
     });
   })();
+</script>
+
+<script>
+  document.querySelectorAll('.hero-cursos__facade').forEach(function (el) {
+    var facade = el;
+    function ativar() {
+      var videoId = facade.dataset.videoId;
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?rel=0&autoplay=1';
+      iframe.title = 'Vídeo';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      facade.innerHTML = '';
+      facade.appendChild(iframe);
+    }
+    facade.addEventListener('click', ativar, { once: true });
+    facade.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') ativar();
+    }, { once: true });
+  });
 </script>
