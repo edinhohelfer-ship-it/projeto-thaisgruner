@@ -1751,6 +1751,10 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     animation: fadeSlideIn 1s cubic-bezier(.2,.8,.2,1) var(--d, 0s) both;
 }
 
+.fx-slow {
+    animation-duration: 1.4s;
+}
+
 .animate-on-scroll {
     animation-play-state: paused !important;
 }
