@@ -6,7 +6,13 @@ import SobreThais from '../components/SobreThais.astro';
 import { sobreThaisDados } from '../dados/sobreThais.js';
 ---
 
-<Layout temaHeader="escuro" temaFooter="escuro" metaViewContent="Curso Técnico Perfect Lashes">
+<Layout
+  temaHeader="escuro"
+  temaFooter="escuro"
+  metaViewContent="Curso Técnico Perfect Lashes"
+  titulo="Curso de Extensão de Cílios Perfect Lashes"
+  descricao="Curso de extensão de cílios em Santa Cruz do Sul ou online. Curso Lash Designer presencial VIP ou com acompanhamento online. Técnica, captação de clientes e precificação."
+>
 
   <Fragment slot="head">
     <link rel="preload" as="image" href="/imagens-padrao/logomarrom-sem-fundo.webp" fetchpriority="high" />
@@ -34,12 +40,16 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
   </div>
 
   <HeroCursos
-    titulo="Você está no lugar certo."
-    texto={`Cansada de tanta informação sobre como ganhar dinheiro com extensão de cílios? Calma! Dedica 5 minutos para ouvir o que quase ninguém te fala. Se permita. <span class="hero-cursos__destaque">Eu vou mudar a sua vida.</span> Só depende de você acreditar e dar o próximo passo.`}
+    titulo="Curso de Extensão de Cílios Perfect Lashes"
+    subtitulo="Você está no lugar certo."
+    texto={`Ser lash designer dá, sim, um bom dinheiro, mas só para quem trabalha certo. E eu não vou apenas te ajudar. <span class="hero-cursos__destaque">Eu vou mudar a sua vida.</span> Só depende de você acreditar e dar o próximo passo.`}
     videoId="_-trn8CRc8w"
-    textoBotaoPrimario="Garantir meu acesso"
-    linkBotaoPrimario="#preco"
+    textoBotaoPrimario="Quero o curso online"
+    linkBotaoPrimario="#card-online"
+    textoBotaoSecundario="Quero atendimento VIP"
+    linkBotaoSecundario="#card-presencial"
     botaoPrimarioGlass={true}
+    botaoSecundarioGlass={true}
     fundoTransparente={true}
   />
 
@@ -77,7 +87,7 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
 
   <ModeloSecaoCards
     etiqueta="Perfect Lashes"
-    titulo="Tudo que você vai aprender"
+    titulo="Tudo o que você vai aprender no curso de lash designer"
     fundoTransparente={true}
     cards={[
       {
@@ -108,32 +118,93 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
   <section class="pgct-preco" id="preco">
     <div class="pgct-preco__inner">
       <header class="pgct-preco__header">
-        <p class="pgct-preco__label">Todos os cursos Perfect Lashes em um único acesso</p>
+        <p class="pgct-preco__label">Dois formatos. O mesmo método Perfect Lashes.</p>
         <h2 class="pgct-preco__titulo">
           <span class="pgct-preco__titulo-l1">Investimento que se paga com</span>
           <span class="pgct-preco__destaque">uma única cliente</span>
         </h2>
       </header>
-      <article class="pgct-preco__card">
-        <p class="pgct-preco__copy">É a sua chance de mudar de vida agora! Essa campanha não ficará disponível por muito tempo.</p>
-        <div class="pgct-preco__valores">
-          <span class="pgct-preco__de">De R$1.980,00</span>
-          <span class="pgct-preco__por">R$197,00</span>
-          <span class="pgct-preco__parcelado">ou 12 x de R$20,37</span>
-        </div>
-        <a href="https://pay.hotmart.com/R108358048X?off=qe33o1ac" class="pgct-btn-terracota pgct-btn-terracota--full">
-          <div class="pgct-btn-terracota__pontos">
-            <i class="pgct-btn-terracota__ponto"></i>
-            <i class="pgct-btn-terracota__ponto"></i>
-            <i class="pgct-btn-terracota__ponto"></i>
-            <i class="pgct-btn-terracota__ponto"></i>
-            <i class="pgct-btn-terracota__ponto"></i>
-            <i class="pgct-btn-terracota__ponto"></i>
-            <i class="pgct-btn-terracota__ponto"></i>
+
+      <div class="pgct-preco__cards">
+
+        <!-- Card 1: Online (Hotmart) -->
+        <article class="pgct-preco__card" id="card-online">
+          <div class="pgct-preco__selo">
+            <span class="pgct-preco__selo-ponto"></span>
+            <span class="pgct-preco__selo-label">Oferta da campanha</span>
           </div>
-          <span class="pgct-btn-terracota__inner">Comprar agora</span>
-        </a>
-      </article>
+          <div class="pgct-preco__card-topo">
+            <p class="pgct-preco__etiqueta">Online</p>
+            <h3 class="pgct-preco__card-titulo">Curso de Extensão de Cílios Online</h3>
+          </div>
+          <p class="pgct-preco__copy">Domine a técnica, cobre o valor justo, organize seu negócio e conquiste clientes. Tudo em um único curso.</p>
+          <div class="pgct-preco__divisor" aria-hidden="true"></div>
+          <div class="pgct-preco__valores">
+            <span class="pgct-preco__de">De 1.980</span>
+            <span class="pgct-preco__por"><span class="pgct-preco__por-label">Por</span>497</span>
+            <span class="pgct-preco__parcelado">ou 12 x de 51,39</span>
+          </div>
+          <ul class="pgct-preco__chips">
+            <li>3 módulos</li>
+            <li>20 horas aula</li>
+            <li>Garantia de 7 dias</li>
+          </ul>
+          <a href="https://pay.hotmart.com/R108358048X?off=qe33o1ac" class="pgct-btn-terracota pgct-btn-terracota--full pgct-preco__botao">
+            <div class="pgct-btn-terracota__pontos">
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+            </div>
+            <span class="pgct-btn-terracota__inner">Comprar agora</span>
+          </a>
+          <p class="pgct-preco__nota">Pagamento seguro pela Hotmart</p>
+        </article>
+
+        <!-- Card 2: Presencial ou Acompanhamento Online (WhatsApp) -->
+        <article class="pgct-preco__card pgct-preco__card--vip" id="card-presencial">
+          <div class="pgct-preco__selo">
+            <span class="pgct-preco__selo-ponto"></span>
+            <span class="pgct-preco__selo-label">Atendimento VIP</span>
+          </div>
+          <div class="pgct-preco__card-topo">
+            <p class="pgct-preco__etiqueta">Individual</p>
+            <h3 class="pgct-preco__card-titulo">Curso de Alongamento de Cílios Presencial ou com Acompanhamento</h3>
+          </div>
+          <p class="pgct-preco__copy">Para quem quer aprender com a Thaís ao lado, no studio ou com acompanhamento individual online.</p>
+          <div class="pgct-preco__divisor" aria-hidden="true"></div>
+          <div class="pgct-preco__valores">
+            <span class="pgct-preco__consulta">Valor sob consulta</span>
+            <span class="pgct-preco__parcelado">Saiba como funciona e as condições pelo WhatsApp</span>
+          </div>
+          <ul class="pgct-preco__chips">
+            <li>Aulas individuais no studio</li>
+            <li>Acompanhamento online individual</li>
+          </ul>
+          <a href="https://wa.me/5551995183025?text=Ol%C3%A1%20Tha%C3%ADs.%0AVim%20pelo%20site%20e%20ainda%20tenho%20d%C3%BAvidas%20sobre%20o%20curso%20t%C3%A9cnico%20Perfect%20Lashes." class="pgct-btn-terracota pgct-btn-terracota--verde pgct-btn-terracota--full pgct-preco__botao">
+            <div class="pgct-btn-terracota__pontos">
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+              <i class="pgct-btn-terracota__ponto"></i>
+            </div>
+            <span class="pgct-btn-terracota__inner">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+              Falar com a Thaís
+            </span>
+          </a>
+          <p class="pgct-preco__nota">Atendimento direto pelo WhatsApp</p>
+        </article>
+
+      </div>
     </div>
   </section>
 

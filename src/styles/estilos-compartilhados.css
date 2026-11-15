@@ -858,6 +858,17 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     text-wrap: balance;
 }
 
+.hero-cursos__subtitulo {
+    font-family: 'Lovelace', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+    color: var(--rose-gold);
+    text-align: center;
+    margin: 0;
+    line-height: 1.3;
+}
+
 .hero-cursos__copy {
     font-family: 'Montserrat', sans-serif;
     font-size: clamp(12px, 2.1vw, 20px);
@@ -1969,10 +1980,25 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     background-color: transparent;
 }
 
+/* Mobile: H1 20→24px e subtítulo 16→20px (só curso-técnico) */
+@media (max-width: 767px) {
+    .hero-cursos--transparente .hero-cursos__titulo {
+        font-size: clamp(1.25rem, 1rem + 1.02vw, 1.5rem);
+    }
+
+    .hero-cursos--transparente .hero-cursos__subtitulo {
+        font-size: clamp(1rem, 0.75rem + 1.02vw, 1.25rem);
+    }
+}
+
 .modelo-secao-cards--transparente {
     background-color: transparent;
 }
 
+/* Título da seção de módulos menor (só curso-técnico): 26px mobile → 40px desktop */
+.modelo-secao-cards--transparente .modelo-secao-cards__titulo {
+    font-size: clamp(1.625rem, 4vw, 2.5rem);
+}
 
 /* ===================================================
    BACKGROUND FIXO — CURSO TÉCNICO (pgct)
@@ -2439,7 +2465,7 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.55);
 }
 
 .pgct-preco__titulo {
@@ -2470,7 +2496,8 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 .pgct-preco__card {
     position: relative;
     width: 100%;
-    max-width: 520px;
+    box-sizing: border-box;
+    scroll-margin-top: calc(var(--altura-header, 80px) + 24px);
     border-radius: 12px;
     border: 1px solid rgba(176,108,74,0.4);
     background: linear-gradient(to bottom, rgba(176,108,74,0.15), rgba(176,108,74,0.04), rgba(255,255,255,0.02));
@@ -2486,7 +2513,7 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 
 .pgct-preco__copy {
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.65);
     line-height: 1.5;
     max-width: 380px;
 }
@@ -2499,14 +2526,18 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 }
 
 .pgct-preco__de {
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.35);
+    font-size: clamp(1.125rem,2vw,1.375rem);
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
     text-decoration: line-through;
-    text-decoration-color: rgba(255,255,255,0.3);
+    text-decoration-color: rgba(255,255,255,0.45);
 }
 
 .pgct-preco__por {
-    font-size: clamp(2.75rem,7vw,4.5rem);
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-size: clamp(3.75rem,7vw,5rem);
     font-weight: 600;
     letter-spacing: -0.04em;
     color: #fff;
@@ -2514,12 +2545,171 @@ Cada componente deve ser organizado em bloco próprio, com a regra base (desktop
 }
 
 .pgct-preco__parcelado {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.4);
-    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 0.4rem;
 }
 
 .pgct-btn-terracota--full {
     width: 100%;
     justify-content: center;
+}
+
+/* --- Seção Preço: dois cards (Online + VIP) --- */
+
+.pgct-preco__cards {
+    width: 100%;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media (min-width: 1024px) {
+    .pgct-preco__cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .pgct-preco__valores {
+        min-height: 124px;
+        justify-content: center;
+    }
+}
+
+.pgct-preco__card--vip {
+    border-color: rgba(255,255,255,0.14);
+    background: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    box-shadow: none;
+}
+
+.pgct-preco__selo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    border: 1px solid rgba(176,108,74,0.5);
+    background: rgba(176,108,74,0.12);
+}
+
+.pgct-preco__selo-ponto {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--terracota);
+    flex-shrink: 0;
+}
+
+.pgct-preco__selo-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #E2C3AE;
+}
+
+.pgct-preco__card--vip .pgct-preco__selo {
+    border-color: rgba(255,255,255,0.18);
+    background: transparent;
+}
+
+.pgct-preco__card--vip .pgct-preco__selo-ponto {
+    background: var(--rose-gold);
+}
+
+.pgct-preco__card--vip .pgct-preco__selo-label {
+    color: rgba(255,255,255,0.75);
+}
+
+.pgct-preco__card-topo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pgct-preco__etiqueta {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rose-gold);
+}
+
+.pgct-preco__card-titulo {
+    font-size: clamp(1.25rem,1.8vw,1.375rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: #fff;
+}
+
+.pgct-preco__divisor {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(204,177,158,0.4), transparent);
+}
+
+.pgct-preco__card--vip .pgct-preco__divisor {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+.pgct-preco__por-label {
+    font-size: clamp(1.125rem,2vw,1.375rem);
+    font-weight: 500;
+    letter-spacing: 0;
+    color: rgba(255,255,255,0.75);
+}
+
+.pgct-preco__consulta {
+    font-size: clamp(1.75rem,3vw,2.25rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #fff;
+}
+
+.pgct-preco__chips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pgct-preco__chips li {
+    padding: 6px 12px;
+    border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,0.14);
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.8);
+}
+
+.pgct-preco__botao {
+    margin-top: auto;
+    min-height: 48px;
+}
+
+.pgct-preco__nota {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+}
+
+/* Variação verde (WhatsApp) do botão com pontos flutuantes */
+.pgct-btn-terracota--verde {
+    background:
+        radial-gradient(65.28% 65.28% at 50% 100%, rgba(37, 211, 102, 0.55) 0%, rgba(37, 211, 102, 0) 100%),
+        linear-gradient(0deg, #0F8043, #0F8043);
+}
+
+.pgct-btn-terracota--verde::after {
+    background:
+        radial-gradient(65.28% 65.28% at 50% 100%, rgba(37, 211, 102, 0.55) 0%, rgba(37, 211, 102, 0) 100%),
+        linear-gradient(0deg, #0F8043, #0F8043);
+}
+
+.pgct-btn-terracota--verde:hover {
+    box-shadow: 0 0 30px rgba(37, 211, 102, 0.4);
 }
