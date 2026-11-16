@@ -1,7 +1,12 @@
 ---
+// Hero da página do curso Perfect Lashes.
+// Desktop (>= 1024px): informações à esquerda e vídeo à direita; a hero fica presa no início da
+// rolagem enquanto a logo Perfect Lashes se abre (arcos se afastam e o nome aparece). Rolando de
+// volta, a logo fecha. Celular: textos, vídeo e botões empilhados, com o mesmo efeito na rolagem.
+// Com "reduzir animações", a logo já aparece aberta e nada fica preso.
 const {
+  etiqueta = 'Curso Técnico',
   titulo,
-  subtitulo = null,
   texto,
   videoId,
   textoBotaoPrimario,
@@ -10,54 +15,46 @@ const {
   linkBotaoSecundario,
   botaoPrimarioGlass = false,
   botaoSecundarioGlass = false,
-  fundoTransparente = false,
 } = Astro.props;
 
 const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+const pastaLogo = '/imagens-curso-tecnico';
 ---
 
-<section class={fundoTransparente ? "hero-cursos hero-cursos--transparente" : "hero-cursos"}>
+<div class="hero-pl-pista">
+  <section class="hero-pl">
+    <div class="hero-pl__info">
+      <span class="hero-pl__etiqueta home-entra" style="--d:.1s">{etiqueta}</span>
 
-  <div class="w-full max-w-[1200px] flex flex-col items-center gap-10 mb-10">
-    <div class="flex flex-col items-center gap-3">
-      <h1 class="hero-cursos__titulo animate-on-scroll fx" style="--d:.1s">{titulo}</h1>
-      {subtitulo && (
-        <p class="hero-cursos__subtitulo animate-on-scroll fx" style="--d:.18s">{subtitulo}</p>
-      )}
-    </div>
-    <p class="hero-cursos__copy animate-on-scroll fx" style="--d:.25s" set:html={texto}></p>
-  </div>
+      <div class="hero-pl__logo home-entra" style="--d:.2s" role="img" aria-label="Perfect Lashes">
+        <span class="hero-pl__luz" aria-hidden="true"></span>
+        <img class="hero-pl__camada hero-pl__arco1" src={`${pastaLogo}/logo-pl-arco1.webp`} alt="" width="592" height="381" fetchpriority="high" decoding="async" />
+        <img class="hero-pl__camada hero-pl__arco2" src={`${pastaLogo}/logo-pl-arco2.webp`} alt="" width="592" height="381" fetchpriority="high" decoding="async" />
+        <img class="hero-pl__aberta" src={`${pastaLogo}/logo-pl-arcos-abertos.webp`} alt="" width="400" height="184" decoding="async" />
+        <img class="hero-pl__nome" src={`${pastaLogo}/logo-pl-texto.webp`} alt="" width="400" height="184" decoding="async" />
+      </div>
 
-  <div class="w-full max-w-[780px] flex flex-col items-center gap-10">
-    <div
-      class="hero-cursos__video hero-cursos__facade animate-on-scroll fx fx-slow"
-      data-video-id={videoId}
-      style="--d:.35s"
-      role="button"
-      tabindex="0"
-      aria-label="Reproduzir vídeo"
-    >
-      <img
-        src={thumbnailUrl}
-        alt="Pré-visualização do vídeo"
-        class="hero-cursos__thumb"
-        width="480"
-        height="360"
-        loading="lazy"
-        decoding="async"
-      />
-      <span class="hero-cursos__play" aria-hidden="true">
-        <svg width="68" height="48" viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
-          <path d="M66.5 7.5C65.7 4.7 63.5 2.5 60.8 1.7C55.4 0 34 0 34 0C34 0 12.6 0 7.2 1.7C4.5 2.5 2.3 4.7 1.5 7.5C0 12.9 0 24 0 24C0 24 0 35.1 1.5 40.5C2.3 43.3 4.5 45.5 7.2 46.3C12.6 48 34 48 34 48C34 48 55.4 48 60.8 46.3C63.5 45.5 65.7 43.3 66.5 40.5C68 35.1 68 24 68 24C68 24 68 12.9 66.5 7.5Z" fill="#FF0000"/>
-          <path d="M27 34L45 24L27 14V34Z" fill="white"/>
-        </svg>
-      </span>
+      <h1 class="hero-pl__titulo home-entra" style="--d:.32s" set:html={titulo}></h1>
+      <p class="hero-pl__texto home-entra" style="--d:.42s" set:html={texto}></p>
     </div>
 
-    <div class="flex flex-col gap-3 w-full md:flex-row md:w-auto md:gap-4 animate-on-scroll fx" style="--d:.5s">
+    <div class="hero-pl__video-area home-entra" style="--d:.5s">
+      <div
+        class="hero-pl__video hero-cursos__facade"
+        data-video-id={videoId}
+        role="button"
+        tabindex="0"
+        aria-label="Assistir ao vídeo"
+      >
+        <img src={thumbnailUrl} alt="" class="hero-pl__thumb" width="480" height="360" loading="lazy" decoding="async" />
+        <span class="hero-pl__play" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="hero-pl__botoes home-entra" style="--d:.62s">
       {botaoPrimarioGlass ? (
         <a
-          class="group isolate inline-flex cursor-pointer overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_10px_rgba(176,108,74,0.45)] bg-gradient-to-b from-white/20 via-white/0 to-white/5 rounded-full relative shadow-[0_0_25px_rgba(176,108,74,0.3),0_8px_40px_rgba(176,108,74,0.15)] w-full md:w-auto justify-center"
+          class="group isolate inline-flex cursor-pointer overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_10px_rgba(176,108,74,0.45)] bg-gradient-to-b from-white/20 via-white/0 to-white/5 rounded-full relative shadow-[0_0_25px_rgba(176,108,74,0.3),0_8px_40px_rgba(176,108,74,0.15)] w-full lg:w-auto justify-center"
           href={linkBotaoPrimario}
         >
           <div class="absolute inset-0 overflow-hidden rounded-full">
@@ -88,13 +85,13 @@ const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
           </div>
         </a>
       ) : (
-        <a href={linkBotaoPrimario} class="botao-base botao-pri-padrao-terracota w-full md:w-auto">
+        <a href={linkBotaoPrimario} class="botao-base botao-pri-padrao-terracota w-full lg:w-auto">
           {textoBotaoPrimario}
         </a>
       )}
       {textoBotaoSecundario && botaoSecundarioGlass && (
         <a
-          class="group isolate inline-flex cursor-pointer overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_10px_rgba(176,108,74,0.45)] bg-gradient-to-b from-white/20 via-white/0 to-white/5 rounded-full relative shadow-[0_0_25px_rgba(176,108,74,0.3),0_8px_40px_rgba(176,108,74,0.15)] w-full md:w-auto justify-center"
+          class="group isolate inline-flex cursor-pointer overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_50px_10px_rgba(176,108,74,0.45)] bg-gradient-to-b from-white/20 via-white/0 to-white/5 rounded-full relative shadow-[0_0_25px_rgba(176,108,74,0.3),0_8px_40px_rgba(176,108,74,0.15)] w-full lg:w-auto justify-center"
           href={linkBotaoSecundario}
         >
           <div class="absolute inset-0 overflow-hidden rounded-full">
@@ -126,32 +123,16 @@ const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
         </a>
       )}
       {textoBotaoSecundario && !botaoSecundarioGlass && (
-        <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-rose w-full md:w-auto">
+        <a href={linkBotaoSecundario} class="botao-base botao-ter-suave-rose w-full lg:w-auto">
           {textoBotaoSecundario}
         </a>
       )}
     </div>
-  </div>
-
-</section>
-
-<script>
-  (function () {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0 });
-    document.querySelectorAll('.hero-cursos .animate-on-scroll').forEach(function (el) {
-      io.observe(el);
-    });
-  })();
-</script>
+  </section>
+</div>
 
 <script>
+  // Vídeo: carrega o YouTube só quando a pessoa clica (não pesa no carregamento)
   document.querySelectorAll('.hero-cursos__facade').forEach(function (el) {
     var facade = el;
     function ativar() {
@@ -162,11 +143,109 @@ const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
       iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
       iframe.allowFullscreen = true;
       facade.innerHTML = '';
+      facade.classList.add('is-tocando');
       facade.appendChild(iframe);
     }
     facade.addEventListener('click', ativar, { once: true });
     facade.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') ativar();
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); ativar(); }
     }, { once: true });
   });
+</script>
+
+<script>
+  (function () {
+    var pista = document.querySelector('.hero-pl-pista');
+    var hero = pista && pista.querySelector('.hero-pl');
+    if (!hero) return;
+    var header = document.querySelector('.site-header');
+    var logo = hero.querySelector('.hero-pl__logo');
+    var arco1 = hero.querySelector('.hero-pl__arco1');
+    var arco2 = hero.querySelector('.hero-pl__arco2');
+    var aberta = hero.querySelector('.hero-pl__aberta');
+    var nome = hero.querySelector('.hero-pl__nome');
+    var desktop = window.matchMedia('(min-width: 1024px)');
+    var reduzir = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var atual = 0, desejado = 0, rodando = false;
+
+    // Altura real do header, para o conteúdo começar logo abaixo dele
+    function medirHeader() {
+      if (header) hero.style.setProperty('--altura-header-pl', header.offsetHeight + 'px');
+    }
+
+    // Destino de cada arco, tirado da logo aberta (frações da largura do palco).
+    // O palco tem a proporção da logo bruta (592 x 381); a logo aberta ocupa a largura toda.
+    function destinos() {
+      var W = logo.offsetWidth, H = W * 381 / 592, topo = (H - W * 0.46) / 2;
+      return [
+        { el: arco1, dx: 0.10358 * W - 0.28667 * W, dy: (topo + 0.10742 * W) - 0.23123 * H, r: -24, s: 0.429 },
+        { el: arco2, dx: 0.8956 * W - 0.71166 * W, dy: (topo + 0.34788 * W) - 0.76592 * H, r: -30, s: 0.414 }
+      ];
+    }
+    function suave(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+    function trecho(v, a, b) { return Math.max(0, Math.min(1, (v - a) / (b - a))); }
+
+    function aplicar(p) {
+      var m = suave(Math.min(1, p / 0.9));
+      destinos().forEach(function (o) {
+        var s = 1 + (o.s - 1) * m;
+        o.el.style.transform = 'translate(' + (o.dx * m) + 'px,' + (o.dy * m) + 'px) rotate(' + (o.r * m) + 'deg) scale(' + s + ')';
+        o.el.style.opacity = 1 - trecho(m, 0.78, 1);
+      });
+      aberta.style.opacity = trecho(m, 0.78, 1);
+      var t = trecho(m, 0.3, 0.85);
+      nome.style.opacity = t;
+      nome.style.transform = 'scale(' + (0.82 + 0.18 * t) + ')';
+      nome.style.filter = t < 1 ? 'blur(' + (8 * (1 - t)).toFixed(2) + 'px)' : '';
+      nome.style.clipPath = 'inset(0 ' + (50 * (1 - t)) + '% 0 ' + (50 * (1 - t)) + '%)';
+      logo.style.setProperty('--luz', (0.35 + 0.55 * m).toFixed(3));
+    }
+
+    function progresso() {
+      var curso = pista.offsetHeight - hero.offsetHeight;
+      if (curso <= 0) return 0;
+      return Math.max(0, Math.min(1, -pista.getBoundingClientRect().top / curso));
+    }
+
+    // Pista = altura da hero + o trecho em que ela fica presa (75% da tela no desktop, 50% no celular)
+    function medirPista() {
+      if (reduzir.matches) { pista.style.height = ''; return; }
+      pista.style.height = (hero.offsetHeight + window.innerHeight * (desktop.matches ? 0.75 : 0.5)) + 'px';
+    }
+
+    function quadro() {
+      atual += (desejado - atual) * 0.14;
+      if (Math.abs(desejado - atual) < 0.001) atual = desejado;
+      aplicar(atual);
+      if (atual !== desejado) requestAnimationFrame(quadro); else rodando = false;
+    }
+
+    function preparar() {
+      medirHeader();
+      medirPista();
+      atual = desejado = reduzir.matches ? 1 : progresso();
+      aplicar(atual);
+    }
+
+    window.addEventListener('scroll', function () {
+      if (reduzir.matches) return;
+      desejado = progresso();
+      if (!rodando) { rodando = true; requestAnimationFrame(quadro); }
+    }, { passive: true });
+
+    // No celular, a barra do navegador muda a altura da tela ao rolar: só recalcula se a largura mudar
+    var ultimaLargura = window.innerWidth;
+    window.addEventListener('resize', function () {
+      if (!desktop.matches && window.innerWidth === ultimaLargura) return;
+      ultimaLargura = window.innerWidth;
+      preparar();
+    });
+    desktop.addEventListener('change', preparar);
+    reduzir.addEventListener('change', preparar);
+    if ('ResizeObserver' in window && header) new ResizeObserver(preparar).observe(header);
+
+    preparar();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(preparar);
+    window.setTimeout(preparar, 1500);
+  })();
 </script>

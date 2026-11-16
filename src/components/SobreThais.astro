@@ -7,6 +7,14 @@ const {
   fotoMobile = null,
   stats,
 } = Astro.props;
+
+// Separa "10 ANOS" em prefixo / número / sufixo para a contagem animada.
+// Valores sem número (ex.: "CRIADORA") ficam como texto fixo.
+function partesNumero(texto) {
+  const m = String(texto).match(/^(\D*)(\d+)(.*)$/);
+  return m ? { prefixo: m[1], numero: m[2], sufixo: m[3] } : null;
+}
+const statsComPartes = stats.map((stat) => ({ ...stat, partes: partesNumero(stat.destaque) }));
 ---
 
 <section class="sobre-thais">
@@ -37,9 +45,13 @@ const {
 
           <!-- Cards: só mobile, dentro do bloco de texto -->
           <div class="flex flex-col gap-1 w-[60%] md:hidden mt-2">
-            {stats.map((stat) => (
-              <div class="sobre-thais__card h-[44px] flex items-center gap-3 px-3">
-                <span class="sobre-thais__numero text-[13px] whitespace-nowrap">{stat.destaque}</span>
+            {statsComPartes.map((stat, i) => (
+              <div class="sobre-thais__card h-[44px] flex items-center gap-3 px-3 animate-on-scroll fx" style={`--d:${(0.2 + i * 0.12).toFixed(2)}s`}>
+                <span class="sobre-thais__numero text-[13px] whitespace-nowrap">
+                  {stat.partes ? (
+                    <span data-contar={stat.partes.numero} data-prefixo={stat.partes.prefixo} data-sufixo={stat.partes.sufixo}>{stat.destaque}</span>
+                  ) : stat.destaque}
+                </span>
                 <span class="flex flex-col leading-tight">
                   <span class="texto-livre text-white opacity-75 text-[9px]">{stat.linha1}</span>
                   <span class="texto-livre text-white opacity-75 text-[9px]">{stat.linha2}</span>
@@ -54,9 +66,13 @@ const {
 
       <!-- Cards: só desktop, alinhados na divisão dos 50% -->
       <div class="hidden md:flex flex-col gap-3 w-[220px] absolute top-3/5 left-45/100 -translate-y-1/2">
-        {stats.map((stat) => (
-          <div class="sobre-thais__card h-[52px] flex items-center gap-2 px-4">
-            <span class="sobre-thais__numero text-[16px] whitespace-nowrap">{stat.destaque}</span>
+        {statsComPartes.map((stat, i) => (
+          <div class="sobre-thais__card h-[52px] flex items-center gap-2 px-4 animate-on-scroll fx" style={`--d:${(0.2 + i * 0.12).toFixed(2)}s`}>
+            <span class="sobre-thais__numero text-[16px] whitespace-nowrap">
+              {stat.partes ? (
+                <span data-contar={stat.partes.numero} data-prefixo={stat.partes.prefixo} data-sufixo={stat.partes.sufixo}>{stat.destaque}</span>
+              ) : stat.destaque}
+            </span>
             <span class="flex flex-col leading-tight">
               <span class="texto-livre text-white opacity-75 text-[10px]">{stat.linha1}</span>
               <span class="texto-livre text-white opacity-75 text-[10px]">{stat.linha2}</span>
@@ -77,3 +93,49 @@ const {
 
   </div>
 </section>
+
+<script>
+  // Quando a seção aparece na tela (uma vez só): foto se ajusta (aproximação suave),
+  // cards entram em sequência e os números contam do zero até o valor final.
+  // Os valores finais já estão no HTML; a contagem só acontece por cima.
+  (function () {
+    var reduzir = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function contar(el) {
+      var alvo = Number(el.dataset.contar);
+      var prefixo = el.dataset.prefixo || '';
+      var sufixo = el.dataset.sufixo || '';
+      var inicio = performance.now();
+      var duracao = 1100;
+      (function passo(agora) {
+        var p = Math.min(1, (agora - inicio) / duracao);
+        var suave = 1 - Math.pow(1 - p, 3);
+        el.textContent = prefixo + Math.round(alvo * suave) + sufixo;
+        if (p < 1) requestAnimationFrame(passo);
+      })(inicio);
+    }
+
+    document.querySelectorAll('.sobre-thais').forEach(function (secao) {
+      var numeros = secao.querySelectorAll('[data-contar]');
+      if (!reduzir) {
+        numeros.forEach(function (el) {
+          el.textContent = (el.dataset.prefixo || '') + '0' + (el.dataset.sufixo || '');
+        });
+      }
+
+      var io = new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (entrada) {
+          if (!entrada.isIntersecting) return;
+          io.unobserve(secao);
+          secao.classList.add('is-visivel');
+          secao.querySelectorAll('.animate-on-scroll').forEach(function (el) {
+            el.classList.add('animate');
+          });
+          if (!reduzir) numeros.forEach(contar);
+        });
+      }, { threshold: 0.2 });
+
+      io.observe(secao);
+    });
+  })();
+</script>

@@ -1,0 +1,230 @@
+---
+// Hero da home — base Sable: nome dividido em volta da foto, H1 no canto superior,
+// texto no canto inferior, dois botões. Entrada em sequência (CSS).
+// Desktop (>= 1024px): a hero fica presa no início da rolagem enquanto "Thaís" e
+// "Grüner" deslizam e se unem na base da foto; depois a página rola normalmente.
+// Rolando de volta, o efeito acontece ao contrário. Mobile: movimento leve em camadas.
+// Tudo desligado com "reduzir animações".
+const {
+  h1,
+  nomeEsquerda,
+  nomeDireita,
+  foto,
+  fotoMobile = null,
+  fotoAlt,
+  textoCanto,
+  textoBotao,
+  linkBotao,
+  textoBotaoLinha,
+  linkBotaoLinha,
+} = Astro.props;
+---
+
+<div class="home-hero-pista">
+  <section class="home-hero">
+    <div class="home-hero__topo home-entra" style="--d:.12s">
+      <h1 class="home-hero__h1" set:html={h1}></h1>
+      <span class="home-hero__regua" aria-hidden="true"></span>
+    </div>
+
+    <div class="home-hero__palco">
+      <div class="home-hero__camada home-hero__camada--esq" data-camada="nome">
+        <span class="home-hero__nome home-entra" style="--d:.12s" aria-hidden="true">{nomeEsquerda}</span>
+      </div>
+      <div class="home-hero__camada home-hero__camada--foto" data-camada="foto">
+        <picture>
+          {fotoMobile && (
+            <source media="(max-width: 767px)" srcset={fotoMobile} />
+          )}
+          <img
+            class="home-hero__foto"
+            src={foto}
+            alt={fotoAlt}
+            width="470"
+            height="580"
+            fetchpriority="high"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+      </div>
+      <div class="home-hero__camada home-hero__camada--dir" data-camada="nome">
+        <span class="home-hero__nome home-entra" style="--d:.54s" aria-hidden="true">{nomeDireita}</span>
+      </div>
+    </div>
+
+    <p class="home-hero__canto home-entra" style="--d:.68s" set:html={textoCanto}></p>
+
+    <div class="home-hero__acoes home-entra" style="--d:.82s">
+      <a href={linkBotao} class="home-btn"><span>{textoBotao}</span></a>
+      <a href={linkBotaoLinha} class="home-btn-linha">{textoBotaoLinha}</a>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Mede a altura real do header e passa para a hero, para o conteúdo começar
+  // sempre logo abaixo dele (qualquer tela, zoom ou tamanho de logo).
+  (function () {
+    var header = document.querySelector('.site-header');
+    var hero = document.querySelector('.home-hero');
+    if (!header || !hero) return;
+    function medir() {
+      hero.style.setProperty('--altura-header-home', header.offsetHeight + 'px');
+    }
+    medir();
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(medir).observe(header);
+    } else {
+      window.addEventListener('resize', medir);
+    }
+  })();
+</script>
+
+<script>
+  (function () {
+    var pista = document.querySelector('.home-hero-pista');
+    var hero = pista && pista.querySelector('.home-hero');
+    if (!hero) return;
+
+    var reduzir = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var desktop = window.matchMedia('(min-width: 1024px)');
+
+    var esq = hero.querySelector('.home-hero__camada--esq');
+    var dir = hero.querySelector('.home-hero__camada--dir');
+    var foto = hero.querySelector('.home-hero__camada--foto');
+    var canto = hero.querySelector('.home-hero__canto');
+
+    // Medidas do "destino" dos nomes, calculadas a partir das posições reais na tela
+    var alvo = null;
+    var atual = 0;      // progresso suavizado (0 = posição zero, 1 = nomes unidos)
+    var desejado = 0;   // progresso pela rolagem
+    var rodando = false;
+    var SUBIDA_FOTO = 36; // px que a foto sobe enquanto os nomes se unem
+
+    function limpar() {
+      [esq, dir, foto].forEach(function (el) { el.style.transform = ''; });
+    }
+
+    function medir() {
+      limpar();
+      var rh = hero.getBoundingClientRect();
+      var re = esq.getBoundingClientRect();
+      var rd = dir.getBoundingClientRect();
+      var rf = foto.getBoundingClientRect();
+      var rc = canto.getBoundingClientRect();
+      var tamanho = parseFloat(getComputedStyle(esq.firstElementChild).fontSize) || 100;
+
+      // Escala do nome unido: diminui um pouco e nunca passa de ~78% da largura da hero
+      var espaco = tamanho * 0.28;
+      var larguraJunta = re.width + espaco + rd.width;
+      var k = Math.min(0.82, (rh.width * 0.78) / larguraJunta);
+
+      // "Thaís Grüner" inteiro centralizado na foto
+      var cx = rf.left + rf.width / 2;
+      var inicio = cx - (larguraJunta * k) / 2;
+      var alvoEsq = inicio + (re.width * k) / 2;
+      var alvoDir = inicio + (re.width + espaco) * k + (rd.width * k) / 2;
+
+      // Base do nome: sobre a base da foto, sempre acima do texto "Santa Cruz..."
+      var altura = re.height * k;
+      var baseFoto = rf.bottom - SUBIDA_FOTO - rf.height * 0.06;
+      var base = Math.min(baseFoto, rc.top - 12);
+      var alvoY = base - altura / 2;
+
+      alvo = {
+        k: k,
+        dxEsq: alvoEsq - (re.left + re.width / 2),
+        dxDir: alvoDir - (rd.left + rd.width / 2),
+        dyEsq: alvoY - (re.top + re.height / 2),
+        dyDir: alvoY - (rd.top + rd.height / 2)
+      };
+    }
+
+    function suave(t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
+
+    function aplicar(p) {
+      if (!alvo) return;
+      var m = suave(Math.min(1, p / 0.85));
+      var esc = 1 + (alvo.k - 1) * m;
+      esq.style.transform = 'translate3d(' + (alvo.dxEsq * m) + 'px,' + (alvo.dyEsq * m) + 'px,0) scale(' + esc + ')';
+      dir.style.transform = 'translate3d(' + (alvo.dxDir * m) + 'px,' + (alvo.dyDir * m) + 'px,0) scale(' + esc + ')';
+      foto.style.transform = 'translate3d(0,' + (-SUBIDA_FOTO * m) + 'px,0)';
+    }
+
+    function lerProgresso() {
+      var curso = pista.offsetHeight - window.innerHeight;
+      if (curso <= 0) return 0;
+      var p = -pista.getBoundingClientRect().top / curso;
+      return Math.max(0, Math.min(1, p));
+    }
+
+    // Suavização: segue o progresso da rolagem com um leve atraso,
+    // para o mouse com "degraus" deslizar fluido.
+    function quadro() {
+      atual += (desejado - atual) * 0.14;
+      if (Math.abs(desejado - atual) < 0.001) atual = desejado;
+      aplicar(atual);
+      if (atual !== desejado) {
+        requestAnimationFrame(quadro);
+      } else {
+        rodando = false;
+      }
+    }
+
+    function aoRolar() {
+      if (!efeitoLigado()) return;
+      desejado = lerProgresso();
+      if (!rodando) { rodando = true; requestAnimationFrame(quadro); }
+    }
+
+    // Mobile e tablet: movimento leve em camadas (como antes)
+    var pendente = false;
+    function camadas() {
+      pendente = false;
+      if (efeitoLigado() || reduzir.matches) return;
+      var y = window.scrollY;
+      if (y > window.innerHeight * 1.2) return;
+      esq.style.transform = dir.style.transform = 'translate3d(0,' + (y * 0.14) + 'px,0)';
+      foto.style.transform = 'translate3d(0,' + (y * -0.06) + 'px,0) scale(' + (1 + y * 0.00006) + ')';
+    }
+
+    function efeitoLigado() {
+      return desktop.matches && !reduzir.matches;
+    }
+
+    function preparar() {
+      if (efeitoLigado()) {
+        medir();
+        atual = desejado = lerProgresso();
+        aplicar(atual);
+      } else {
+        alvo = null;
+        limpar();
+        camadas();
+      }
+    }
+
+    window.addEventListener('scroll', function () {
+      if (efeitoLigado()) {
+        aoRolar();
+      } else if (!pendente) {
+        pendente = true;
+        requestAnimationFrame(camadas);
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', preparar);
+    desktop.addEventListener('change', preparar);
+    reduzir.addEventListener('change', preparar);
+
+    // Mede depois que as fontes carregam (o tamanho do nome depende da fonte Lovelace)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(preparar);
+    } else {
+      preparar();
+    }
+    // Mede de novo quando a animação de entrada da hero termina
+    window.setTimeout(preparar, 1500);
+  })();
+</script>

@@ -12,6 +12,13 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Páginas fora do sitemap automático: consultoria (só por link direto), obrigado e páginas internas
+      filter: (page) =>
+        !['/consultoria', '/obrigado-consultoria', '/obrigado-mentoria', '/design-sistema', '/em-breve']
+          .some((rota) => new URL(page).pathname.replace(/\/$/, '') === rota),
+    }),
+  ],
   adapter: vercel()
 });

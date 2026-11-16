@@ -7,7 +7,7 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
 ---
 
 <Layout
-  temaHeader="escuro"
+  temaHeader="vidro"
   temaFooter="escuro"
   metaViewContent="Curso Técnico Perfect Lashes"
   titulo="Curso de Extensão de Cílios Perfect Lashes"
@@ -16,6 +16,8 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
 
   <Fragment slot="head">
     <link rel="preload" as="image" href="/imagens-padrao/logomarrom-sem-fundo.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/imagens-curso-tecnico/logo-pl-arco1.webp" />
+    <link rel="preload" as="image" href="/imagens-curso-tecnico/logo-pl-arco2.webp" />
   </Fragment>
 
   <!-- Background fixo da página -->
@@ -40,17 +42,16 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
   </div>
 
   <HeroCursos
-    titulo="Curso de Extensão de Cílios Perfect Lashes"
-    subtitulo="Você está no lugar certo."
-    texto={`Ser lash designer dá, sim, um bom dinheiro, mas só para quem trabalha certo. E eu não vou apenas te ajudar. <span class="hero-cursos__destaque">Eu vou mudar a sua vida.</span> Só depende de você acreditar e dar o próximo passo.`}
+    etiqueta="Curso Técnico"
+    titulo="Curso de Extensão de Cílios <em>do iniciante ao avançado</em>"
+    texto="Para quem quer fazer dos cílios a sua profissão e para quem já atua e quer evoluir com acompanhamento. <strong>Online, de qualquer lugar, ou presencial em Santa Cruz do Sul.</strong>"
     videoId="_-trn8CRc8w"
-    textoBotaoPrimario="Quero o curso online"
+    textoBotaoPrimario="Ver o curso online"
     linkBotaoPrimario="#card-online"
-    textoBotaoSecundario="Quero atendimento VIP"
+    textoBotaoSecundario="Ver acompanhamento VIP"
     linkBotaoSecundario="#card-presencial"
     botaoPrimarioGlass={true}
     botaoSecundarioGlass={true}
-    fundoTransparente={true}
   />
 
   <!-- Seção marquee: o conteúdo -->
@@ -181,8 +182,8 @@ import { sobreThaisDados } from '../dados/sobreThais.js';
             <span class="pgct-preco__parcelado">Saiba como funciona e as condições pelo WhatsApp</span>
           </div>
           <ul class="pgct-preco__chips">
-            <li>Aulas individuais no studio</li>
-            <li>Acompanhamento online individual</li>
+            <li>Iniciante e Consultoria Técnica</li>
+            <li>Presencial ou Acompanhamento Online</li>
           </ul>
           <a href="https://wa.me/5551995183025?text=Ol%C3%A1%20Tha%C3%ADs.%0AVim%20pelo%20site%20e%20ainda%20tenho%20d%C3%BAvidas%20sobre%20o%20curso%20t%C3%A9cnico%20Perfect%20Lashes." class="pgct-btn-terracota pgct-btn-terracota--verde pgct-btn-terracota--full pgct-preco__botao">
             <div class="pgct-btn-terracota__pontos">

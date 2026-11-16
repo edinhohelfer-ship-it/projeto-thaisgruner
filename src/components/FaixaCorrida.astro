@@ -1,0 +1,19 @@
+---
+// Faixa terracota com texto correndo. O grupo é repetido duas vezes para o loop não ter emenda.
+const { itens = [] } = Astro.props;
+---
+
+<div class="home-faixa" aria-hidden="true">
+  <div class="home-faixa__trilho">
+    {[0, 1].map(() => (
+      <div class="home-faixa__grupo">
+        {itens.map((item) => (
+          <>
+            <span>{item}</span>
+            <span class="home-faixa__sep">/</span>
+          </>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>

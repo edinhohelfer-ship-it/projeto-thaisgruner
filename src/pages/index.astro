@@ -1,69 +1,108 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import HeroSimples from '../components/HeroSimples.astro';
-import CardsAcesso from '../components/CardsAcesso.astro';
+import HeroHome from '../components/HeroHome.astro';
+import FaixaCorrida from '../components/FaixaCorrida.astro';
+import DuvidasHome from '../components/DuvidasHome.astro';
+import CaminhosHome from '../components/CaminhosHome.astro';
 import SobreThais from '../components/SobreThais.astro';
+import DiagnosticoHome from '../components/DiagnosticoHome.astro';
 import { sobreThaisDados } from '../dados/sobreThais.js';
 ---
 
-<Layout temaHeader="escuro" temaFooter="escuro">
+<Layout
+  temaHeader="vidro"
+  temaFooter="escuro"
+  titulo="Curso de Extensão de Cílios e Mentoria para Profissionais da Beleza"
+  descricao="Cursos de extensão de cílios online e presenciais em Santa Cruz do Sul, mentoria para negócios de beleza e imersões com a Thaís Grüner."
+>
 
-  <HeroSimples
-    titulo="Toda grande construção começa com uma DECISÃO"
-    texto="Mentorias, consultorias e treinamentos para profissionais da beleza que desejam estruturar seus negócios, evoluir com estratégia e crescer de forma eficiente."
-    textoBotao="Descubra por onde COMEÇAR"
-    link="#cursos"
-    imagemFundo="/imagens-home/hero-home.webp"
-    imagemFundoMobile="/imagens-home/hero-home-mobile.webp"
+  <Fragment slot="head">
+    <link rel="preload" as="image" href="/imagens-home/hero-home-mobile.webp?v=2" media="(max-width: 767px)" fetchpriority="high" />
+    <link rel="preload" as="image" href="/imagens-home/hero-home.webp?v=2" media="(min-width: 768px)" fetchpriority="high" />
+  </Fragment>
+
+  <HeroHome
+    h1="Cursos de extensão de cílios<br>e mentoria para<br>profissionais da beleza"
+    nomeEsquerda="Thaís"
+    nomeDireita="Grüner"
+    foto="/imagens-home/hero-home.webp?v=2"
+    fotoMobile="/imagens-home/hero-home-mobile.webp?v=2"
+    fotoAlt="Thaís Grüner, educadora em extensão de cílios e mentora de profissionais da beleza"
+    textoCanto="Online ou presencial<br>Santa Cruz do Sul<br>10 anos no mercado beauty"
+    textoBotao="Onde começar"
+    linkBotao="#caminhos"
+    textoBotaoLinha="Diagnóstico gratuito"
+    linkBotaoLinha="#diagnostico"
   />
 
+  <FaixaCorrida
+    itens={[
+      "Perfect Lashes",
+      "Curso de extensão de cílios",
+      "Consultoria para Lash Designers",
+      "Imersões Avançadas",
+      "M.I.B. Mulheres que Impulsionam Beleza",
+      "Mentoria para mulheres empreendedoras",      
+    ]}
+  />
 
+  <DuvidasHome
+    itens={[
+      {
+        pergunta: "Para quem é a Mentoria M.I.B.?",
+        resposta: "Para empresárias da área da beleza que querem organizar seu negócio, fortalecer seu posicionamento e crescer com mais lucratividade e direção.",
+      },
+      {
+        pergunta: "Para quem é o Perfect Lashes?",
+        resposta: "É para quem deseja ter a extensão de cílios como sua profissão. Do iniciante ao avançado, da agenda cheia à gestão.",
+      },
+      {
+        pergunta: "Já sou Lash Designer. Serve para mim?",
+        resposta: "Sim. A modalidade consultoria técnica é para quem já atua e quer evoluir com acompanhamento.",
+      },
+      {
+        pergunta: "É online ou presencial?",
+        resposta: "Os dois: tanto o Perfect Lashes como a M.I.B. têm as opções online, de qualquer lugar, ou presencial em Santa Cruz do Sul.",
+      },
+    ]}
+  />
 
-  <CardsAcesso
-  cards={[
-    {
-      titulo: "Estruture seu NEGÓCIO",
-      imagem: "/imagens-home/card01-home-mentoria.webp",
-      imagemMobile: "/imagens-home/card01-home-mentoria-mobile.webp",
-      textoBotao: "Acessar conteúdo da Mentoria",
-      link: "/mentoria",
-    },
-    {
-      titulo: "Aperfeiçoe sua TÉCNICA",
-      imagem: "/imagens-home/card02-home-consultoria.webp",
-      imagemMobile: "/imagens-home/card02-home-consultoria-mobile.webp",
-      textoBotao: "Acessar conteúdo da Consultoria",
-      link: "/consultoria",
-    },
-    {
-      titulo: "Cursos Técnicos e Imersões",
-      imagem: "/imagens-home/card03-home-cursos.webp",
-      imagemMobile: "/imagens-home/card03-home-cursos-mobile.webp",
-      textoBotao: "Acessar Cursos e Imersões",
-      link: "/perfect-lashes",
-    },
-    
-  ]}
-/>
-
-
+  <CaminhosHome
+    etiqueta="Por onde começar"
+    itens={[
+      {
+        titulo: "Mentoria M.I.B.",
+        texto: "Estruture e faça crescer o seu negócio na beleza.",
+        imagem: "/imagens-home/card01-home-mentoria.webp?v=2",
+        alt: "Mentoria M.I.B. para profissionais da beleza",
+        link: "/mentoria",
+      },
+      {
+        titulo: "Cursos Perfect Lashes",
+        texto: "Técnica completa, online ou presencial com acompanhamento VIP.",
+        imagem: "/imagens-home/card02-home-cursos.webp",
+        alt: "Curso de extensão de cílios Perfect Lashes",
+        link: "/curso-tecnico-perfect-lashes",
+      },
+      {
+        titulo: "Imersões Online",
+        texto: "Saúde ocular e tricologia, E-Books e negócios",
+        imagem: "/imagens-home/card03-home-imersoes.webp",
+        alt: "Imersões em saúde ocular e tricologia para lash designers",
+        link: "/perfect-lashes",
+      },
+    ]}
+  />
 
   <SobreThais {...sobreThaisDados} />
 
-
-
-  <section class="bg-(--charcoal) px-6 py-12 md:py-16 text-center">
-    <p class="titulo-livre-lovelace-bold text-[24px] md:text-[20px] tracking-widest text-(--rose-gold) mb-6">
-      DIAGNÓSTICO
-    </p>
-    <p class="texto-livre-bold text-[14px] md:text-[16px] text-white opacity-80 max-w-[600px] mx-auto mb-6">
-      Todo negócio pode crescer. A diferença está em saber por onde começar.
-    </p>
-    <p class="texto-livre text-[12px] md:text-[16px] text-white opacity-80 max-w-[600px] mx-auto mb-6">
-      Preencha o formulário e receba um diagnóstico gratuito sobre o seu negócio Beauty
-    </p>
-    <a href="https://tally.so/r/2EdaNe" class="botao-base botao-pri-suave-rose">Quero meu diagnóstico</a>
-  </section>
+  <DiagnosticoHome
+    etiqueta="Diagnóstico gratuito"
+    titulo="Todo negócio pode crescer."
+    tituloDestaque="A diferença está em saber por onde começar."
+    texto="Preencha o formulário e receba um diagnóstico gratuito sobre o seu negócio beauty."
+    textoBotao="Quero meu diagnóstico"
+    link="https://tally.so/r/2EdaNe"
+  />
 
 </Layout>
-

@@ -1,0 +1,90 @@
+---
+// Dúvidas frequentes da home — painel em degradê terracota com etiqueta visível.
+// Desktop: 4 lado a lado, sempre abertas. Mobile: uma por linha, todas começam fechadas
+// e abrem/fecham ao tocar na pergunta (várias podem ficar abertas).
+// Inclui o schema FAQPage para o Google (as respostas ficam no código mesmo fechadas).
+const { itens = [] } = Astro.props;
+
+const schemaFaq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: itens.map((item) => ({
+    '@type': 'Question',
+    name: item.pergunta,
+    acceptedAnswer: { '@type': 'Answer', text: item.resposta },
+  })),
+};
+---
+
+<section class="home-duvidas" aria-labelledby="home-duvidas-titulo">
+  <h2 id="home-duvidas-titulo" class="home-duvidas__etiqueta">Dúvidas frequentes</h2>
+  <div class="home-duvidas__lista">
+    {itens.map((item, i) => (
+      <div class="home-duvida animate-on-scroll fx" style={`--d:${(i * 0.1).toFixed(2)}s`}>
+        <h3 class="home-duvida__pergunta">
+          <button type="button" class="home-duvida__botao" id={`duvida-${i}`} aria-controls={`duvida-resposta-${i}`}>
+            <span>{item.pergunta}</span>
+            <span class="home-duvida__icone" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="home-duvida__corpo" id={`duvida-resposta-${i}`} role="region" aria-labelledby={`duvida-${i}`}>
+          <div class="home-duvida__corpo-interno">
+            <p class="home-duvida__resposta">{item.resposta}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(schemaFaq)}></script>
+
+<script>
+  (function () {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.home-duvidas .animate-on-scroll').forEach(function (el) {
+      io.observe(el);
+    });
+  })();
+
+  // Abrir/fechar no mobile. Sem JavaScript, tudo fica aberto (nada se perde).
+  (function () {
+    var secao = document.querySelector('.home-duvidas');
+    if (!secao) return;
+    var mobile = window.matchMedia('(max-width: 767px)');
+    var itens = secao.querySelectorAll('.home-duvida');
+
+    function sincronizar() {
+      itens.forEach(function (item) {
+        var botao = item.querySelector('.home-duvida__botao');
+        if (mobile.matches) {
+          botao.removeAttribute('tabindex');
+          botao.setAttribute('aria-expanded', item.classList.contains('is-aberta') ? 'true' : 'false');
+        } else {
+          // Desktop: respostas sempre visíveis, a pergunta não é clicável
+          botao.setAttribute('tabindex', '-1');
+          botao.removeAttribute('aria-expanded');
+        }
+      });
+    }
+
+    itens.forEach(function (item) {
+      item.querySelector('.home-duvida__botao').addEventListener('click', function () {
+        if (!mobile.matches) return;
+        item.classList.toggle('is-aberta');
+        sincronizar();
+      });
+    });
+
+    secao.classList.add('tem-acordeao');
+    sincronizar();
+    mobile.addEventListener('change', sincronizar);
+  })();
+</script>

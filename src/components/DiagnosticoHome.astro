@@ -1,0 +1,48 @@
+---
+// Diagnóstico da home — base Sable (seção de cadastro centralizada) com feixes de luz caindo.
+const {
+  etiqueta,
+  titulo,
+  tituloDestaque,
+  texto,
+  textoBotao,
+  link,
+} = Astro.props;
+---
+
+<section class="home-diag" id="diagnostico">
+  <div class="home-diag__feixes" aria-hidden="true">
+    <div class="home-diag__coluna"><span class="home-diag__feixe home-diag__feixe--1"></span></div>
+    <div class="home-diag__coluna"><span class="home-diag__feixe home-diag__feixe--2"></span></div>
+    <div class="home-diag__coluna"><span class="home-diag__feixe home-diag__feixe--3"></span></div>
+    <div class="home-diag__coluna"><span class="home-diag__feixe home-diag__feixe--4"></span></div>
+  </div>
+
+  <div class="home-diag__conteudo">
+    <p class="home-diag__etiqueta animate-on-scroll fx">{etiqueta}</p>
+    <h2 class="home-diag__titulo animate-on-scroll fx" style="--d:.1s">
+      {titulo}
+      <span class="home-diag__destaque">{tituloDestaque}</span>
+    </h2>
+    <p class="home-diag__texto animate-on-scroll fx" style="--d:.2s">{texto}</p>
+    <div class="animate-on-scroll fx" style="--d:.3s">
+      <a href={link} class="home-btn"><span>{textoBotao}</span></a>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.home-diag .animate-on-scroll').forEach(function (el) {
+      io.observe(el);
+    });
+  })();
+</script>
